@@ -1,0 +1,6 @@
+output_dir: ".."
+before_chapter_script: "_setup.R"
+delete_merged_file: true
+rmf_files: ["index.rmd",
+            "01_Lesson_One.rmd",
+            "02_Lesson_Two.rmd"]

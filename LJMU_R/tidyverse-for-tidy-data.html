@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Tidyverse for Tidy Data | Introduction to Statistics Using R</title>
+  <meta name="description" content="An introduction to the software R, designed for LJMU Students" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Tidyverse for Tidy Data | Introduction to Statistics Using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://myko101.github.io/Tutorials/LJMU_R/" />
+  
+  <meta property="og:description" content="An introduction to the software R, designed for LJMU Students" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Tidyverse for Tidy Data | Introduction to Statistics Using R" />
+  
+  <meta name="twitter:description" content="An introduction to the software R, designed for LJMU Students" />
+  
+
+
+
+<meta name="date" content="2020-04-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r.html"/>
+
+<script src="libs/header-attrs-2.1.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> R &amp; RStudio</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r"><i class="fa fa-check"></i><b>1.1.1</b> R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rstudio"><i class="fa fa-check"></i><b>1.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#where-to-get-them"><i class="fa fa-check"></i><b>1.1.3</b> Where to get them?</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#first-steps"><i class="fa fa-check"></i><b>1.1.4</b> First steps</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#help"><i class="fa fa-check"></i><b>1.2</b> Help</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#help-files"><i class="fa fa-check"></i><b>1.2.1</b> Help Files</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#search"><i class="fa fa-check"></i><b>1.2.2</b> Search</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#ask"><i class="fa fa-check"></i><b>1.2.3</b> Ask</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectorisation"><i class="fa fa-check"></i><b>1.3</b> Vectorisation</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>1.3.1</b> Vectors</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>1.3.2</b> Data Types</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#assignment"><i class="fa fa-check"></i><b>1.3.3</b> Assignment</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting"><i class="fa fa-check"></i><b>1.3.4</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statistics"><i class="fa fa-check"></i><b>1.4</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data"><i class="fa fa-check"></i><b>1.4.1</b> Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#describing-our-data"><i class="fa fa-check"></i><b>1.4.2</b> Describing our data</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>1.4.3</b> Plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#probabilities"><i class="fa fa-check"></i><b>1.5</b> Probabilities</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Data Distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html"><i class="fa fa-check"></i><b>2</b> Tidyverse for Tidy Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#packages"><i class="fa fa-check"></i><b>2.1</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#installing-packages"><i class="fa fa-check"></i><b>2.1.1</b> Installing packages</a></li>
+<li class="chapter" data-level="2.1.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#documentation"><i class="fa fa-check"></i><b>2.1.2</b> Documentation</a></li>
+<li class="chapter" data-level="2.1.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#loading-packages"><i class="fa fa-check"></i><b>2.1.3</b> Loading packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-pipe"><i class="fa fa-check"></i><b>2.2</b> The Pipe</a></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#loading-data"><i class="fa fa-check"></i><b>2.3</b> Loading Data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#messy-data"><i class="fa fa-check"></i><b>2.3.1</b> Messy Data!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#changing-our-data"><i class="fa fa-check"></i><b>2.4</b> Changing our data</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-mutate-function"><i class="fa fa-check"></i><b>2.4.1</b> The mutate() function</a></li>
+<li class="chapter" data-level="2.4.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#neat-code"><i class="fa fa-check"></i><b>2.4.2</b> Neat code</a></li>
+<li class="chapter" data-level="2.4.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-rename-function"><i class="fa fa-check"></i><b>2.4.3</b> The rename() function</a></li>
+<li class="chapter" data-level="2.4.4" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-recode-function"><i class="fa fa-check"></i><b>2.4.4</b> The recode() function</a></li>
+<li class="chapter" data-level="2.4.5" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-if_else-function"><i class="fa fa-check"></i><b>2.4.5</b> The if_else() function</a></li>
+<li class="chapter" data-level="2.4.6" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-case_when-function"><i class="fa fa-check"></i><b>2.4.6</b> The case_when() function</a></li>
+<li class="chapter" data-level="2.4.7" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#boolean-logic"><i class="fa fa-check"></i><b>2.4.7</b> Boolean Logic</a></li>
+<li class="chapter" data-level="2.4.8" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-factor-function"><i class="fa fa-check"></i><b>2.4.8</b> The factor() function</a></li>
+<li class="chapter" data-level="2.4.9" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-separate-function"><i class="fa fa-check"></i><b>2.4.9</b> The separate() function</a></li>
+<li class="chapter" data-level="2.4.10" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-mutate_at-function"><i class="fa fa-check"></i><b>2.4.10</b> The mutate_at() function</a></li>
+<li class="chapter" data-level="2.4.11" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-select-function"><i class="fa fa-check"></i><b>2.4.11</b> The select() function</a></li>
+<li class="chapter" data-level="2.4.12" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#dates"><i class="fa fa-check"></i><b>2.4.12</b> Dates</a></li>
+<li class="chapter" data-level="2.4.13" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-filter-function"><i class="fa fa-check"></i><b>2.4.13</b> The filter() function</a></li>
+<li class="chapter" data-level="2.4.14" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-summarise-function"><i class="fa fa-check"></i><b>2.4.14</b> The summarise() function</a></li>
+<li class="chapter" data-level="2.4.15" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-group_by-function"><i class="fa fa-check"></i><b>2.4.15</b> The group_by() function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#combining-data"><i class="fa fa-check"></i><b>2.5</b> Combining data</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-_join-functions"><i class="fa fa-check"></i><b>2.5.1</b> The *_join() functions</a></li>
+<li class="chapter" data-level="2.5.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-pivot_functions"><i class="fa fa-check"></i><b>2.5.2</b> The pivot_*()functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-cheat-sheets"><i class="fa fa-check"></i><b>2.6</b> The Cheat Sheets</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics Using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidyverse-for-tidy-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Tidyverse for Tidy Data</h1>
+<div id="packages" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Packages</h2>
+<p>R is designed to be a <strong>modular</strong> approach to statistical analysis and is <strong>open-source</strong> and allows the addition of <strong>packages</strong>. This means that the version of R you download is the basic version of it and we can download <strong>packages</strong> which contian more advanced functions. Think of it like DLC, but for statistics (and much like R it is still free!) These packages are built by other R users and can be downloaded from a repository called <strong>CRAN</strong> (Comprehensive R Archive Network).</p>
+<div id="installing-packages" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Installing packages</h3>
+<p>The first package we’re going to download and install is the <code>tidyverse</code> package (which actually imports/installs a bunch of other packages).</p>
+<p>The command to install a new packages is:</p>
+<pre><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>This function will search <strong>CRAN</strong> for the package called <code>"tidyverse"</code> and install it into our own package repository. Note that this needs to be in quotes as this is a <code>string</code> that R will search for. It also downloads and installs all the other packages that <code>tidyverse</code> uses. As it’s installing, you’ll see it run through all these packages (e.g. <code>broom</code>, <code>ggplot2</code>,<code>tidyr</code>), we’ll get to these later.</p>
+<p>If you’re running this on your home computer and have full admin rights, then this installation should go fine (it just might take a while). However if you don’t have full admin rights, then you might need to use the <code>lock=F</code> argument like so: <code>install.packages("tidyverse",lock=F)</code>, for example on a university computer you need to install packages this way. If the installation fails, try this way.</p>
+<p>You can see the currently installed packages inthe <strong>Viewer</strong> pane under the Packages tab. If you click on the name of a package in here, it will bring up a Help file (still in the <strong>Viewer</strong> pane) for that package, including a list of functions contained in that package (which link to their Help Files). Some packages include links to vignettes/documentation regarding the package.</p>
+</div>
+<div id="documentation" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Documentation</h3>
+<p>As well as storing the actual package files, CRAN also stores documentation about the package. This includes the Help files that get installed along with the packages. CRAN homepages for packages are standardised and all look the same with (roughly) the same information.</p>
+<p>Let’s have a look at the CRAN page for the <a href="https://cran.r-project.org/web/packages/tidyverse/">tidyverse</a>.</p>
+<p>Most of what we see here is for fairly advanced R users, so we’re going to ignore a lot of it (until you get better). At the top, you can see the name of the package and a quick blurb about what it’s for. There are also a bunch of links to other packages that the current package uses. Under the Downloads heading, you can see the <strong>Reference manual</strong> and the <strong>Vignettes</strong>.</p>
+<p>The <strong>Reference manual</strong> for a package contains a list of all of the functions that are in that package, and information about their use. This information is the <em>same</em> information that is contained in the <code>?</code> Help files that is downloaded into R. This can be useful if you can’t remember the name of a function, but you know it’s in a certain package.</p>
+<p>The <strong>Vignettes</strong> are more of a user guide. They’re usually written by the package author and contains information on how to <em>use</em> the package. Kind of like an instruction manual, whereas the reference manual is more like the glossary. Packages don’t always have vignettes, but when they do, I highly recomend reading them.</p>
+</div>
+<div id="loading-packages" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Loading packages</h3>
+<p>So, we’ve installed a package, but we’re not actually using it. Once a package has been <em>installed</em> it is stored on our system and we only need to do this once. But, we also need to load the package into our current R session. (Note that this time, we don’t need quotation marks)</p>
+<p>We now have access to all of the functions contained within the core bundle of <code>tidyverse</code> packages (listed in the console under <code>Attaching packages</code>. This means that by installing and loading the <code>tidyverse</code> package, we’ve actually installed and loaded these other packages (e.g. <code>ggplot2</code> and <code>dplyr</code>). Let’s get started!</p>
+</div>
+</div>
+<div id="the-pipe" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> The Pipe</h2>
+<p>One of the most important changes that comes with the <code>tidyverse</code> is the addition of the <strong>Pipe</strong>: <code>%&gt;%</code>. It’s a new operator that comes with the <code>dplyr</code> package (originally from the <code>magrittr</code> pckage) and it allows us to completely change how we use functions. It can make our code much easier to read, particularly when writing complicated series of functions. For example:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tidyverse-for-tidy-data.html#cb96-1"></a><span class="co">#Written as single line:</span></span>
+<span id="cb96-2"><a href="tidyverse-for-tidy-data.html#cb96-2"></a><span class="kw">log</span>(<span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">runif</span>(<span class="dv">20</span>))))</span>
+<span id="cb96-3"><a href="tidyverse-for-tidy-data.html#cb96-3"></a></span>
+<span id="cb96-4"><a href="tidyverse-for-tidy-data.html#cb96-4"></a></span>
+<span id="cb96-5"><a href="tidyverse-for-tidy-data.html#cb96-5"></a><span class="co">#Spread over multiple lines</span></span>
+<span id="cb96-6"><a href="tidyverse-for-tidy-data.html#cb96-6"></a>x &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb96-7"><a href="tidyverse-for-tidy-data.html#cb96-7"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(x)</span>
+<span id="cb96-8"><a href="tidyverse-for-tidy-data.html#cb96-8"></a>x &lt;-<span class="st"> </span><span class="kw">sum</span>(x)</span>
+<span id="cb96-9"><a href="tidyverse-for-tidy-data.html#cb96-9"></a>x &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</span>
+<span id="cb96-10"><a href="tidyverse-for-tidy-data.html#cb96-10"></a>x &lt;-<span class="st"> </span><span class="kw">log</span>(x)</span>
+<span id="cb96-11"><a href="tidyverse-for-tidy-data.html#cb96-11"></a>x</span>
+<span id="cb96-12"><a href="tidyverse-for-tidy-data.html#cb96-12"></a></span>
+<span id="cb96-13"><a href="tidyverse-for-tidy-data.html#cb96-13"></a><span class="co">#Written with pipes:</span></span>
+<span id="cb96-14"><a href="tidyverse-for-tidy-data.html#cb96-14"></a><span class="dv">20</span> <span class="op">%&gt;%</span></span>
+<span id="cb96-15"><a href="tidyverse-for-tidy-data.html#cb96-15"></a><span class="st">  </span><span class="kw">runif</span>() <span class="op">%&gt;%</span></span>
+<span id="cb96-16"><a href="tidyverse-for-tidy-data.html#cb96-16"></a><span class="st">  </span><span class="kw">sum</span>() <span class="op">%&gt;%</span></span>
+<span id="cb96-17"><a href="tidyverse-for-tidy-data.html#cb96-17"></a><span class="st">  </span><span class="kw">sqrt</span>() <span class="op">%&gt;%</span></span>
+<span id="cb96-18"><a href="tidyverse-for-tidy-data.html#cb96-18"></a><span class="st">  </span><span class="kw">log</span>()</span></code></pre></div>
+<p>All three of thes examples perform the same actions in the same order. But that first line is really difficult to read. It’s hard to see what functions are happening and which brackets are associated with which function. If we wanted to add 3 after the <code>sum()</code> function, it would be hard to see where to put it.</p>
+<p>In the single line version, we are working from the inside out. This gets easier to read in the version where we spread it across multiple lines since what we’re doing is now in order. But this is prone to mistakes. What if we type <code>z</code> instead of <code>x</code> in a function call or an assignment call? The piped version gets rid of this risk and duplicated code (<code>x &lt;-</code> on every line). I’ve chosen to spread my command over multiple lines to make it easier to read and to indent each new line (RStudio actually does this automatically for you), this makes my code look neater and much easier to read.</p>
+<p>What the pipe does is allow us to <em>pipe</em> our answer into the next function as the first argument. We can then chain them together as above to make things much easier to read. This changes our syntax a little bit. The following lines perform the same thing:</p>
+<pre><code>f(a,b,c,d)
+a %&gt;% f(b,c,d)</code></pre>
+<p>And with chaining:</p>
+<pre><code>f(g(a,b),c,d)
+a %&gt;% 
+  g(b) %&gt;% 
+  f(c,d)</code></pre>
+<p>If your function only takes a single argument, then you don’t even need to include the brackets:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="tidyverse-for-tidy-data.html#cb99-1"></a><span class="dv">20</span> <span class="op">%&gt;%</span></span>
+<span id="cb99-2"><a href="tidyverse-for-tidy-data.html#cb99-2"></a><span class="st">  </span>runif <span class="op">%&gt;%</span></span>
+<span id="cb99-3"><a href="tidyverse-for-tidy-data.html#cb99-3"></a><span class="st">  </span>sum <span class="op">%&gt;%</span></span>
+<span id="cb99-4"><a href="tidyverse-for-tidy-data.html#cb99-4"></a><span class="st">  </span>sqrt <span class="op">%&gt;%</span></span>
+<span id="cb99-5"><a href="tidyverse-for-tidy-data.html#cb99-5"></a><span class="st">  </span>log</span></code></pre></div>
+<pre><code>## [1] 1.106602</code></pre>
+<p>The shortcut to quickly enter this in RStudio is Ctrl/Cmd + Alt + M</p>
+</div>
+<div id="loading-data" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Loading Data</h2>
+<p>I’ve uploaded a <a href="data/data_anthro.csv">messy dataset</a> online for us to use today. Right click the link and then download the file. Save it somewhere useful (maybe in a new folder).</p>
+<p>In R (as well as many programming languages), we have something called the <em>working directory</em>. We can see this if we click on the Files tab in the <strong>Viewer</strong> pane (bottom right). This shows us all the files in our current directory (note, this might not be our working directory if we’ve clicked around a bit).</p>
+<p>We can find out our working directory by using the command <code>getwd()</code> and we can change it using the <code>setwd()</code> command. It can be tricky to remember what the directory were trying to find its, so we can use a file explorer window to find it. In the top menu, click Session &gt; Set Working Directory &gt; Choose Directory (or press Ctrl/Cmd + Shift + H). Find the folder where you’ve just saved the file and set it as our working directory.</p>
+<p>You’ll notice that R Studio actually sent the <code>setwd()</code> command to the <strong>Console</strong> for us anyway. If you want, you can copy and paste that into your script for use later (just remember to remove the <code>&gt;</code> symbol or it won’t run from the Script).</p>
+<p>If you didn’t want to download the file, you can also load it straight from the web:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="tidyverse-for-tidy-data.html#cb101-1"></a>dat &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/data_anthro.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   ID = col_character(),
+##   DOB = col_character(),
+##   Gender = col_character(),
+##   Ht = col_character(),
+##   Wgt = col_character()
+## )</code></pre>
+<p>This <code>read_csv()</code> function is contained in the <code>readr</code> package. There is a built in function in R that allows us to bring in csv files, but it’s messier. We’re in the tidyverse now!</p>
+<p>This has given a bit of an output. <code>read_csv</code> tries to guess what data types columns/variables within this dataset are. We can suppress this message with the argument <code>col_types = col()</code>, or we can define what we want them to be by passing the data types as a vector (d=double, c=character,l=logical) <code>col_types=c("c","c","c","c","c")</code>.</p>
+<p>Let’s have a look at this data. Previously, we needed to use the <code>head()</code> function to just look at the top few rows. But that was when we were using <code>data.frame</code> structure from the basic R package. <code>read_csv()</code> loads the data and stores it in a <code>tibble</code> format. This is essentially the same as a <code>data.frame</code> (and can be used in the same way), but provides a bit more information and consistency and only prints the first few rows:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="tidyverse-for-tidy-data.html#cb103-1"></a>dat</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##    ID    DOB        Gender Ht    Wgt  
+##    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+##  1 001   22/03/1965 m      5 6   7 1  
+##  2 002   17/04/1977 f      5 9   11 0 
+##  3 003   24/07/1966 f      5 4   9 8  
+##  4 004   22/02/1985 Female 5 7   11 1 
+##  5 005   30/07/1985 M      6 0   10 10
+##  6 006   09/07/1987 male   6 2   11 12
+##  7 007   23/01/1995 female 5 10  10 2 
+##  8 008   31/12/1992 M      6 3   12 1 
+##  9 009   24/01/1952 Male   5 4   7 10 
+## 10 010   11/06/1953 F      5 2   8 6  
+## # ... with 140 more rows</code></pre>
+<p>R now tells us that the <code>tibble</code> has 150 rows and 5 columns, and as well as giving us the names of the variables in the data, it also tells us their types (at the moment, they’re all <code>&lt;chr&gt;</code>, but some of these will change as we go on) and at the bottom, we’re told that there are 140 more rows. If we had a lot of columns in this data, R would only show us the first few columns (as many can fit in the screen) and tell us at the bottom what the extra columns are (names and data types).</p>
+<div id="messy-data" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Messy Data!</h3>
+<p>This data is quite messy. There are some things we need to fix. First thing to do would be to list out everything we need to fix.</p>
+<ol style="list-style-type: decimal">
+<li>I would prefer ID to be a number (although this is not always true)</li>
+<li>DOB is a character. This is supposed to be a date. Can R store dates? OF COURSE IT CAN!</li>
+<li>The next two columns are Ht and Wgt, and are supposed to be Height and Weight. We’ll fix those names</li>
+<li>Height and weight are stored as feet/inches and stone/pounds. This is inconvenient. We want consistecy, so we want to change them to cm and kg.</li>
+<li>Gender is also inconsitent some are words (male/female) and lower/uppercase single letters. We need to standardise this.</li>
+</ol>
+</div>
+</div>
+<div id="changing-our-data" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Changing our data</h2>
+<p>We could edit this data in excel and go through one cell at a time, but if we have a big data set, this is going to be difficult. Let’s get R to do it for us. The advantage of doing it all in R is that our <em>Raw</em> data (the original file) doesn’t need to be changed. We write our code in a Script to process the data and then at the end, we can save our data as a new file, or just our outputs (i.e. our models).</p>
+<div id="the-mutate-function" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> The mutate() function</h3>
+<p>The <code>dplyr</code> package provides us with the <code>mutate()</code> function, which is incredibly useful for editing data as we go, and is designed to be used with the pipe. Let’s use it, along with the <code>as.numeric()</code> function to convert the <code>ID</code> variable into a number.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="tidyverse-for-tidy-data.html#cb105-1"></a>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID))</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Ht    Wgt  
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+##  1     1 22/03/1965 m      5 6   7 1  
+##  2     2 17/04/1977 f      5 9   11 0 
+##  3     3 24/07/1966 f      5 4   9 8  
+##  4     4 22/02/1985 Female 5 7   11 1 
+##  5     5 30/07/1985 M      6 0   10 10
+##  6     6 09/07/1987 male   6 2   11 12
+##  7     7 23/01/1995 female 5 10  10 2 
+##  8     8 31/12/1992 M      6 3   12 1 
+##  9     9 24/01/1952 Male   5 4   7 10 
+## 10    10 11/06/1953 F      5 2   8 6  
+## # ... with 140 more rows</code></pre>
+<p>Exactly as we needed, <code>ID</code> is now a number (<code>&lt;dbl&gt;</code>, short for double, which just means it can store a big number, a relic of old programming). The <code>mutate()</code> function takes in a <code>tibble</code> as it’s first argument (remember, this is what the pipe is doing) and changes it depending on whatever other information is passed to it. If the variable we put in already exists, it is overwritten, if not a new column is created. We can edit more than one variable at a time this way and create new variables and the variables are created/edited in order.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="tidyverse-for-tidy-data.html#cb107-1"></a>dat <span class="op">%&gt;%</span></span>
+<span id="cb107-2"><a href="tidyverse-for-tidy-data.html#cb107-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">150</span>), <span class="co">#Remember this function?</span></span>
+<span id="cb107-3"><a href="tidyverse-for-tidy-data.html#cb107-3"></a>         <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">150</span>),</span>
+<span id="cb107-4"><a href="tidyverse-for-tidy-data.html#cb107-4"></a>         <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span>y)</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 7
+##    ID    DOB        Gender Ht    Wgt        x        y
+##    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+##  1 001   22/03/1965 m      5 6   7 1   0.0899 0.000571
+##  2 002   17/04/1977 f      5 9   11 0  0.976  0.596   
+##  3 003   24/07/1966 f      5 4   9 8   1.14   0.296   
+##  4 004   22/02/1985 Female 5 7   11 1  0.919  0.909   
+##  5 005   30/07/1985 M      6 0   10 10 1.50   0.849   
+##  6 006   09/07/1987 male   6 2   11 12 0.754  0.642   
+##  7 007   23/01/1995 female 5 10  10 2  0.577  0.00137 
+##  8 008   31/12/1992 M      6 3   12 1  1.14   0.871   
+##  9 009   24/01/1952 Male   5 4   7 10  1.02   0.197   
+## 10 010   11/06/1953 F      5 2   8 6   0.457  0.403   
+## # ... with 140 more rows</code></pre>
+<p>Note that this is the same as running <code>mutate(dat,x=runif(150),y=runif(150),x=x+y)</code>.</p>
+<p>Right now, we’ve not stored the output from the previous <code>mutate()</code> call, <code>dat</code> is still as it was when we loaded it with the <code>ID</code> variable stored as a <code>character</code>. See:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="tidyverse-for-tidy-data.html#cb109-1"></a>dat</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##    ID    DOB        Gender Ht    Wgt  
+##    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+##  1 001   22/03/1965 m      5 6   7 1  
+##  2 002   17/04/1977 f      5 9   11 0 
+##  3 003   24/07/1966 f      5 4   9 8  
+##  4 004   22/02/1985 Female 5 7   11 1 
+##  5 005   30/07/1985 M      6 0   10 10
+##  6 006   09/07/1987 male   6 2   11 12
+##  7 007   23/01/1995 female 5 10  10 2 
+##  8 008   31/12/1992 M      6 3   12 1 
+##  9 009   24/01/1952 Male   5 4   7 10 
+## 10 010   11/06/1953 F      5 2   8 6  
+## # ... with 140 more rows</code></pre>
+</div>
+<div id="neat-code" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Neat code</h3>
+<p>For now, let’s clear out our <strong>Script</strong> pane to keep ourselves organised, and eliminate the code that we don’t need. Copy this into your <strong>Script</strong> pane and run it all (Ctrl/Cmd + A will select all the code in the <strong>Script</strong> pane and Ctrl/Cmd + Enter will run it all)</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="tidyverse-for-tidy-data.html#cb111-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</span>
+<span id="cb111-2"><a href="tidyverse-for-tidy-data.html#cb111-2"></a></span>
+<span id="cb111-3"><a href="tidyverse-for-tidy-data.html#cb111-3"></a><span class="co">#Load up my libraries</span></span>
+<span id="cb111-4"><a href="tidyverse-for-tidy-data.html#cb111-4"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb111-5"><a href="tidyverse-for-tidy-data.html#cb111-5"></a></span>
+<span id="cb111-6"><a href="tidyverse-for-tidy-data.html#cb111-6"></a><span class="co">#Load up my data</span></span>
+<span id="cb111-7"><a href="tidyverse-for-tidy-data.html#cb111-7"></a>dat &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/data_anthro.csv&quot;</span>)</span>
+<span id="cb111-8"><a href="tidyverse-for-tidy-data.html#cb111-8"></a></span>
+<span id="cb111-9"><a href="tidyverse-for-tidy-data.html#cb111-9"></a></span>
+<span id="cb111-10"><a href="tidyverse-for-tidy-data.html#cb111-10"></a><span class="co">#Edit the dat file</span></span>
+<span id="cb111-11"><a href="tidyverse-for-tidy-data.html#cb111-11"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb111-12"><a href="tidyverse-for-tidy-data.html#cb111-12"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="co">#Turn ID into numeric</span></span>
+<span id="cb111-13"><a href="tidyverse-for-tidy-data.html#cb111-13"></a></span>
+<span id="cb111-14"><a href="tidyverse-for-tidy-data.html#cb111-14"></a>dat_clean</span></code></pre></div>
+<p>I’ve added a function as the first line <code>rm(list=ls())</code> which will clear out our workspace and get rid of any variables that have been created. I’ve also added annotations with the <code>#</code> symbol. R won’t run anything in a line that is preceded by the <code>#</code> symbol (and it’ll even colour code it as well), this allows you to make notes (either to yourself or others) explaining what your code is actually doing. This isn’t always necessary if it’s obvious, but it can be useful to keep track of things.</p>
+<p>Annotations are voluntary. We don’t have to put them in there, but they really help when you’re reading over code that you’ve not used in a while, or you’re sending it to someone else. It’s much easier to annotate and make your code as readable as possible than it is to stand there explaining your code to someone who has never seen it before.</p>
+<p>We’ve also stored the cleaned <code>dat</code> dataset as <code>dat_clean</code></p>
+</div>
+<div id="the-rename-function" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> The rename() function</h3>
+<p>The <code>dplyr</code> package also provides us with the <code>rename</code> function, which allows us to rename some of the variables. This can make it easier to interpret what the variables are. Coming up with clear and concise names is very good practice for budding coders.</p>
+<p>As we mentioned earlier, with the <code>%&gt;%</code> pipe, we can chain commands together, so that’s what we’re going to start doing. In the end, our tidying of the data is going to be one long chain of functions, but it should be clear what we’ve done, and in what order. After it’s done, R will store the output of <em>everything</em> into the <code>dat_clean</code> variable.</p>
+<p>So, let’s add a <code>rename()</code> command to our <code>dat</code> cleaning chain.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="tidyverse-for-tidy-data.html#cb112-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb112-2"><a href="tidyverse-for-tidy-data.html#cb112-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb112-3"><a href="tidyverse-for-tidy-data.html#cb112-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="co">#Rename some variables</span></span>
+<span id="cb112-4"><a href="tidyverse-for-tidy-data.html#cb112-4"></a></span>
+<span id="cb112-5"><a href="tidyverse-for-tidy-data.html#cb112-5"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 m      5 6    7 1   
+##  2     2 17/04/1977 f      5 9    11 0  
+##  3     3 24/07/1966 f      5 4    9 8   
+##  4     4 22/02/1985 Female 5 7    11 1  
+##  5     5 30/07/1985 M      6 0    10 10 
+##  6     6 09/07/1987 male   6 2    11 12 
+##  7     7 23/01/1995 female 5 10   10 2  
+##  8     8 31/12/1992 M      6 3    12 1  
+##  9     9 24/01/1952 Male   5 4    7 10  
+## 10    10 11/06/1953 F      5 2    8 6   
+## # ... with 140 more rows</code></pre>
+<p>The syntax here is just <code>new-name = old-name</code>. Now the variables <code>Ht</code> and <code>Wgt</code> are completely gone from <code>dat</code>, and we have new variables <code>Height</code> and <code>Weight</code> in their place.</p>
+<p>That’s two out of our five problems solved.</p>
+</div>
+<div id="the-recode-function" class="section level3" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> The recode() function</h3>
+<p>The Gender variable is still a bit of mess. Let’s take a look. This time, we’re just going to put this in the <strong>console</strong>.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="tidyverse-for-tidy-data.html#cb114-1"></a><span class="kw">table</span>(dat<span class="op">$</span>Gender)</span></code></pre></div>
+<pre><code>## 
+##          f          F     female     Female          m          M       male 
+##         13         26         18         18         12         19         22 
+##       Male Non-Binary 
+##         18          4</code></pre>
+<p>We’re used the <code>$</code> operator to access the <code>Gender</code> variable inside the <code>dat</code> tibble, and then ran the <code>table()</code> function to get a count of how often each of the values appear in the variable. An interesting side note is that when we’ve been using the variables in <code>dat</code> within our tidyverse functions, we’ve not needed to use this <code>$</code> operator, e.g. you would expect to have to do something like <code>dat %&gt;% mutate(dat$ID = as.numeric(dat$ID)</code>, but we didn’t, we just needed: <code>dat %&gt;% mutate(ID = as.numeric(ID))</code>. Another advantage of the <code>tidyverse</code>.</p>
+<p>We as humans can tell what each of these entries means. Some of them mean Male and some mean Female. But R can’t discern that. We’re gonna lump them together by converting all the relevant values into “Male” or “Female”. We can do this using the <code>recode()</code> function inside the <code>mutate()</code> function.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="tidyverse-for-tidy-data.html#cb116-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb116-2"><a href="tidyverse-for-tidy-data.html#cb116-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb116-3"><a href="tidyverse-for-tidy-data.html#cb116-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb116-4"><a href="tidyverse-for-tidy-data.html#cb116-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">recode</span>(Gender, <span class="co">#Tidy up Gender</span></span>
+<span id="cb116-5"><a href="tidyverse-for-tidy-data.html#cb116-5"></a>                         <span class="dt">m =</span> <span class="st">&quot;Male&quot;</span>, <span class="dt">male =</span> <span class="st">&quot;Male&quot;</span>, <span class="dt">M =</span> <span class="st">&quot;Male&quot;</span>, <span class="co">#Males</span></span>
+<span id="cb116-6"><a href="tidyverse-for-tidy-data.html#cb116-6"></a>                         <span class="dt">f =</span> <span class="st">&quot;Female&quot;</span>, <span class="dt">female =</span> <span class="st">&quot;Female&quot;</span>, <span class="dt">F =</span> <span class="st">&quot;Female&quot;</span>)) <span class="co">#Females</span></span>
+<span id="cb116-7"><a href="tidyverse-for-tidy-data.html#cb116-7"></a></span>
+<span id="cb116-8"><a href="tidyverse-for-tidy-data.html#cb116-8"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 Male   5 6    7 1   
+##  2     2 17/04/1977 Female 5 9    11 0  
+##  3     3 24/07/1966 Female 5 4    9 8   
+##  4     4 22/02/1985 Female 5 7    11 1  
+##  5     5 30/07/1985 Male   6 0    10 10 
+##  6     6 09/07/1987 Male   6 2    11 12 
+##  7     7 23/01/1995 Female 5 10   10 2  
+##  8     8 31/12/1992 Male   6 3    12 1  
+##  9     9 24/01/1952 Male   5 4    7 10  
+## 10    10 11/06/1953 Female 5 2    8 6   
+## # ... with 140 more rows</code></pre>
+<p>The first argument is actually the vector that we are recoding, <code>Gender</code>. Since we’re only performing the one function here, we’re not going to pipe as it’s still pretty neat as it is (thanks to the neat indentation oriented formatting). Confusingly, this is written backwards to the <code>rename()</code> function, so we need <code>old-name = new-name</code> and the new name has to be in quotes (because it is a string), but other than that, it’s pretty straight forward.</p>
+<p>If we’re recoding a string that has spaces or that starts with a number, we need to put them in between <em>backticks</em>. You’ll be used to the single quote or apostrophe (’) and double quote ("), but in R, we sometimes need to use the backtick as a quotation mark (`). The backtick is usually located to the left of the 1 button on your keyboard (yes, that button is finally useful!)</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="tidyverse-for-tidy-data.html#cb118-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;One&quot;</span>,<span class="st">&quot;Two&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;Fo ur&quot;</span>)</span>
+<span id="cb118-2"><a href="tidyverse-for-tidy-data.html#cb118-2"></a><span class="kw">recode</span>(x,<span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> &quot;Three&quot;</span>,<span class="st">`</span><span class="dt">Fo ur</span><span class="st">`</span> =<span class="st"> &quot;Four&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;One&quot;   &quot;Two&quot;   &quot;Three&quot; &quot;Four&quot;</code></pre>
+<p>Technically, the <code>recode()</code> function <em>can</em> be used with a numeric vectors rather than a character vector, but it is much easier not to (mostly because R can store different types of numbers, eg double,<code>&lt;dbl&gt;</code> is different from an integer <code>&lt;int&gt;</code>, but we’re not going to get into that here, just don’ do it).</p>
+</div>
+<div id="the-if_else-function" class="section level3" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> The if_else() function</h3>
+<p>The <code>recode()</code> function is pretty useful for a lot of circumstances, but it still looks a little clunky in our code. We can use the <code>if_else()</code> function to make R make a decision. Basically, if something is true do this thing, if it’s false, do the other thing.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="tidyverse-for-tidy-data.html#cb120-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;One&quot;</span>,<span class="st">&quot;Two&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;Four&quot;</span>)</span>
+<span id="cb120-2"><a href="tidyverse-for-tidy-data.html#cb120-2"></a><span class="kw">if_else</span>(x <span class="op">==</span><span class="st"> &quot;3&quot;</span>,<span class="st">&quot;Three&quot;</span>,x)</span></code></pre></div>
+<pre><code>## [1] &quot;One&quot;   &quot;Two&quot;   &quot;Three&quot; &quot;Four&quot;</code></pre>
+<p>For our vector, it evaluates the first argument (<code>x==3</code> into a <code>logical</code> vector) and then if it’s <code>TRUE</code>, it uses the second argument and if it’s <code>FALSE</code> uses the third argument. A lot of the time, the third argument will just be the original vector (so we only change it if the logical statement is <code>TRUE</code>). These conditional arguments can also be vectors, in which case R will match them up and keep everything in the right order.</p>
+<p>We’re also going to introduce a new operator, the <code>%in%</code> operator. Remember operators have something on the left and something on the right. The %in% operator checks if the things in the vector on the left are in the vector on the right</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="tidyverse-for-tidy-data.html#cb122-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb122-2"><a href="tidyverse-for-tidy-data.html#cb122-2"></a>x <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<p>For <em>every</em> element in <code>x</code>, we check whether it is in the vector on the right. If it is, it returns <code>TRUE</code>, otherwise, it returns <code>FALSE</code>. We can use this instead of the previous recode</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="tidyverse-for-tidy-data.html#cb124-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb124-2"><a href="tidyverse-for-tidy-data.html#cb124-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb124-3"><a href="tidyverse-for-tidy-data.html#cb124-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb124-4"><a href="tidyverse-for-tidy-data.html#cb124-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">if_else</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>),<span class="st">&quot;Male&quot;</span>,Gender), <span class="co">#Tidy up Gender</span></span>
+<span id="cb124-5"><a href="tidyverse-for-tidy-data.html#cb124-5"></a>         <span class="dt">Gender =</span> <span class="kw">if_else</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>),<span class="st">&quot;Female&quot;</span>,Gender)) </span>
+<span id="cb124-6"><a href="tidyverse-for-tidy-data.html#cb124-6"></a></span>
+<span id="cb124-7"><a href="tidyverse-for-tidy-data.html#cb124-7"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 Male   5 6    7 1   
+##  2     2 17/04/1977 Female 5 9    11 0  
+##  3     3 24/07/1966 Female 5 4    9 8   
+##  4     4 22/02/1985 Female 5 7    11 1  
+##  5     5 30/07/1985 Male   6 0    10 10 
+##  6     6 09/07/1987 Male   6 2    11 12 
+##  7     7 23/01/1995 Female 5 10   10 2  
+##  8     8 31/12/1992 Male   6 3    12 1  
+##  9     9 24/01/1952 Male   5 4    7 10  
+## 10    10 11/06/1953 Female 5 2    8 6   
+## # ... with 140 more rows</code></pre>
+<p>There are plenty of situations where <code>recode()</code> is better than <code>if_else()</code>. Since we’re wanting to turn a lot of values into a few simpler ones, the <code>if_else()</code> function is better. If we’re just wanting to rename the values in our variable, then <code>recode()</code> works better. For example, if all the values were either “M”, “F” or “N” and we want them to be “Male”, “Female” or “Non-Binary”, then <code>recode()</code> would be the better option.</p>
+<p>But remember that “Better” is often subjective. These commands do the same thing, but whichever you understand better should be the one you use!</p>
+</div>
+<div id="the-case_when-function" class="section level3" number="2.4.6">
+<h3><span class="header-section-number">2.4.6</span> The case_when() function</h3>
+<p>We’ve converted the <code>recode()</code> function into a pair of <code>if_else()</code> functions. Not too bad when we’re just doing two, but if we needed to look at more cases, this could get complicated. And complicated means prone to errors. We can use the <code>case_when()</code> function for this:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="tidyverse-for-tidy-data.html#cb126-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb126-2"><a href="tidyverse-for-tidy-data.html#cb126-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb126-3"><a href="tidyverse-for-tidy-data.html#cb126-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb126-4"><a href="tidyverse-for-tidy-data.html#cb126-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,    <span class="co">#Tidy up Gender</span></span>
+<span id="cb126-5"><a href="tidyverse-for-tidy-data.html#cb126-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb126-6"><a href="tidyverse-for-tidy-data.html#cb126-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender))</span>
+<span id="cb126-7"><a href="tidyverse-for-tidy-data.html#cb126-7"></a></span>
+<span id="cb126-8"><a href="tidyverse-for-tidy-data.html#cb126-8"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 Male   5 6    7 1   
+##  2     2 17/04/1977 Female 5 9    11 0  
+##  3     3 24/07/1966 Female 5 4    9 8   
+##  4     4 22/02/1985 Female 5 7    11 1  
+##  5     5 30/07/1985 Male   6 0    10 10 
+##  6     6 09/07/1987 Male   6 2    11 12 
+##  7     7 23/01/1995 Female 5 10   10 2  
+##  8     8 31/12/1992 Male   6 3    12 1  
+##  9     9 24/01/1952 Male   5 4    7 10  
+## 10    10 11/06/1953 Female 5 2    8 6   
+## # ... with 140 more rows</code></pre>
+<p>Each argument in the <code>case_when()</code> function is a <code>logical</code>, just like in the <code>if_else()</code> statement, followed by the <code>~</code> symbol, and then the result that we want to use in that case. R evaluates each of the conditional statements in order, this means that if two statements are correct (for your given data), R will return the <em>first</em> choice. This is also why we finish with a <code>T ~ Gender</code> to give the <code>case_when()</code> function a default option, if none of the other statements are <code>TRUE</code>, then this last one is <em>definitely</em> (and literally) <code>TRUE</code>. Here’s a simpler example to show this sequential evaluation:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="tidyverse-for-tidy-data.html#cb128-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb128-2"><a href="tidyverse-for-tidy-data.html#cb128-2"></a><span class="kw">case_when</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span> <span class="op">~</span><span class="st"> &quot;small&quot;</span>, <span class="co">#This is true for 1 &amp; 2</span></span>
+<span id="cb128-3"><a href="tidyverse-for-tidy-data.html#cb128-3"></a>          x <span class="op">&lt;</span><span class="st"> </span><span class="dv">7</span> <span class="op">~</span><span class="st"> &quot;medium&quot;</span>, <span class="co">#This is true for 1, 2, 3, 4, 5 and 6, BUT 1 &amp; 2 have already gone.</span></span>
+<span id="cb128-4"><a href="tidyverse-for-tidy-data.html#cb128-4"></a>          T <span class="op">~</span><span class="st"> &quot;large&quot;</span>) <span class="co">#Everything else (7, 8 &amp; 9) get this result</span></span></code></pre></div>
+<pre><code>##  [1] &quot;small&quot;  &quot;small&quot;  &quot;medium&quot; &quot;medium&quot; &quot;medium&quot; &quot;medium&quot; &quot;large&quot;  &quot;large&quot; 
+##  [9] &quot;large&quot;  &quot;large&quot;</code></pre>
+<p>For our purposes, we can use any of the previous options: <code>recode()</code>, <code>if_else()</code> or <code>case_when()</code>. It’s upto personal choice and style. Which do you find the easiest to understand? Which makes the most sense and is clearer <em>for you</em>. Whichever one it is, keep that one. We’re going to look at one final way to do this soon</p>
+</div>
+<div id="boolean-logic" class="section level3" number="2.4.7">
+<h3><span class="header-section-number">2.4.7</span> Boolean Logic</h3>
+<p>The last few bits involved evaluating a conditional statement (i.e logical vectors), sometimes, we need to check a few different statements at once. We might need them both to be true, or just one of them, or neither of them. We can use operators to combine <code>logical</code> vectors (just like we use operators for numeric vectors e.g <code>c(5,4) + c(3,2)</code>)</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="tidyverse-for-tidy-data.html#cb130-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(T,T,F,F)</span>
+<span id="cb130-2"><a href="tidyverse-for-tidy-data.html#cb130-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(T,F,T,F)</span>
+<span id="cb130-3"><a href="tidyverse-for-tidy-data.html#cb130-3"></a></span>
+<span id="cb130-4"><a href="tidyverse-for-tidy-data.html#cb130-4"></a>x <span class="op">&amp;</span><span class="st"> </span>y <span class="co">#AND opertor, both the left and right must be TRUE</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="tidyverse-for-tidy-data.html#cb132-1"></a>x <span class="op">|</span><span class="st"> </span>y <span class="co">#OR operator, either the left or the right need to be TRUE</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="tidyverse-for-tidy-data.html#cb134-1"></a><span class="kw">xor</span>(x,y) <span class="co">#Exclusive OR, only one can be TRUE</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<p>Obviously the last one, <code>xor()</code> is a function and not an operator, but it can still come in handy for our <code>if_else()</code> and <code>case_when()</code> functions.</p>
+</div>
+<div id="the-factor-function" class="section level3" number="2.4.8">
+<h3><span class="header-section-number">2.4.8</span> The factor() function</h3>
+<p>In data terms, we’d say that the <code>Gender</code> variable is categorical. Since we have a categorical data, it would make sense that we also want to store it in our <code>tibble</code> as such. Let’s do that!</p>
+<p>Underneath, R stores a <code>factor</code> as a number with an associated vector of levels, which is (usually) a <code>character</code>.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tidyverse-for-tidy-data.html#cb136-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb136-2"><a href="tidyverse-for-tidy-data.html#cb136-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb136-3"><a href="tidyverse-for-tidy-data.html#cb136-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb136-4"><a href="tidyverse-for-tidy-data.html#cb136-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb136-5"><a href="tidyverse-for-tidy-data.html#cb136-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb136-6"><a href="tidyverse-for-tidy-data.html#cb136-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender), <span class="co">#Tidy up Gender</span></span>
+<span id="cb136-7"><a href="tidyverse-for-tidy-data.html#cb136-7"></a>         <span class="dt">Gender =</span> <span class="kw">factor</span>(Gender))</span>
+<span id="cb136-8"><a href="tidyverse-for-tidy-data.html#cb136-8"></a></span>
+<span id="cb136-9"><a href="tidyverse-for-tidy-data.html#cb136-9"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;fct&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 Male   5 6    7 1   
+##  2     2 17/04/1977 Female 5 9    11 0  
+##  3     3 24/07/1966 Female 5 4    9 8   
+##  4     4 22/02/1985 Female 5 7    11 1  
+##  5     5 30/07/1985 Male   6 0    10 10 
+##  6     6 09/07/1987 Male   6 2    11 12 
+##  7     7 23/01/1995 Female 5 10   10 2  
+##  8     8 31/12/1992 Male   6 3    12 1  
+##  9     9 24/01/1952 Male   5 4    7 10  
+## 10    10 11/06/1953 Female 5 2    8 6   
+## # ... with 140 more rows</code></pre>
+<p>The data type of <code>Gender</code> has switched to <code>&lt;fct&gt;</code>, which means it’s a factor. If we have a look at it, it’ll tell us the levels of that factor (i.e. what are all the possible values)</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="tidyverse-for-tidy-data.html#cb138-1"></a><span class="kw">head</span>(dat_clean<span class="op">$</span>Gender) <span class="co">#First few elements</span></span></code></pre></div>
+<pre><code>## [1] Male   Female Female Female Male   Male  
+## Levels: Female Male Non-Binary</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="tidyverse-for-tidy-data.html#cb140-1"></a><span class="kw">head</span>(<span class="kw">as.numeric</span>(dat_clean<span class="op">$</span>Gender)) <span class="co">#This is what R sees</span></span></code></pre></div>
+<pre><code>## [1] 2 1 1 1 2 2</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="tidyverse-for-tidy-data.html#cb142-1"></a><span class="kw">levels</span>(dat_clean<span class="op">$</span>Gender) <span class="co">#This is what we see</span></span></code></pre></div>
+<pre><code>## [1] &quot;Female&quot;     &quot;Male&quot;       &quot;Non-Binary&quot;</code></pre>
+<p>In this version, “Female” has been chosen to be the first level. This means if we run any analysis, “Female” will be used as the reference category. This is because it’s the first element in the vector and so R just uses this by default. A lot of functions that can take a <code>factor</code> as an argument will automatically convert a <code>character</code> into a <code>factor</code>, and again, just use the first element as the reference.</p>
+<p>This might not be what we want, we might want “Male” to be our default, or if we run this on a different dataset in the same format, we might end up with a different default level. We we’re going to ensure that the “Female” category is our reference category using the <code>relevel()</code> function:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tidyverse-for-tidy-data.html#cb144-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb144-2"><a href="tidyverse-for-tidy-data.html#cb144-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb144-3"><a href="tidyverse-for-tidy-data.html#cb144-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb144-4"><a href="tidyverse-for-tidy-data.html#cb144-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb144-5"><a href="tidyverse-for-tidy-data.html#cb144-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb144-6"><a href="tidyverse-for-tidy-data.html#cb144-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Tidy up Gender</span></span>
+<span id="cb144-7"><a href="tidyverse-for-tidy-data.html#cb144-7"></a><span class="st">           </span>factor <span class="op">%&gt;%</span></span>
+<span id="cb144-8"><a href="tidyverse-for-tidy-data.html#cb144-8"></a><span class="st">           </span><span class="kw">relevel</span>(<span class="st">&quot;Female&quot;</span>))</span>
+<span id="cb144-9"><a href="tidyverse-for-tidy-data.html#cb144-9"></a></span>
+<span id="cb144-10"><a href="tidyverse-for-tidy-data.html#cb144-10"></a><span class="kw">levels</span>(dat_clean<span class="op">$</span>Gender)</span></code></pre></div>
+<pre><code>## [1] &quot;Female&quot;     &quot;Male&quot;       &quot;Non-Binary&quot;</code></pre>
+<p>Going forward, we’re not going to both using <code>relevel()</code> for now since we know our default is “Female”, but it’s useful to know.</p>
+</div>
+<div id="the-separate-function" class="section level3" number="2.4.9">
+<h3><span class="header-section-number">2.4.9</span> The separate() function</h3>
+<p>The Height &amp; Weight variables are still in an unusual form. From inspection, we can see that they’re written in imperial measures: feet &amp; inches and stone &amp; lbs. For Height, the feet &amp; inches are separated by a space, so we can use this to split the vector into two</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="tidyverse-for-tidy-data.html#cb146-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb146-2"><a href="tidyverse-for-tidy-data.html#cb146-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb146-3"><a href="tidyverse-for-tidy-data.html#cb146-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb146-4"><a href="tidyverse-for-tidy-data.html#cb146-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb146-5"><a href="tidyverse-for-tidy-data.html#cb146-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb146-6"><a href="tidyverse-for-tidy-data.html#cb146-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb146-7"><a href="tidyverse-for-tidy-data.html#cb146-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="co">#Split Height up</span></span>
+<span id="cb146-8"><a href="tidyverse-for-tidy-data.html#cb146-8"></a></span>
+<span id="cb146-9"><a href="tidyverse-for-tidy-data.html#cb146-9"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 6
+##       ID DOB        Gender Feet  Inches Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; 
+##  1     1 22/03/1965 Male   5     6      7 1   
+##  2     2 17/04/1977 Female 5     9      11 0  
+##  3     3 24/07/1966 Female 5     4      9 8   
+##  4     4 22/02/1985 Female 5     7      11 1  
+##  5     5 30/07/1985 Male   6     0      10 10 
+##  6     6 09/07/1987 Male   6     2      11 12 
+##  7     7 23/01/1995 Female 5     10     10 2  
+##  8     8 31/12/1992 Male   6     3      12 1  
+##  9     9 24/01/1952 Male   5     4      7 10  
+## 10    10 11/06/1953 Female 5     2      8 6   
+## # ... with 140 more rows</code></pre>
+<p>This removes the <code>Height</code> variable and replaces it with two new ones, the <code>Feet</code> and <code>Inches</code> variables. We can now combine these back together by converting them into metres using the following conversion: 1 foot = 0.3048 m and 1 inch = 0.0254 m.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tidyverse-for-tidy-data.html#cb148-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb148-2"><a href="tidyverse-for-tidy-data.html#cb148-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb148-3"><a href="tidyverse-for-tidy-data.html#cb148-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb148-4"><a href="tidyverse-for-tidy-data.html#cb148-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb148-5"><a href="tidyverse-for-tidy-data.html#cb148-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb148-6"><a href="tidyverse-for-tidy-data.html#cb148-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb148-7"><a href="tidyverse-for-tidy-data.html#cb148-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb148-8"><a href="tidyverse-for-tidy-data.html#cb148-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches) <span class="co">#Convert into metres</span></span></code></pre></div>
+<pre><code>## Error in 0.3048 * Feet: non-numeric argument to binary operator</code></pre>
+<p>We’ve hit our first error. <code>Feet</code> and <code>Inches</code> are still stored as characters. We need to convert them into Numbers before we can multiply and add them. We could do it this way:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="tidyverse-for-tidy-data.html#cb150-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb150-2"><a href="tidyverse-for-tidy-data.html#cb150-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb150-3"><a href="tidyverse-for-tidy-data.html#cb150-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb150-4"><a href="tidyverse-for-tidy-data.html#cb150-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb150-5"><a href="tidyverse-for-tidy-data.html#cb150-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb150-6"><a href="tidyverse-for-tidy-data.html#cb150-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb150-7"><a href="tidyverse-for-tidy-data.html#cb150-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb150-8"><a href="tidyverse-for-tidy-data.html#cb150-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Feet =</span> <span class="kw">as.numeric</span>(Feet), <span class="co">#Convert to Numbers</span></span>
+<span id="cb150-9"><a href="tidyverse-for-tidy-data.html#cb150-9"></a>         <span class="dt">Inches =</span> <span class="kw">as.numeric</span>(Inches))</span></code></pre></div>
+<p>Which is easy enough, but what if we were wanting to do it with a lot of variables at once?</p>
+</div>
+<div id="the-mutate_at-function" class="section level3" number="2.4.10">
+<h3><span class="header-section-number">2.4.10</span> The mutate_at() function</h3>
+<p>We can use the <code>mutate_at()</code> function to apply a function to a <em>bunch</em> of variables all at once. This is pretty advanced <code>tidyverse</code> stuff!</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="tidyverse-for-tidy-data.html#cb151-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb151-2"><a href="tidyverse-for-tidy-data.html#cb151-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb151-3"><a href="tidyverse-for-tidy-data.html#cb151-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb151-4"><a href="tidyverse-for-tidy-data.html#cb151-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb151-5"><a href="tidyverse-for-tidy-data.html#cb151-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb151-6"><a href="tidyverse-for-tidy-data.html#cb151-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb151-7"><a href="tidyverse-for-tidy-data.html#cb151-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb151-8"><a href="tidyverse-for-tidy-data.html#cb151-8"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),as.numeric) <span class="co">#Convert to Numbers</span></span>
+<span id="cb151-9"><a href="tidyverse-for-tidy-data.html#cb151-9"></a></span>
+<span id="cb151-10"><a href="tidyverse-for-tidy-data.html#cb151-10"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 6
+##       ID DOB        Gender  Feet Inches Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; 
+##  1     1 22/03/1965 Male       5      6 7 1   
+##  2     2 17/04/1977 Female     5      9 11 0  
+##  3     3 24/07/1966 Female     5      4 9 8   
+##  4     4 22/02/1985 Female     5      7 11 1  
+##  5     5 30/07/1985 Male       6      0 10 10 
+##  6     6 09/07/1987 Male       6      2 11 12 
+##  7     7 23/01/1995 Female     5     10 10 2  
+##  8     8 31/12/1992 Male       6      3 12 1  
+##  9     9 24/01/1952 Male       5      4 7 10  
+## 10    10 11/06/1953 Female     5      2 8 6   
+## # ... with 140 more rows</code></pre>
+<p>This is a <strong>scoped</strong> version of the <code>mutate()</code> function, meaning that it mutates the <code>tibble</code> on a specific set of variables. We told the <code>mutate_at()</code> function that we want to apply the <code>as.numeric()</code> function to <code>Feet</code> and <code>Inches</code>. We passed the names of the variables as strings to <code>mutate_at()</code> and then passed the function without the brackets at the end.</p>
+</div>
+<div id="the-select-function" class="section level3" number="2.4.11">
+<h3><span class="header-section-number">2.4.11</span> The select() function</h3>
+<p>We can now go back to the formula for converting feet/inches to metres and re-run it with <code>Feet</code> and <code>Inches</code> as numbers</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="tidyverse-for-tidy-data.html#cb153-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb153-2"><a href="tidyverse-for-tidy-data.html#cb153-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb153-3"><a href="tidyverse-for-tidy-data.html#cb153-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb153-4"><a href="tidyverse-for-tidy-data.html#cb153-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb153-5"><a href="tidyverse-for-tidy-data.html#cb153-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb153-6"><a href="tidyverse-for-tidy-data.html#cb153-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb153-7"><a href="tidyverse-for-tidy-data.html#cb153-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb153-8"><a href="tidyverse-for-tidy-data.html#cb153-8"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert to Numbers</span></span>
+<span id="cb153-9"><a href="tidyverse-for-tidy-data.html#cb153-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches) <span class="co">#Convert into metres</span></span>
+<span id="cb153-10"><a href="tidyverse-for-tidy-data.html#cb153-10"></a></span>
+<span id="cb153-11"><a href="tidyverse-for-tidy-data.html#cb153-11"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 7
+##       ID DOB        Gender  Feet Inches Weight Height
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1     1 22/03/1965 Male       5      6 7 1      1.68
+##  2     2 17/04/1977 Female     5      9 11 0     1.75
+##  3     3 24/07/1966 Female     5      4 9 8      1.63
+##  4     4 22/02/1985 Female     5      7 11 1     1.70
+##  5     5 30/07/1985 Male       6      0 10 10    1.83
+##  6     6 09/07/1987 Male       6      2 11 12    1.88
+##  7     7 23/01/1995 Female     5     10 10 2     1.78
+##  8     8 31/12/1992 Male       6      3 12 1     1.91
+##  9     9 24/01/1952 Male       5      4 7 10     1.63
+## 10    10 11/06/1953 Female     5      2 8 6      1.57
+## # ... with 140 more rows</code></pre>
+<p>Almost done. We’ve now got <code>Height</code> into metres, but do we really need the <code>Feet</code> and <code>Inches</code> variables anymore? We can pick which variables we want to keep in our dataset using the <code>select()</code> function</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="tidyverse-for-tidy-data.html#cb155-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb155-2"><a href="tidyverse-for-tidy-data.html#cb155-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb155-3"><a href="tidyverse-for-tidy-data.html#cb155-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb155-4"><a href="tidyverse-for-tidy-data.html#cb155-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb155-5"><a href="tidyverse-for-tidy-data.html#cb155-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb155-6"><a href="tidyverse-for-tidy-data.html#cb155-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb155-7"><a href="tidyverse-for-tidy-data.html#cb155-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb155-8"><a href="tidyverse-for-tidy-data.html#cb155-8"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert to Numbers</span></span>
+<span id="cb155-9"><a href="tidyverse-for-tidy-data.html#cb155-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb155-10"><a href="tidyverse-for-tidy-data.html#cb155-10"></a><span class="st">  </span><span class="kw">select</span>(ID,DOB,Gender,Height,Weight) <span class="co">#Pick just what we want to keep</span></span>
+<span id="cb155-11"><a href="tidyverse-for-tidy-data.html#cb155-11"></a></span>
+<span id="cb155-12"><a href="tidyverse-for-tidy-data.html#cb155-12"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Height Weight
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; 
+##  1     1 22/03/1965 Male     1.68 7 1   
+##  2     2 17/04/1977 Female   1.75 11 0  
+##  3     3 24/07/1966 Female   1.63 9 8   
+##  4     4 22/02/1985 Female   1.70 11 1  
+##  5     5 30/07/1985 Male     1.83 10 10 
+##  6     6 09/07/1987 Male     1.88 11 12 
+##  7     7 23/01/1995 Female   1.78 10 2  
+##  8     8 31/12/1992 Male     1.91 12 1  
+##  9     9 24/01/1952 Male     1.63 7 10  
+## 10    10 11/06/1953 Female   1.57 8 6   
+## # ... with 140 more rows</code></pre>
+<p>Similar to working with vectors, we can also tell R which variables we <em>don’t</em> want. This might actually be easier here.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="tidyverse-for-tidy-data.html#cb157-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb157-2"><a href="tidyverse-for-tidy-data.html#cb157-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb157-3"><a href="tidyverse-for-tidy-data.html#cb157-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb157-4"><a href="tidyverse-for-tidy-data.html#cb157-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb157-5"><a href="tidyverse-for-tidy-data.html#cb157-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb157-6"><a href="tidyverse-for-tidy-data.html#cb157-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb157-7"><a href="tidyverse-for-tidy-data.html#cb157-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb157-8"><a href="tidyverse-for-tidy-data.html#cb157-8"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert to Numbers</span></span>
+<span id="cb157-9"><a href="tidyverse-for-tidy-data.html#cb157-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb157-10"><a href="tidyverse-for-tidy-data.html#cb157-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches) <span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb157-11"><a href="tidyverse-for-tidy-data.html#cb157-11"></a></span>
+<span id="cb157-12"><a href="tidyverse-for-tidy-data.html#cb157-12"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 5
+##       ID DOB        Gender Weight Height
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;
+##  1     1 22/03/1965 Male   7 1      1.68
+##  2     2 17/04/1977 Female 11 0     1.75
+##  3     3 24/07/1966 Female 9 8      1.63
+##  4     4 22/02/1985 Female 11 1     1.70
+##  5     5 30/07/1985 Male   10 10    1.83
+##  6     6 09/07/1987 Male   11 12    1.88
+##  7     7 23/01/1995 Female 10 2     1.78
+##  8     8 31/12/1992 Male   12 1     1.91
+##  9     9 24/01/1952 Male   7 10     1.63
+## 10    10 11/06/1953 Female 8 6      1.57
+## # ... with 140 more rows</code></pre>
+<p>We’ve converted <code>Height</code> from feet and inches into metres. We still need to do the same for <code>Weight</code> into kg. The conversion between kg and st/lbs is 1 stone = 6.35029 kg and 1 lb = 0.453592 kg. Can you replicate what I did here for the <code>Weight</code> variable? Take Five minutes and have a think. Some functions that you run for this can be combined with the previous functions that we ran for <code>Height</code>. We also want to create a new variable, <code>BMI</code>, which is calculated as <code>BMI = Weight/Height^2</code>, let’s add this too!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="tidyverse-for-tidy-data.html#cb159-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb159-2"><a href="tidyverse-for-tidy-data.html#cb159-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb159-3"><a href="tidyverse-for-tidy-data.html#cb159-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb159-4"><a href="tidyverse-for-tidy-data.html#cb159-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb159-5"><a href="tidyverse-for-tidy-data.html#cb159-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb159-6"><a href="tidyverse-for-tidy-data.html#cb159-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb159-7"><a href="tidyverse-for-tidy-data.html#cb159-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb159-8"><a href="tidyverse-for-tidy-data.html#cb159-8"></a><span class="st">  </span><span class="kw">separate</span>(Weight,<span class="kw">c</span>(<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Weight up</span></span>
+<span id="cb159-9"><a href="tidyverse-for-tidy-data.html#cb159-9"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>,<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert</span></span>
+<span id="cb159-10"><a href="tidyverse-for-tidy-data.html#cb159-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet  <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches,</span>
+<span id="cb159-11"><a href="tidyverse-for-tidy-data.html#cb159-11"></a>         <span class="dt">Weight =</span> <span class="fl">6.3502</span><span class="op">*</span>Stone <span class="op">+</span><span class="st"> </span><span class="fl">0.4535</span><span class="op">*</span>Pounds,</span>
+<span id="cb159-12"><a href="tidyverse-for-tidy-data.html#cb159-12"></a>         <span class="dt">BMI =</span> Weight<span class="op">/</span>Height<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb159-13"><a href="tidyverse-for-tidy-data.html#cb159-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches,<span class="op">-</span>Stone,<span class="op">-</span>Pounds) <span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb159-14"><a href="tidyverse-for-tidy-data.html#cb159-14"></a></span>
+<span id="cb159-15"><a href="tidyverse-for-tidy-data.html#cb159-15"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 6
+##       ID DOB        Gender Height Weight   BMI
+##    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 22/03/1965 Male     1.68   44.9  16.0
+##  2     2 17/04/1977 Female   1.75   69.9  22.7
+##  3     3 24/07/1966 Female   1.63   60.8  23.0
+##  4     4 22/02/1985 Female   1.70   70.3  24.3
+##  5     5 30/07/1985 Male     1.83   68.0  20.3
+##  6     6 09/07/1987 Male     1.88   75.3  21.3
+##  7     7 23/01/1995 Female   1.78   64.4  20.4
+##  8     8 31/12/1992 Male     1.91   76.7  21.1
+##  9     9 24/01/1952 Male     1.63   49.0  18.5
+## 10    10 11/06/1953 Female   1.57   53.5  21.6
+## # ... with 140 more rows</code></pre>
+</div>
+<div id="dates" class="section level3" number="2.4.12">
+<h3><span class="header-section-number">2.4.12</span> Dates</h3>
+<p>Dates are hard! This is just a fact. Leap Days, Time Zones, Daylight’s Savings Time, Leap Seconds. All make for difficulty in dealing with Dates. We’re going to need a specialised package for dates: <code>lubridate</code>. This is a package designed with the <code>tidyverse</code> in mind, but is not installed when we downloaded the <code>tidyverse</code> package at the start, so in the <strong>console</strong>, we’re going to install the lubridate package: <code>install.packages("lubridate")</code>.</p>
+<p>As is convention (and keeping our code organised), we’re going to load the package into R using the <code>library()</code> function at the start of our code (rather than in the middle).</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="tidyverse-for-tidy-data.html#cb161-1"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<p>This little info box just tells us that there is a function called <code>date()</code> in the <code>base</code> package <em>and</em> in the <code>lubridate</code> package. Since we’re loading the <code>lubridate</code> package, this essentially overwrites the <code>date()</code> function from the <code>base</code> package. Which is fine, since <code>lubridate</code> has a better version. We can still use the original <code>date()</code> function by writing <code>base::date()</code> (but we don’t need it).</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="tidyverse-for-tidy-data.html#cb164-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb164-2"><a href="tidyverse-for-tidy-data.html#cb164-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb164-3"><a href="tidyverse-for-tidy-data.html#cb164-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb164-4"><a href="tidyverse-for-tidy-data.html#cb164-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb164-5"><a href="tidyverse-for-tidy-data.html#cb164-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb164-6"><a href="tidyverse-for-tidy-data.html#cb164-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb164-7"><a href="tidyverse-for-tidy-data.html#cb164-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb164-8"><a href="tidyverse-for-tidy-data.html#cb164-8"></a><span class="st">  </span><span class="kw">separate</span>(Weight,<span class="kw">c</span>(<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Weight up</span></span>
+<span id="cb164-9"><a href="tidyverse-for-tidy-data.html#cb164-9"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>,<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert</span></span>
+<span id="cb164-10"><a href="tidyverse-for-tidy-data.html#cb164-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet  <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches,</span>
+<span id="cb164-11"><a href="tidyverse-for-tidy-data.html#cb164-11"></a>         <span class="dt">Weight =</span> <span class="fl">6.3502</span><span class="op">*</span>Stone <span class="op">+</span><span class="st"> </span><span class="fl">0.4535</span><span class="op">*</span>Pounds,</span>
+<span id="cb164-12"><a href="tidyverse-for-tidy-data.html#cb164-12"></a>         <span class="dt">BMI =</span> Weight<span class="op">/</span>Height<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb164-13"><a href="tidyverse-for-tidy-data.html#cb164-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches,<span class="op">-</span>Stone,<span class="op">-</span>Pounds) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb164-14"><a href="tidyverse-for-tidy-data.html#cb164-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DOB =</span> <span class="kw">dmy</span>(DOB)) <span class="co"># Convert Date</span></span>
+<span id="cb164-15"><a href="tidyverse-for-tidy-data.html#cb164-15"></a></span>
+<span id="cb164-16"><a href="tidyverse-for-tidy-data.html#cb164-16"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 6
+##       ID DOB        Gender Height Weight   BMI
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0
+##  2     2 1977-04-17 Female   1.75   69.9  22.7
+##  3     3 1966-07-24 Female   1.63   60.8  23.0
+##  4     4 1985-02-22 Female   1.70   70.3  24.3
+##  5     5 1985-07-30 Male     1.83   68.0  20.3
+##  6     6 1987-07-09 Male     1.88   75.3  21.3
+##  7     7 1995-01-23 Female   1.78   64.4  20.4
+##  8     8 1992-12-31 Male     1.91   76.7  21.1
+##  9     9 1952-01-24 Male     1.63   49.0  18.5
+## 10    10 1953-06-11 Female   1.57   53.5  21.6
+## # ... with 140 more rows</code></pre>
+<p>The <code>dmy()</code> function takes in dates of the form “Day-Month-Year” and converts them into a type <code>date</code>. Pretty intuitive. There are similar functions such as <code>mdy()</code>, <code>ymd()</code> for different formats. These are all found in the same <code>?dmy</code> Help file. The <code>Date</code> type functions similar to a number since it is considered a continuous variable, rather than a <code>character</code>, which makes it much easier to work with. For example, we can now sort them in order and find the median DOB, the <code>dplyr</code> package provides us with the <code>median()</code> function, which is an improvement on the <code>quantile()</code> function:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="tidyverse-for-tidy-data.html#cb166-1"></a><span class="kw">median</span>(dat_clean<span class="op">$</span>DOB)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Oh, it’s returned <code>NA</code>, which means that there are <code>NA</code> values in our data. <code>NA</code> is usually used for Missing values. Let’s see how many we have. The <code>is.na()</code> function returns <code>TRUE</code> if the element in a vector is <code>NA</code> and <code>FALSE</code> if it isn’t (i.e. it contains an acutal number)</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="tidyverse-for-tidy-data.html#cb168-1"></a>dat_clean<span class="op">$</span>DOB <span class="op">%&gt;%</span></span>
+<span id="cb168-2"><a href="tidyverse-for-tidy-data.html#cb168-2"></a><span class="st">  </span>is.na <span class="op">%&gt;%</span></span>
+<span id="cb168-3"><a href="tidyverse-for-tidy-data.html#cb168-3"></a><span class="st">  </span>sum</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>A lot of functions also contain the option to ignore <code>NA</code> values, so let’s get the real <code>median()</code></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="tidyverse-for-tidy-data.html#cb170-1"></a><span class="kw">median</span>(dat_clean<span class="op">$</span>DOB, <span class="dt">na.rm=</span>T) <span class="co">#na.rm=T tells median to remove the NAs</span></span></code></pre></div>
+<pre><code>## [1] &quot;1978-03-11&quot;</code></pre>
+</div>
+<div id="the-filter-function" class="section level3" number="2.4.13">
+<h3><span class="header-section-number">2.4.13</span> The filter() function</h3>
+<p>In our <code>DOB</code> variable, we have some <code>NA</code>s and they can really mess up our work. Let’s get rid of those entries using the <code>filter()</code> function. Remember that the <code>!</code> (not) operator turns <code>TRUE</code> into <code>FALSE</code> and vice versa:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="tidyverse-for-tidy-data.html#cb172-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb172-2"><a href="tidyverse-for-tidy-data.html#cb172-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb172-3"><a href="tidyverse-for-tidy-data.html#cb172-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb172-4"><a href="tidyverse-for-tidy-data.html#cb172-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb172-5"><a href="tidyverse-for-tidy-data.html#cb172-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb172-6"><a href="tidyverse-for-tidy-data.html#cb172-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb172-7"><a href="tidyverse-for-tidy-data.html#cb172-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb172-8"><a href="tidyverse-for-tidy-data.html#cb172-8"></a><span class="st">  </span><span class="kw">separate</span>(Weight,<span class="kw">c</span>(<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Weight up</span></span>
+<span id="cb172-9"><a href="tidyverse-for-tidy-data.html#cb172-9"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>,<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert</span></span>
+<span id="cb172-10"><a href="tidyverse-for-tidy-data.html#cb172-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet  <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches,</span>
+<span id="cb172-11"><a href="tidyverse-for-tidy-data.html#cb172-11"></a>         <span class="dt">Weight =</span> <span class="fl">6.3502</span><span class="op">*</span>Stone <span class="op">+</span><span class="st"> </span><span class="fl">0.4535</span><span class="op">*</span>Pounds,</span>
+<span id="cb172-12"><a href="tidyverse-for-tidy-data.html#cb172-12"></a>         <span class="dt">BMI =</span> Weight<span class="op">/</span>Height<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb172-13"><a href="tidyverse-for-tidy-data.html#cb172-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches,<span class="op">-</span>Stone,<span class="op">-</span>Pounds) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb172-14"><a href="tidyverse-for-tidy-data.html#cb172-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DOB =</span> <span class="kw">dmy</span>(DOB)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Convert Date</span></span>
+<span id="cb172-15"><a href="tidyverse-for-tidy-data.html#cb172-15"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(DOB)) <span class="co">#Get rid of the NAs</span></span>
+<span id="cb172-16"><a href="tidyverse-for-tidy-data.html#cb172-16"></a></span>
+<span id="cb172-17"><a href="tidyverse-for-tidy-data.html#cb172-17"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 145 x 6
+##       ID DOB        Gender Height Weight   BMI
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0
+##  2     2 1977-04-17 Female   1.75   69.9  22.7
+##  3     3 1966-07-24 Female   1.63   60.8  23.0
+##  4     4 1985-02-22 Female   1.70   70.3  24.3
+##  5     5 1985-07-30 Male     1.83   68.0  20.3
+##  6     6 1987-07-09 Male     1.88   75.3  21.3
+##  7     7 1995-01-23 Female   1.78   64.4  20.4
+##  8     8 1992-12-31 Male     1.91   76.7  21.1
+##  9     9 1952-01-24 Male     1.63   49.0  18.5
+## 10    10 1953-06-11 Female   1.57   53.5  21.6
+## # ... with 135 more rows</code></pre>
+<p>Now we’ve completely got rid of the <code>NA</code>s in our dataset and should have values for every cell.</p>
+</div>
+<div id="the-summarise-function" class="section level3" number="2.4.14">
+<h3><span class="header-section-number">2.4.14</span> The summarise() function</h3>
+<p>Now we have a bunch of tidy data, what can we do with it? Well firstly, we can grab out some important descriptive statistics. Previously, we have used things like the <code>mean()</code> and <code>sd()</code> functions on vectors and we can do that here within our tibble. What happens if we do it in a <code>mutate()</code> call?</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="tidyverse-for-tidy-data.html#cb174-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb174-2"><a href="tidyverse-for-tidy-data.html#cb174-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb174-3"><a href="tidyverse-for-tidy-data.html#cb174-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb174-4"><a href="tidyverse-for-tidy-data.html#cb174-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb174-5"><a href="tidyverse-for-tidy-data.html#cb174-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb174-6"><a href="tidyverse-for-tidy-data.html#cb174-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb174-7"><a href="tidyverse-for-tidy-data.html#cb174-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb174-8"><a href="tidyverse-for-tidy-data.html#cb174-8"></a><span class="st">  </span><span class="kw">separate</span>(Weight,<span class="kw">c</span>(<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Weight up</span></span>
+<span id="cb174-9"><a href="tidyverse-for-tidy-data.html#cb174-9"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>,<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert</span></span>
+<span id="cb174-10"><a href="tidyverse-for-tidy-data.html#cb174-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet  <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches,</span>
+<span id="cb174-11"><a href="tidyverse-for-tidy-data.html#cb174-11"></a>         <span class="dt">Weight =</span> <span class="fl">6.3502</span><span class="op">*</span>Stone <span class="op">+</span><span class="st"> </span><span class="fl">0.4535</span><span class="op">*</span>Pounds,</span>
+<span id="cb174-12"><a href="tidyverse-for-tidy-data.html#cb174-12"></a>         <span class="dt">BMI =</span> Weight<span class="op">/</span>Height<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb174-13"><a href="tidyverse-for-tidy-data.html#cb174-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches,<span class="op">-</span>Stone,<span class="op">-</span>Pounds) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb174-14"><a href="tidyverse-for-tidy-data.html#cb174-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DOB =</span> <span class="kw">dmy</span>(DOB)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Convert Date</span></span>
+<span id="cb174-15"><a href="tidyverse-for-tidy-data.html#cb174-15"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(DOB)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Get rid of the NAs</span></span>
+<span id="cb174-16"><a href="tidyverse-for-tidy-data.html#cb174-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean.BMI =</span> <span class="kw">mean</span>(BMI))</span>
+<span id="cb174-17"><a href="tidyverse-for-tidy-data.html#cb174-17"></a></span>
+<span id="cb174-18"><a href="tidyverse-for-tidy-data.html#cb174-18"></a>dat_clean</span></code></pre></div>
+<pre><code>## # A tibble: 145 x 7
+##       ID DOB        Gender Height Weight   BMI mean.BMI
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0     20.5
+##  2     2 1977-04-17 Female   1.75   69.9  22.7     20.5
+##  3     3 1966-07-24 Female   1.63   60.8  23.0     20.5
+##  4     4 1985-02-22 Female   1.70   70.3  24.3     20.5
+##  5     5 1985-07-30 Male     1.83   68.0  20.3     20.5
+##  6     6 1987-07-09 Male     1.88   75.3  21.3     20.5
+##  7     7 1995-01-23 Female   1.78   64.4  20.4     20.5
+##  8     8 1992-12-31 Male     1.91   76.7  21.1     20.5
+##  9     9 1952-01-24 Male     1.63   49.0  18.5     20.5
+## 10    10 1953-06-11 Female   1.57   53.5  21.6     20.5
+## # ... with 135 more rows</code></pre>
+<p>We now have the average BMI in every row. Maybe that’s what we wanted. But it’s not what I wanted. Let’s put it in a <code>summarise()</code> call instead. Since we’ve neatened up our <code>dat_clean</code> dataset as much as possible, we’re going to save it and edit from there</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="tidyverse-for-tidy-data.html#cb176-1"></a>dat_clean &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb176-2"><a href="tidyverse-for-tidy-data.html#cb176-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">as.numeric</span>(ID)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Turn ID into numeric</span></span>
+<span id="cb176-3"><a href="tidyverse-for-tidy-data.html#cb176-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Height =</span> Ht, <span class="dt">Weight =</span> Wgt) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Rename some variables</span></span>
+<span id="cb176-4"><a href="tidyverse-for-tidy-data.html#cb176-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Gender =</span> <span class="kw">case_when</span>(Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;male&quot;</span>) <span class="op">~</span><span class="st"> &quot;Male&quot;</span>,</span>
+<span id="cb176-5"><a href="tidyverse-for-tidy-data.html#cb176-5"></a>                            Gender <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;female&quot;</span>) <span class="op">~</span><span class="st"> &quot;Female&quot;</span>,</span>
+<span id="cb176-6"><a href="tidyverse-for-tidy-data.html#cb176-6"></a>                            T <span class="op">~</span><span class="st"> </span>Gender)) <span class="op">%&gt;%</span></span>
+<span id="cb176-7"><a href="tidyverse-for-tidy-data.html#cb176-7"></a><span class="st">  </span><span class="kw">separate</span>(Height,<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Height up</span></span>
+<span id="cb176-8"><a href="tidyverse-for-tidy-data.html#cb176-8"></a><span class="st">  </span><span class="kw">separate</span>(Weight,<span class="kw">c</span>(<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Split Weight up</span></span>
+<span id="cb176-9"><a href="tidyverse-for-tidy-data.html#cb176-9"></a><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;Feet&quot;</span>,<span class="st">&quot;Inches&quot;</span>,<span class="st">&quot;Stone&quot;</span>,<span class="st">&quot;Pounds&quot;</span>),as.numeric) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert</span></span>
+<span id="cb176-10"><a href="tidyverse-for-tidy-data.html#cb176-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Height =</span> <span class="fl">0.3048</span><span class="op">*</span>Feet  <span class="op">+</span><span class="st"> </span><span class="fl">0.0254</span><span class="op">*</span>Inches,</span>
+<span id="cb176-11"><a href="tidyverse-for-tidy-data.html#cb176-11"></a>         <span class="dt">Weight =</span> <span class="fl">6.3502</span><span class="op">*</span>Stone <span class="op">+</span><span class="st"> </span><span class="fl">0.4535</span><span class="op">*</span>Pounds,</span>
+<span id="cb176-12"><a href="tidyverse-for-tidy-data.html#cb176-12"></a>         <span class="dt">BMI =</span> Weight<span class="op">/</span>Height<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Convert into metres</span></span>
+<span id="cb176-13"><a href="tidyverse-for-tidy-data.html#cb176-13"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Feet,<span class="op">-</span>Inches,<span class="op">-</span>Stone,<span class="op">-</span>Pounds) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Drop what we don&#39;t want</span></span>
+<span id="cb176-14"><a href="tidyverse-for-tidy-data.html#cb176-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DOB =</span> <span class="kw">dmy</span>(DOB)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Convert Date</span></span>
+<span id="cb176-15"><a href="tidyverse-for-tidy-data.html#cb176-15"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(DOB)) <span class="co">#Get rid of the NAs</span></span>
+<span id="cb176-16"><a href="tidyverse-for-tidy-data.html#cb176-16"></a></span>
+<span id="cb176-17"><a href="tidyverse-for-tidy-data.html#cb176-17"></a>dat_clean <span class="op">%&gt;%</span></span>
+<span id="cb176-18"><a href="tidyverse-for-tidy-data.html#cb176-18"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">mean.BMI =</span> <span class="kw">mean</span>(BMI))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   mean.BMI
+##      &lt;dbl&gt;
+## 1     20.5</code></pre>
+<p>Well, that’s a bit better, but what if we want more than just the mean of the BMI? Let’s over-complicated this <code>summarise()</code> function</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tidyverse-for-tidy-data.html#cb178-1"></a>dat_clean <span class="op">%&gt;%</span></span>
+<span id="cb178-2"><a href="tidyverse-for-tidy-data.html#cb178-2"></a><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">c</span>(<span class="st">&quot;Height&quot;</span>,<span class="st">&quot;Weight&quot;</span>,<span class="st">&quot;BMI&quot;</span>),</span>
+<span id="cb178-3"><a href="tidyverse-for-tidy-data.html#cb178-3"></a>               <span class="kw">list</span>(<span class="dt">mean=</span>mean,<span class="dt">sd=</span>sd,<span class="dt">min=</span>min,<span class="dt">max=</span>max))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 12
+##   Height_mean Weight_mean BMI_mean Height_sd Weight_sd BMI_sd Height_min
+##         &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+## 1        1.70        59.5     20.5    0.0943      14.6   4.24       1.47
+## # ... with 5 more variables: Weight_min &lt;dbl&gt;, BMI_min &lt;dbl&gt;, Height_max &lt;dbl&gt;,
+## #   Weight_max &lt;dbl&gt;, BMI_max &lt;dbl&gt;</code></pre>
+<p>Within the <code>summarise_at()</code> function, we’ve created a <code>list()</code> of functions and told R to perform that function on all of the variables we gave it. Very similar to the way we used <code>mutate_at()</code> earlier.</p>
+</div>
+<div id="the-group_by-function" class="section level3" number="2.4.15">
+<h3><span class="header-section-number">2.4.15</span> The group_by() function</h3>
+<p>It’s all very well having a summary of the entire dataset, but what if I want to <strong>stratify</strong>. I want the same statistics, but based on a the value in <code>Gender</code>.</p>
+<p>Easy. Peasy.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="tidyverse-for-tidy-data.html#cb180-1"></a>dat_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb180-2"><a href="tidyverse-for-tidy-data.html#cb180-2"></a><span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="co">#Group the data</span></span></code></pre></div>
+<pre><code>## # A tibble: 145 x 6
+## # Groups:   Gender [3]
+##       ID DOB        Gender Height Weight   BMI
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0
+##  2     2 1977-04-17 Female   1.75   69.9  22.7
+##  3     3 1966-07-24 Female   1.63   60.8  23.0
+##  4     4 1985-02-22 Female   1.70   70.3  24.3
+##  5     5 1985-07-30 Male     1.83   68.0  20.3
+##  6     6 1987-07-09 Male     1.88   75.3  21.3
+##  7     7 1995-01-23 Female   1.78   64.4  20.4
+##  8     8 1992-12-31 Male     1.91   76.7  21.1
+##  9     9 1952-01-24 Male     1.63   49.0  18.5
+## 10    10 1953-06-11 Female   1.57   53.5  21.6
+## # ... with 135 more rows</code></pre>
+<p>We can tell R that we want the rows in our <code>tibble</code> to be grouped together based on the value in the <code>Gender</code> variable. Now, the <code>summarise()</code> function will respect this grouping.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="tidyverse-for-tidy-data.html#cb182-1"></a>dat_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb182-2"><a href="tidyverse-for-tidy-data.html#cb182-2"></a><span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Group the data</span></span>
+<span id="cb182-3"><a href="tidyverse-for-tidy-data.html#cb182-3"></a><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">c</span>(<span class="st">&quot;Height&quot;</span>,<span class="st">&quot;Weight&quot;</span>,<span class="st">&quot;BMI&quot;</span>),</span>
+<span id="cb182-4"><a href="tidyverse-for-tidy-data.html#cb182-4"></a>               <span class="kw">list</span>(<span class="dt">mean=</span>mean,<span class="dt">sd=</span>sd,<span class="dt">min=</span>min,<span class="dt">max=</span>max))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 13
+##   Gender Height_mean Weight_mean BMI_mean Height_sd Weight_sd BMI_sd Height_min
+##   &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Female        1.65        55.2     20.3    0.0764     12.8    4.16       1.47
+## 2 Male          1.76        64.5     20.8    0.0785     15.2    4.40       1.55
+## 3 Non-B~        1.62        54.1     20.6    0.0381      9.40   3.14       1.57
+## # ... with 5 more variables: Weight_min &lt;dbl&gt;, BMI_min &lt;dbl&gt;, Height_max &lt;dbl&gt;,
+## #   Weight_max &lt;dbl&gt;, BMI_max &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="combining-data" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Combining data</h2>
+<p>Quite often in our data analysis, we will need to combine data from multiple sources into a single dataset. For example, we might have taken scoring measurements separately and want to combine them back in with our original anthropometric data above.</p>
+<div id="the-_join-functions" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> The *_join() functions</h3>
+<p>We can do that with the family of <code>*_join()</code> functions. These functions take two <code>tibbles</code> (or <code>data.frames</code>), <code>x</code> and <code>y</code> and joins them together based on an identifier for each row. However, sometimes we may have an id that is in one dataset, but not in the other. The <code>*_join()</code> family allows us to decide what entries to keep.</p>
+<ul>
+<li><code>inner_join()</code> will keep only the IDs that appear in both <code>x</code> and <code>y</code>.</li>
+<li><code>full_join()</code> will keep all IDs from both and if there are any missing, it will replace them with an <code>NA</code>.</li>
+<li><code>left_join()</code> and <code>right_join()</code> will keep all of the IDs in the left (<code>x</code>) or the right (<code>x</code>) regardless of whether they’re in the other or not.</li>
+</ul>
+<p>Let’s bring in a new <a href="data/data_score.csv">dataset</a> and try it out!</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tidyverse-for-tidy-data.html#cb184-1"></a>dat_score &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/data_score.csv&quot;</span>,</span>
+<span id="cb184-2"><a href="tidyverse-for-tidy-data.html#cb184-2"></a>                      <span class="dt">col_types=</span><span class="kw">cols</span>())</span>
+<span id="cb184-3"><a href="tidyverse-for-tidy-data.html#cb184-3"></a>dat_score</span></code></pre></div>
+<pre><code>## # A tibble: 150 x 4
+##       ID Score_1 Score_2 Score_3
+##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1    68.2    81.0    88.8
+##  2     2    42.8    56.2    72.1
+##  3     3    45.1    56.6    63.7
+##  4     4    59.3    64.9    63.5
+##  5     5    52.3    49.8    54.4
+##  6     6    63.5    68.2    79.9
+##  7     7    32.5    40.3    52.3
+##  8     8    32.2    42.2    56.5
+##  9     9    59.2    62.6    75.7
+## 10    10    38.9    41.5    50.8
+## # ... with 140 more rows</code></pre>
+<p>This dataset has the same <code>ID</code> as our previous one, but don’t forget we previously deleted some rows from our dataset (based on whether <code>DOB</code> was missing or not). So we don’t have the exact same ones. This means we’re going to want to use <code>inner_join()</code>? We need to pass the datasets as arguments along with a vector telling R which variables are our identifiers:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="tidyverse-for-tidy-data.html#cb186-1"></a>dat_joined &lt;-<span class="st"> </span><span class="kw">inner_join</span>(dat_clean,dat_score,<span class="dt">by=</span><span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb186-2"><a href="tidyverse-for-tidy-data.html#cb186-2"></a>dat_joined</span></code></pre></div>
+<pre><code>## # A tibble: 145 x 9
+##       ID DOB        Gender Height Weight   BMI Score_1 Score_2 Score_3
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0    68.2    81.0    88.8
+##  2     2 1977-04-17 Female   1.75   69.9  22.7    42.8    56.2    72.1
+##  3     3 1966-07-24 Female   1.63   60.8  23.0    45.1    56.6    63.7
+##  4     4 1985-02-22 Female   1.70   70.3  24.3    59.3    64.9    63.5
+##  5     5 1985-07-30 Male     1.83   68.0  20.3    52.3    49.8    54.4
+##  6     6 1987-07-09 Male     1.88   75.3  21.3    63.5    68.2    79.9
+##  7     7 1995-01-23 Female   1.78   64.4  20.4    32.5    40.3    52.3
+##  8     8 1992-12-31 Male     1.91   76.7  21.1    32.2    42.2    56.5
+##  9     9 1952-01-24 Male     1.63   49.0  18.5    59.2    62.6    75.7
+## 10    10 1953-06-11 Female   1.57   53.5  21.6    38.9    41.5    50.8
+## # ... with 135 more rows</code></pre>
+</div>
+<div id="the-pivot_functions" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> The pivot_*()functions</h3>
+<p>So we have the scores in what is known as a wide format, the table has a lot of columns and each score (1-3) has it’s own column. We can change this into a long format, where each <code>ID</code> x <code>Score</code> combination has it’s own row:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="tidyverse-for-tidy-data.html#cb188-1"></a>dat_joined <span class="op">%&gt;%</span></span>
+<span id="cb188-2"><a href="tidyverse-for-tidy-data.html#cb188-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">c</span>(Score_<span class="dv">1</span>,Score_<span class="dv">2</span>,Score_<span class="dv">3</span>),</span>
+<span id="cb188-3"><a href="tidyverse-for-tidy-data.html#cb188-3"></a>               <span class="dt">names_to=</span><span class="st">&quot;ScoreNum&quot;</span>,</span>
+<span id="cb188-4"><a href="tidyverse-for-tidy-data.html#cb188-4"></a>               <span class="dt">values_to=</span><span class="st">&quot;Score&quot;</span>,</span>
+<span id="cb188-5"><a href="tidyverse-for-tidy-data.html#cb188-5"></a>               <span class="dt">names_prefix=</span><span class="st">&quot;Score_&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 435 x 8
+##       ID DOB        Gender Height Weight   BMI ScoreNum Score
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0 1         68.2
+##  2     1 1965-03-22 Male     1.68   44.9  16.0 2         81.0
+##  3     1 1965-03-22 Male     1.68   44.9  16.0 3         88.8
+##  4     2 1977-04-17 Female   1.75   69.9  22.7 1         42.8
+##  5     2 1977-04-17 Female   1.75   69.9  22.7 2         56.2
+##  6     2 1977-04-17 Female   1.75   69.9  22.7 3         72.1
+##  7     3 1966-07-24 Female   1.63   60.8  23.0 1         45.1
+##  8     3 1966-07-24 Female   1.63   60.8  23.0 2         56.6
+##  9     3 1966-07-24 Female   1.63   60.8  23.0 3         63.7
+## 10     4 1985-02-22 Female   1.70   70.3  24.3 1         59.3
+## # ... with 425 more rows</code></pre>
+<p>The effects of <code>pivot_longer()</code> can be undone with the <code>pivot_wider()</code> function</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tidyverse-for-tidy-data.html#cb190-1"></a>dat_joined <span class="op">%&gt;%</span></span>
+<span id="cb190-2"><a href="tidyverse-for-tidy-data.html#cb190-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">c</span>(Score_<span class="dv">1</span>,Score_<span class="dv">2</span>,Score_<span class="dv">3</span>),</span>
+<span id="cb190-3"><a href="tidyverse-for-tidy-data.html#cb190-3"></a>               <span class="dt">names_to=</span><span class="st">&quot;ScoreNum&quot;</span>,</span>
+<span id="cb190-4"><a href="tidyverse-for-tidy-data.html#cb190-4"></a>               <span class="dt">values_to=</span><span class="st">&quot;Score&quot;</span>,</span>
+<span id="cb190-5"><a href="tidyverse-for-tidy-data.html#cb190-5"></a>               <span class="dt">names_prefix=</span><span class="st">&quot;Score_&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb190-6"><a href="tidyverse-for-tidy-data.html#cb190-6"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from=</span>ScoreNum,</span>
+<span id="cb190-7"><a href="tidyverse-for-tidy-data.html#cb190-7"></a>               <span class="dt">values_from=</span>Score,</span>
+<span id="cb190-8"><a href="tidyverse-for-tidy-data.html#cb190-8"></a>               <span class="dt">names_prefix=</span><span class="st">&quot;Score_&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 145 x 9
+##       ID DOB        Gender Height Weight   BMI Score_1 Score_2 Score_3
+##    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1 1965-03-22 Male     1.68   44.9  16.0    68.2    81.0    88.8
+##  2     2 1977-04-17 Female   1.75   69.9  22.7    42.8    56.2    72.1
+##  3     3 1966-07-24 Female   1.63   60.8  23.0    45.1    56.6    63.7
+##  4     4 1985-02-22 Female   1.70   70.3  24.3    59.3    64.9    63.5
+##  5     5 1985-07-30 Male     1.83   68.0  20.3    52.3    49.8    54.4
+##  6     6 1987-07-09 Male     1.88   75.3  21.3    63.5    68.2    79.9
+##  7     7 1995-01-23 Female   1.78   64.4  20.4    32.5    40.3    52.3
+##  8     8 1992-12-31 Male     1.91   76.7  21.1    32.2    42.2    56.5
+##  9     9 1952-01-24 Male     1.63   49.0  18.5    59.2    62.6    75.7
+## 10    10 1953-06-11 Female   1.57   53.5  21.6    38.9    41.5    50.8
+## # ... with 135 more rows</code></pre>
+<p>These two functions work really well together depending on how we want our data to look. How we want our data to look will usually depend on what analysis we are doing.</p>
+</div>
+</div>
+<div id="the-cheat-sheets" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> The Cheat Sheets</h2>
+<p>We’ve introduced a bunch of new functions throughout this lesson and mentioned quite a few different packages. The <strong>Reference manuals</strong> and <strong>vignettes</strong> from a <code>package</code> can be incredibly useful for a thorough description of how the package works. But, a more intuitive resource is the <a href="https://rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>. These are much more visual and are really useful as a lookup if you can’t quite remember what function you need to use (rather than trawling through the Reference manual). Not all Cheatsheets are on the RStudio page, but remember, Google is your friend and searching specifically for Cheatsheets is easy! For example: “R dplyr Cheatsheet”</p>
+<p>There is also a shortcut to some of these Cheatsheets within RStudio in the menubar (at the top of the window) Help &gt; Cheatsheets</p>
+<p>Let’s take a look at the <code>dplyr</code> <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">Cheatsheet</a>! We can find this in the Help shortcut in R Studio.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

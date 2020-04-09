@@ -1,0 +1,756 @@
+# Tidyverse for Tidy Data
+
+## Packages
+
+R is designed to be a **modular** approach to statistical analysis and is **open-source** and allows the addition of **packages**. This means that the version of R you download is the basic version of it and we can download **packages** which contian more advanced functions. Think of it like DLC, but for statistics (and much like R it is still free!) These packages are built by other R users and can be downloaded from a repository called **CRAN** (Comprehensive R Archive Network).
+
+### Installing packages
+
+The first package we're going to download and install is the `tidyverse` package (which actually imports/installs a bunch of other packages).
+
+The command to install a new packages is:
+
+```
+install.packages("tidyverse")
+```
+
+This function will search **CRAN** for the package called `"tidyverse"` and install it into our own package repository. Note that this needs to be in quotes as this is a `string` that R will search for. It also downloads and installs all the other packages that `tidyverse` uses. As it's installing, you'll see it run through all these packages (e.g. `broom`, `ggplot2`,`tidyr`), we'll get to these later.
+
+
+If you're running this on your home computer and have full admin rights, then this installation should go fine (it just might take a while). However if you don't have full admin rights, then you might need to use the `lock=F` argument like so: `install.packages("tidyverse",lock=F)`, for example on a university computer you need to install packages this way. If the installation fails, try this way.
+
+
+You can see the currently installed packages inthe **Viewer** pane under the Packages tab. If you click on the name of a package in here, it will bring up a Help file (still in the **Viewer** pane) for that package, including a list of functions contained in that package (which link to their Help Files). Some packages include links to vignettes/documentation regarding the package.
+
+### Documentation
+
+As well as storing the actual package files, CRAN also stores documentation about the package. This includes the Help files that get installed along with the packages. CRAN homepages for packages are standardised and all look the same with (roughly) the same information.
+
+Let's have a look at the CRAN page for the [tidyverse](https://cran.r-project.org/web/packages/tidyverse/).
+
+Most of what we see here is for fairly advanced R users, so we're going to ignore a lot of it (until you get better). At the top, you can see the name of the package and a quick blurb about what it's for. There are also a bunch of links to other packages that the current package uses. Under the Downloads heading, you can see the **Reference manual** and the **Vignettes**.
+
+The **Reference manual** for a package contains a list of all of the functions that are in that package, and information about their use. This information is the *same* information that is contained in the `?` Help files that is downloaded into R. This can be useful if you can't remember the name of a function, but you know it's in a certain package.
+
+The **Vignettes** are more of a user guide. They're usually written by the package author and contains information on how to *use* the package. Kind of like an instruction manual, whereas the reference manual is more like the glossary. Packages don't always have vignettes, but when they do, I highly recomend reading them.
+
+### Loading packages
+
+So, we've installed a package, but we're not actually using it. Once a package has been *installed* it is stored on our system and we only need to do this once. But, we also need to load the package into our current R session. (Note that this time, we don't need quotation marks)
+
+```{r, echo=F}
+library(tidyverse)
+```
+
+We now have access to all of the functions contained within the core bundle of `tidyverse` packages (listed in the console under `Attaching packages`. This means that by installing and loading the `tidyverse` package, we've actually installed and loaded these other packages (e.g. `ggplot2` and `dplyr`). Let's get started!
+
+## The Pipe
+
+One of the most important changes that comes with the `tidyverse` is the addition of the **Pipe**: `%>%`. It's a new operator that comes with the `dplyr` package (originally from the `magrittr` pckage) and it allows us to completely change how we use functions. It can make our code much easier to read, particularly when writing complicated series of functions. For example:
+```{r, eval=F}
+#Written as single line:
+log(sqrt(sum(runif(20))))
+
+
+#Spread over multiple lines
+x <- 20
+x <- runif(x)
+x <- sum(x)
+x <- sqrt(x)
+x <- log(x)
+x
+
+#Written with pipes:
+20 %>%
+  runif() %>%
+  sum() %>%
+  sqrt() %>%
+  log()
+
+
+
+```
+
+All three of thes examples perform the same actions in the same order. But that first line is really difficult to read. It's hard to see what functions are happening and which brackets are associated with which function. If we wanted to add 3 after the `sum()` function, it would be hard to see where to put it.
+
+In the single line version, we are working from the inside out. This gets easier to read in the version where we spread it across multiple lines since what we're doing is now in order. But this is prone to mistakes. What if we type `z` instead of `x` in a function call or an assignment call? The piped version gets rid of this risk and duplicated code (`x <-` on every line). I've chosen to spread my command over multiple lines to make it easier to read and to indent each new line (RStudio actually does this automatically for you), this makes my code look neater and much easier to read.
+
+What the pipe does is allow us to *pipe* our answer into the next function as the first argument. We can then chain them together as above to make things much easier to read. This changes our syntax a little bit. The following lines perform the same thing:
+```
+f(a,b,c,d)
+a %>% f(b,c,d)
+```
+
+And with chaining:
+```
+f(g(a,b),c,d)
+a %>% 
+  g(b) %>% 
+  f(c,d)
+```
+
+If your function only takes a single argument, then you don't even need to include the brackets:
+```{r}
+20 %>%
+  runif %>%
+  sum %>%
+  sqrt %>%
+  log
+```
+
+
+The shortcut to quickly enter this in RStudio is Ctrl/Cmd + Alt + M
+
+## Loading Data
+
+I've uploaded a [messy dataset](data/data_anthro.csv) online for us to use today. Right click the link and then download the file. Save it somewhere useful (maybe in a new folder).
+
+In R (as well as many programming languages), we have something called the *working directory*. We can see this if we click on the Files tab in the **Viewer** pane (bottom right). This shows us all the files in our current directory (note, this might not be our working directory if we've clicked around a bit).
+
+We can find out our working directory by using the command `getwd()` and we can change it using the `setwd()` command. It can be tricky to remember what the directory were trying to find its, so we can use a file explorer window to find it. In the top menu, click Session >  Set Working Directory > Choose Directory (or press Ctrl/Cmd + Shift + H). Find the folder where you've just saved the file and set it as our working directory.
+
+You'll notice that R Studio actually sent the `setwd()` command to the **Console** for us anyway. If you want, you can copy and paste that into your script for use later (just remember to remove the `>` symbol or it won't run from the Script).
+
+If you didn't want to download the file, you can also load it straight from the web:
+
+
+```{r}
+dat <- read_csv("data/data_anthro.csv")
+```
+This `read_csv()` function is contained in the `readr` package. There is a built in function in R that allows us to bring in csv files, but it's messier. We're in the tidyverse now!
+
+This has given a bit of an output. `read_csv` tries to guess what data types columns/variables within this dataset are. We can suppress this message with the argument `col_types = col()`, or we can define what we want them to be by passing the data types as a vector (d=double, c=character,l=logical) `col_types=c("c","c","c","c","c")`.
+
+Let's have a look at this data. Previously, we needed to use the `head()` function to just look at the top few rows. But that was when we were using  `data.frame` structure from the basic R package. `read_csv()` loads the data and stores it in a `tibble` format. This is essentially the same as a `data.frame` (and can be used in the same way), but provides a bit more information and consistency and only prints the first few rows:
+```{r}
+dat
+```
+
+R now tells us that the `tibble` has `r nrow(dat)` rows and `r ncol(dat)` columns, and as well as giving us the names of the variables in the data, it also tells us their types (at the moment, they're all `<chr>`, but some of these will change as we go on) and at the bottom, we're told that there are `r nrow(dat)-10` more rows. If we had a lot of columns in this data, R would only show us the first few columns (as many can fit in the screen) and tell us at the bottom what the extra columns are (names and data types).
+
+### Messy Data!
+
+This data is quite messy. There are some things we need to fix. First thing to do would be to list out everything we need to fix.
+
+1. I would prefer ID to be a number (although this is not always true)
+2. DOB is a character. This is supposed to be a date. Can R store dates? OF COURSE IT CAN!
+3. The next two columns are Ht and Wgt, and are supposed to be Height and Weight. We'll fix those names
+4. Height and weight are stored as feet/inches and stone/pounds. This is inconvenient. We want consistecy, so we want to change them to cm and kg.
+5. Gender is also inconsitent some are words (male/female) and lower/uppercase single letters. We need to standardise this.
+
+
+## Changing our data
+
+We could edit this data in excel and go through one cell at a time, but if we have a big data set, this is going to be difficult. Let's get R to do it for us. The advantage of doing it all in R is that our *Raw* data (the original file) doesn't need to be changed. We write our code in a Script to process the data and then at the end, we can save our data as a new file, or just our outputs (i.e. our models).
+
+### The mutate() function
+
+The `dplyr` package provides us with the `mutate()` function, which is incredibly useful for editing data as we go, and is designed to be used with the pipe. Let's use it, along with the `as.numeric()` function to convert the `ID` variable into a number.
+
+```{r}
+dat %>% mutate(ID = as.numeric(ID))
+```
+
+Exactly as we needed, `ID` is now a number (`<dbl>`, short for double, which just means it can store a big number, a relic of old programming). The `mutate()` function takes in a `tibble` as it's first argument (remember, this is what the pipe is doing) and changes it depending on whatever other information is passed to it. If the variable we put in already exists, it is overwritten, if not a new column is created. We can edit more than one variable at a time this way and create new variables and the variables are created/edited in order.
+
+```{r}
+dat %>%
+  mutate(x = runif(150), #Remember this function?
+         y = runif(150),
+         x = x + y)
+```
+
+Note that this is the same as running `mutate(dat,x=runif(150),y=runif(150),x=x+y)`.
+
+Right now, we've not stored the output from the previous `mutate()` call, `dat` is still as it was when we loaded it with the `ID` variable stored as a `character`. See:
+
+```{r}
+dat
+```
+
+### Neat code
+
+For now, let's clear out our **Script** pane to keep ourselves organised, and eliminate the code that we don't need. Copy this into your **Script** pane and run it all (Ctrl/Cmd + A will select all the code in the **Script** pane and Ctrl/Cmd + Enter will run it all)
+
+```{r eval=F}
+rm(list=ls())
+
+#Load up my libraries
+library(tidyverse)
+
+#Load up my data
+dat <- read_csv("data/data_anthro.csv")
+
+
+#Edit the dat file
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) #Turn ID into numeric
+
+dat_clean
+```
+
+I've added a function as the first line `rm(list=ls())` which will clear out our workspace and get rid of any variables that have been created. I've also added annotations with the `#` symbol. R won't run anything in a line that is preceded by the `#` symbol (and it'll even colour code it as well), this allows you to make notes (either to yourself or others) explaining what your code is actually doing. This isn't always necessary if it's obvious, but it can be useful to keep track of things.
+
+Annotations are voluntary. We don't have to put them in there, but they really help when you're reading over code that you've not used in a while, or you're sending it to someone else. It's much easier to annotate and make your code as readable as possible than it is to stand there explaining your code to someone who has never seen it before.
+
+We've also stored the cleaned `dat` dataset as `dat_clean`
+
+### The rename() function
+
+The `dplyr` package also provides us with the `rename` function, which allows us to rename some of the variables. This can make it easier to interpret what the variables are. Coming up with clear and concise names is very good practice for budding coders.
+
+As we mentioned earlier, with the `%>%` pipe, we can chain commands together, so that's what we're going to start doing. In the end, our tidying of the data is going to be one long chain of functions, but it should be clear what we've done, and in what order. After it's done, R will store the output of *everything* into the `dat_clean` variable.
+
+So, let's add a `rename()` command to our `dat` cleaning chain.
+
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) #Rename some variables
+
+dat_clean
+```
+
+The syntax here is just `new-name = old-name`. Now the variables `Ht` and `Wgt` are completely gone from `dat`, and we have new variables `Height` and `Weight` in their place. 
+
+That's two out of our five problems solved.
+
+### The recode() function
+
+The Gender variable is still a bit of mess. Let's take a look. This time, we're just going to put this in the **console**.
+
+```{r}
+table(dat$Gender)
+```
+
+We're used the `$` operator to access the `Gender` variable inside the `dat` tibble, and then ran the `table()` function to get a count of how often each of the values appear in the variable. An interesting side note is that when we've been using the variables in `dat` within our tidyverse functions, we've not needed to use this `$` operator, e.g. you would expect to have to do something like `dat %>% mutate(dat$ID = as.numeric(dat$ID)`, but we didn't, we just needed: `dat %>% mutate(ID = as.numeric(ID))`. Another advantage of the `tidyverse`.
+
+We as humans can tell what each of these entries means. Some of them mean Male and some mean Female. But R can't discern that. We're gonna lump them together by converting all the relevant values into "Male" or "Female". We can do this using the `recode()` function inside the `mutate()` function.
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = recode(Gender, #Tidy up Gender
+                         m = "Male", male = "Male", M = "Male", #Males
+                         f = "Female", female = "Female", F = "Female")) #Females
+
+dat_clean
+```
+
+The first argument is actually the vector that we are recoding, `Gender`. Since we're only performing the one function here, we're not going to pipe as it's still pretty neat as it is (thanks to the neat indentation oriented formatting). Confusingly, this is written backwards to the `rename()` function, so we need `old-name = new-name` and the new name has to be in quotes (because it is a string), but other than that, it's pretty straight forward.
+
+If we're recoding a string that has spaces or that starts with a number, we need to put them in between *backticks*. You'll be used to the single quote or apostrophe (') and double quote ("), but in R, we sometimes need to use the backtick as a quotation mark (`). The backtick is usually located to the left of the 1 button on your keyboard (yes, that button is finally useful!)
+
+```{r}
+x <- c("One","Two","3","Fo ur")
+recode(x,`3` = "Three",`Fo ur` = "Four")
+```
+
+Technically, the `recode()` function *can* be used with a numeric vectors rather than a character vector, but it is much easier not to (mostly because R can store different types of numbers, eg double,`<dbl>` is different from an integer `<int>`, but we're not going to get into that here, just don' do it).
+
+### The if_else() function
+
+The `recode()` function is pretty useful for a lot of circumstances, but it still looks a little clunky in our code. We can use the `if_else()` function to make R make a decision. Basically, if something is true do this thing, if it's false, do the other thing.
+
+```{r}
+x <- c("One","Two","3","Four")
+if_else(x == "3","Three",x)
+```
+
+For our vector, it evaluates the first argument (`x==3` into a `logical` vector) and then if it's `TRUE`, it uses the second argument and if it's `FALSE` uses the third argument. A lot of the time, the third argument will just be the original vector (so we only change it if the logical statement is `TRUE`). These conditional arguments can also be vectors, in which case R will match them up and keep everything in the right order.
+
+We're also going to introduce a new operator, the `%in%` operator. Remember operators have something on the left and something on the right. The %in% operator checks if the things in the vector on the left are in the vector on the right
+
+```{r}
+x <- c(1,2,3,4,5,6)
+x %in% c(2,4,6)
+```
+
+For *every* element in `x`, we check whether it is in the vector on the right. If it is, it returns `TRUE`, otherwise, it returns `FALSE`. We can use this instead of the previous recode
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = if_else(Gender %in% c("m","M","male"),"Male",Gender), #Tidy up Gender
+         Gender = if_else(Gender %in% c("f","F","female"),"Female",Gender)) 
+
+dat_clean
+```
+
+There are plenty of situations where `recode()` is better than `if_else()`. Since we're wanting to turn a lot of values into a few simpler ones, the `if_else()` function is better. If we're just wanting to rename the values in our variable, then `recode()` works better. For example, if all the values were either "M", "F" or "N" and we want them to be "Male", "Female" or "Non-Binary", then `recode()` would be the better option.
+
+But remember that "Better" is often subjective. These commands do the same thing, but whichever you understand better should be the one you use!
+
+### The case_when() function
+
+We've converted the `recode()` function into a pair of `if_else()` functions. Not too bad when we're just doing two, but if we needed to look at more cases, this could get complicated. And complicated means prone to errors. We can use the `case_when()` function for this:
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",    #Tidy up Gender
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender))
+
+dat_clean
+```
+
+Each argument in the `case_when()` function is a `logical`, just like in the `if_else()` statement, followed by the `~` symbol, and then the result that we want to use in that case. R evaluates each of the conditional statements in order, this means that if two statements are correct (for your given data), R will return the *first* choice. This is also why we finish with a `T ~ Gender` to give the `case_when()` function a default option, if none of the other statements are `TRUE`, then this last one is *definitely* (and literally) `TRUE`. Here's a simpler example to show this sequential evaluation:
+
+```{r}
+x <- 1:10
+case_when(x < 3 ~ "small", #This is true for 1 & 2
+          x < 7 ~ "medium", #This is true for 1, 2, 3, 4, 5 and 6, BUT 1 & 2 have already gone.
+          T ~ "large") #Everything else (7, 8 & 9) get this result
+```
+
+For our purposes, we can use any of the previous options: `recode()`, `if_else()` or `case_when()`. It's upto personal choice and style. Which do you find the easiest to understand? Which makes the most sense and is clearer *for you*. Whichever one it is, keep that one. We're going to look at one final way to do this soon
+
+### Boolean Logic
+
+The last few bits involved evaluating a conditional statement (i.e logical vectors), sometimes, we need to check a few different statements at once. We might need them both to be true, or just one of them, or neither of them. We can use operators to combine `logical` vectors (just like we use operators for numeric vectors e.g `c(5,4) + c(3,2)`)
+
+```{r}
+x <- c(T,T,F,F)
+y <- c(T,F,T,F)
+
+x & y #AND opertor, both the left and right must be TRUE
+x | y #OR operator, either the left or the right need to be TRUE
+xor(x,y) #Exclusive OR, only one can be TRUE
+
+```
+
+Obviously the last one, `xor()` is a function and not an operator, but it can still come in handy for our `if_else()` and `case_when()` functions.
+
+
+### The factor() function
+
+In data terms, we'd say that the `Gender` variable is categorical. Since we have a categorical data, it would make sense that we also want to store it in our `tibble` as such. Let's do that!
+
+Underneath, R stores a `factor` as a number with an associated vector of levels, which is (usually) a `character`.
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender), #Tidy up Gender
+         Gender = factor(Gender))
+
+dat_clean
+```
+
+The data type of `Gender` has switched to `<fct>`, which means it's a factor. If we have a look at it, it'll tell us the levels of that factor (i.e. what are all the possible values)
+
+```{r}
+head(dat_clean$Gender) #First few elements
+head(as.numeric(dat_clean$Gender)) #This is what R sees
+levels(dat_clean$Gender) #This is what we see
+```
+
+In this version, "Female" has been chosen to be the first level. This means if we run any analysis, "Female" will be used as the reference category. This is because it's the first element in the vector and so R just uses this by default. A lot of functions that can take a `factor` as an argument will automatically convert a `character` into a `factor`, and again, just use the first element as the reference.
+
+This might not be what we want, we might want "Male" to be our default, or if we run this on a different dataset in the same format, we might end up with a different default level. We we're going to ensure that the "Female" category is our reference category using the `relevel()` function:
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender) %>% #Tidy up Gender
+           factor %>%
+           relevel("Female"))
+
+levels(dat_clean$Gender)
+```
+
+Going forward, we're not going to both using `relevel()` for now since we know our default is "Female", but it's useful to know.
+
+### The separate() function
+
+The Height & Weight variables are still in an unusual form. From inspection, we can see that they're written in imperial measures: feet & inches and stone & lbs. For Height, the feet & inches are separated by a space, so we can use this to split the vector into two
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") #Split Height up
+
+dat_clean
+```
+
+This removes the `Height` variable and replaces it with two new ones, the `Feet` and `Inches` variables. We can now combine these back together by converting them into metres using the following conversion: 1 foot = 0.3048 m and 1 inch = 0.0254 m.
+
+```{r error=TRUE}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate(Height = 0.3048*Feet + 0.0254*Inches) #Convert into metres
+```
+
+We've hit our first error. `Feet` and `Inches` are still stored as characters. We need to convert them into Numbers before we can multiply and add them. We could do it this way:
+```{r eval=F}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate(Feet = as.numeric(Feet), #Convert to Numbers
+         Inches = as.numeric(Inches))
+```
+
+Which is easy enough, but what if we were wanting to do it with a lot of variables at once?
+
+### The mutate_at() function
+
+We can use the `mutate_at()` function to apply a function to a *bunch* of variables all at once. This is pretty advanced `tidyverse` stuff!
+
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate_at(c("Feet","Inches"),as.numeric) #Convert to Numbers
+
+dat_clean
+```
+
+ This is a **scoped** version of the `mutate()` function, meaning that it mutates the `tibble` on a specific set of variables. We told the `mutate_at()` function that we want to apply the `as.numeric()` function to `Feet` and `Inches`. We passed the names of the variables as strings to `mutate_at()` and then passed the function without the brackets at the end.
+
+### The select() function
+
+We can now go back to the formula for converting feet/inches to metres and re-run it with `Feet` and `Inches` as numbers
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate_at(c("Feet","Inches"),as.numeric) %>% #Convert to Numbers
+  mutate(Height = 0.3048*Feet + 0.0254*Inches) #Convert into metres
+
+dat_clean
+```
+
+Almost done. We've now got `Height` into metres, but do we really need the `Feet` and `Inches` variables anymore? We can pick which variables we want to keep in our dataset using the `select()` function
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate_at(c("Feet","Inches"),as.numeric) %>% #Convert to Numbers
+  mutate(Height = 0.3048*Feet + 0.0254*Inches) %>% #Convert into metres
+  select(ID,DOB,Gender,Height,Weight) #Pick just what we want to keep
+
+dat_clean
+```
+
+Similar to working with vectors, we can also tell R which variables we *don't* want. This might actually be easier here.
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  mutate_at(c("Feet","Inches"),as.numeric) %>% #Convert to Numbers
+  mutate(Height = 0.3048*Feet + 0.0254*Inches) %>% #Convert into metres
+  select(-Feet,-Inches) #Drop what we don't want
+
+dat_clean
+```
+
+We've converted `Height` from feet and inches into metres. We still need to do the same for `Weight` into kg. The conversion between kg and st/lbs is 1 stone = 6.35029 kg and 1 lb = 0.453592 kg. Can you replicate what I did here for the `Weight` variable? Take Five minutes and have a think. Some functions that you run for this can be combined with the previous functions that we ran for `Height`. We also want to create a new variable, `BMI`, which is calculated as `BMI = Weight/Height^2`, let's add this too!
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  separate(Weight,c("Stone","Pounds"),sep=" ") %>% #Split Weight up
+  mutate_at(c("Feet","Inches","Stone","Pounds"),as.numeric) %>% #Convert
+  mutate(Height = 0.3048*Feet  + 0.0254*Inches,
+         Weight = 6.3502*Stone + 0.4535*Pounds,
+         BMI = Weight/Height^2) %>% #Convert into metres
+  select(-Feet,-Inches,-Stone,-Pounds) #Drop what we don't want
+
+dat_clean
+```
+
+### Dates
+
+Dates are hard! This is just a fact. Leap Days, Time Zones, Daylight's Savings Time, Leap Seconds. All make for difficulty in dealing with Dates. We're going to need a specialised package for dates: `lubridate`. This is a package designed with the `tidyverse` in mind, but is not installed when we downloaded the `tidyverse` package at the start, so in the **console**, we're going to install the lubridate package: `install.packages("lubridate")`.
+
+As is convention (and keeping our code organised), we're going to load the package into R using the `library()` function at the start of our code (rather than in the middle).
+
+```{r}
+library(lubridate)
+```
+
+This little info box just tells us that there is a function called `date()` in the `base` package *and* in the `lubridate` package. Since we're loading the `lubridate` package, this essentially overwrites the `date()` function from the `base` package. Which is fine, since `lubridate` has a better version. We can still use the original `date()` function by writing `base::date()` (but we don't need it).
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  separate(Weight,c("Stone","Pounds"),sep=" ") %>% #Split Weight up
+  mutate_at(c("Feet","Inches","Stone","Pounds"),as.numeric) %>% #Convert
+  mutate(Height = 0.3048*Feet  + 0.0254*Inches,
+         Weight = 6.3502*Stone + 0.4535*Pounds,
+         BMI = Weight/Height^2) %>% #Convert into metres
+  select(-Feet,-Inches,-Stone,-Pounds) %>% #Drop what we don't want
+  mutate(DOB = dmy(DOB)) # Convert Date
+
+dat_clean
+```
+
+The `dmy()` function takes in dates of the form "Day-Month-Year" and converts them into a type `date`. Pretty intuitive. There are similar functions such as `mdy()`, `ymd()` for different formats. These are all found in the same `?dmy` Help file. The `Date` type functions similar to a number since it is considered a continuous variable, rather than a `character`, which makes it much easier to work with. For example, we can now sort them in order and find the median DOB, the `dplyr` package provides us with the `median()` function, which is an improvement on the `quantile()` function:
+
+```{r}
+median(dat_clean$DOB)
+```
+
+Oh, it's returned `NA`, which means that there are `NA` values in our data. `NA` is usually used for Missing values. Let's see how many we have. The `is.na()` function returns `TRUE` if the element in a vector is `NA` and `FALSE` if it isn't (i.e. it contains an acutal number)
+
+```{r}
+dat_clean$DOB %>%
+  is.na %>%
+  sum
+```
+A lot of functions also contain the option to ignore `NA` values, so let's get the real `median()`
+```{r}
+median(dat_clean$DOB, na.rm=T) #na.rm=T tells median to remove the NAs
+```
+
+### The filter() function
+
+In our `DOB` variable, we have some `NA`s and they can really mess up our work. Let's get rid of those entries using the `filter()` function. Remember that the `!` (not) operator turns `TRUE` into `FALSE` and vice versa:
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  separate(Weight,c("Stone","Pounds"),sep=" ") %>% #Split Weight up
+  mutate_at(c("Feet","Inches","Stone","Pounds"),as.numeric) %>% #Convert
+  mutate(Height = 0.3048*Feet  + 0.0254*Inches,
+         Weight = 6.3502*Stone + 0.4535*Pounds,
+         BMI = Weight/Height^2) %>% #Convert into metres
+  select(-Feet,-Inches,-Stone,-Pounds) %>% #Drop what we don't want
+  mutate(DOB = dmy(DOB)) %>% # Convert Date
+  filter(!is.na(DOB)) #Get rid of the NAs
+
+dat_clean
+```
+
+Now we've completely got rid of the `NA`s in our dataset and should have values for every cell.
+
+### The summarise() function
+
+Now we have a bunch of tidy data, what can we do with it? Well firstly, we can grab out some important descriptive statistics. Previously, we have used things like the `mean()` and `sd()` functions on vectors and we can do that here within our tibble. What happens if we do it in a `mutate()` call?
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  separate(Weight,c("Stone","Pounds"),sep=" ") %>% #Split Weight up
+  mutate_at(c("Feet","Inches","Stone","Pounds"),as.numeric) %>% #Convert
+  mutate(Height = 0.3048*Feet  + 0.0254*Inches,
+         Weight = 6.3502*Stone + 0.4535*Pounds,
+         BMI = Weight/Height^2) %>% #Convert into metres
+  select(-Feet,-Inches,-Stone,-Pounds) %>% #Drop what we don't want
+  mutate(DOB = dmy(DOB)) %>% # Convert Date
+  filter(!is.na(DOB)) %>% #Get rid of the NAs
+  mutate(mean.BMI = mean(BMI))
+
+dat_clean
+```
+We now have the average BMI in every row. Maybe that's what we wanted. But it's not what I wanted. Let's put it in a `summarise()` call instead. Since we've neatened up our `dat_clean` dataset as much as possible, we're going to save it and edit from there
+
+```{r}
+dat_clean <- dat %>% 
+  mutate(ID = as.numeric(ID)) %>% #Turn ID into numeric
+  rename(Height = Ht, Weight = Wgt) %>% #Rename some variables
+  mutate(Gender = case_when(Gender %in% c("m","M","male") ~ "Male",
+                            Gender %in% c("f","F","female") ~ "Female",
+                            T ~ Gender)) %>%
+  separate(Height,c("Feet","Inches"),sep=" ") %>% #Split Height up
+  separate(Weight,c("Stone","Pounds"),sep=" ") %>% #Split Weight up
+  mutate_at(c("Feet","Inches","Stone","Pounds"),as.numeric) %>% #Convert
+  mutate(Height = 0.3048*Feet  + 0.0254*Inches,
+         Weight = 6.3502*Stone + 0.4535*Pounds,
+         BMI = Weight/Height^2) %>% #Convert into metres
+  select(-Feet,-Inches,-Stone,-Pounds) %>% #Drop what we don't want
+  mutate(DOB = dmy(DOB)) %>% # Convert Date
+  filter(!is.na(DOB)) #Get rid of the NAs
+
+dat_clean %>%
+    summarise(mean.BMI = mean(BMI))
+```
+
+Well, that's a bit better, but what if we want more than just the mean of the BMI? Let's over-complicated this `summarise()` function
+
+```{r}
+dat_clean %>%
+  summarise_at(c("Height","Weight","BMI"),
+               list(mean=mean,sd=sd,min=min,max=max))
+
+```
+
+Within the `summarise_at()` function, we've created a `list()` of functions and told R to perform that function on all of the variables we gave it. Very similar to the way we used `mutate_at()` earlier.
+
+### The group_by() function
+
+It's all very well having a summary of the entire dataset, but what if I want to **stratify**. I want the same statistics, but based on a the value in `Gender`.
+
+Easy. Peasy.
+```{r}
+dat_clean %>% 
+  group_by(Gender) #Group the data
+```
+
+We can tell R that we want the rows in our `tibble` to be grouped together based on the value in the `Gender` variable. Now, the `summarise()` function will respect this grouping.
+
+```{r}
+dat_clean %>% 
+  group_by(Gender) %>% #Group the data
+  summarise_at(c("Height","Weight","BMI"),
+               list(mean=mean,sd=sd,min=min,max=max))
+
+```
+
+## Combining data
+
+Quite often in our data analysis, we will need to combine data from multiple sources into a single dataset. For example, we might have taken scoring measurements separately and want to combine them back in with our original anthropometric data above.
+
+### The *_join() functions
+
+We can do that with the family of `*_join()` functions. These functions take two `tibbles` (or `data.frames`), `x` and `y` and joins them together based on an identifier for each row. However, sometimes we may have an id that is in one dataset, but not in the other. The `*_join()` family allows us to decide what entries to keep.
+
+* `inner_join()` will keep only the IDs that appear in both `x` and `y`.
+* `full_join()` will keep all IDs from both and if there are any missing, it will replace them with an `NA`.
+* `left_join()` and `right_join()` will keep all of the IDs in the left (`x`) or the right (`x`) regardless of whether they're in the other or not.
+
+Let's bring in a new [dataset](data/data_score.csv) and try it out!
+
+```{r}
+dat_score <- read_csv("data/data_score.csv",
+                      col_types=cols())
+dat_score
+```
+
+This dataset has the same `ID` as our previous one, but don't forget we previously deleted some rows from our dataset (based on whether `DOB` was missing or not). So we don't have the exact same ones. This means we're going to want to use `inner_join()`? We need to pass the datasets as arguments along with a vector telling R which variables are our identifiers:
+
+```{r}
+dat_joined <- inner_join(dat_clean,dat_score,by="ID")
+dat_joined
+```
+
+### The pivot_*()functions
+
+So we have the scores in what is known as a wide format, the table has a lot of columns and each score (1-3) has it's own column. We can change this into a long format, where each `ID` x `Score` combination has it's own row:
+
+```{r}
+dat_joined %>%
+  pivot_longer(c(Score_1,Score_2,Score_3),
+               names_to="ScoreNum",
+               values_to="Score",
+               names_prefix="Score_")
+```
+
+The effects of `pivot_longer()` can be undone with the `pivot_wider()` function
+
+```{r}
+dat_joined %>%
+  pivot_longer(c(Score_1,Score_2,Score_3),
+               names_to="ScoreNum",
+               values_to="Score",
+               names_prefix="Score_") %>%
+  pivot_wider(names_from=ScoreNum,
+               values_from=Score,
+               names_prefix="Score_")
+```
+
+These two functions work really well together depending on how we want our data to look. How we want our data to look will usually depend on what analysis we are doing.
+
+
+
+
+
+## The Cheat Sheets
+
+We've introduced a bunch of new functions throughout this lesson and mentioned quite a few different packages. The **Reference manuals** and **vignettes** from a `package` can be incredibly useful for a thorough description of how the package works. But, a more intuitive resource is the [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/). These are much more visual and are really useful as a lookup if you can't quite remember what function you need to use (rather than trawling through the Reference manual). Not all Cheatsheets are on the RStudio page, but remember, Google is your friend and searching specifically for Cheatsheets is easy! For example: "R dplyr Cheatsheet"
+
+There is also a shortcut to some of these Cheatsheets within RStudio in the menubar (at the top of the window) Help > Cheatsheets
+
+Let's take a look at the `dplyr` [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)! We can find this in the Help shortcut in R Studio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
