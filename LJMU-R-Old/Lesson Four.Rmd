@@ -1,0 +1,563 @@
+---
+title: "Regression, or How I learned to Stop Worrying and Love the Stats" #h1
+subtitle: "Statistics in R - Lesson Four" #h3
+author: 
+  name: "Michael A Barrowman"
+  email: "m.a.barrowman@ljmu.ac.uk"
+output:
+  html_document: 
+    css: styles.css
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    toc_float: 
+      collapsed: false
+editor_options:
+  chunk_output_type: inline
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(userfriendlyscience)
+```
+
+# Tests Continued...
+
+## One-way ANOVA
+
+In the previous lesson we learned that a t-test can be used to evaluate whether there is a difference between two groups. We take the variable we are measuring, and figure out how far apart it is in the two groups, based on how varied the two groups are. We can extend this idea to an ANOVA test to establish whether there is a difference across multiple groups.
+
+ANOVA or ANalysis Of VAriance attempts to figure out how much of the *variance* that a variable displays comes from the group and how much comes from elsewhere. Lets take a look at an example
+
+`r set.seed(75932)`
+```{r}
+n <- 300
+dat_anova <- tibble(Main = sample(c("Pizza","Pasta","Steak"),n,replace=T)) %>%
+  mutate(Main = fct_infreq(Main),
+         Score = rnorm(n) + (Main=="Pasta") + 2*(Main=="Pizza"))
+
+ggplot(dat_anova) + 
+  geom_density(aes(Score,group=Main,fill=Main),col=NA,alpha=0.4)
+
+```
+
+Since we have a few groups (and maybe even more), a density plot like this can get a bit full (especially if there is a lot of overlap). In this situation, we could use a set of box plots (or box-and-whisker diagram):
+
+```{r}
+ggplot(dat_anova,aes(y=Score,x=Main,col=Main)) +
+  geom_boxplot() +
+  scale_colour_brewer(palette="Dark2")
+```
+
+Here, we've also used  `scale_colour_brewer()` function to change the colours we've used for our `fill` aesthetic to use a different palette (The `Dark2` palette). Similarly, we could have used `scale_fill_brewer()` to change the `fill` aesthetic, or one of the many other `scale_colour_*()` or `scale_fill_*()` to do a similar thing. More examples of palettes can be found [here](https://ggplot2.tidyverse.org/reference/scale_brewer.html#palettes).
+
+We can run an ANOVA test to assess the following hypothesis:
+
+$$ \begin{align*}
+H_0&: \mu_A = \mu_B = \mu_C\\
+H_1&: \textrm{The means are not all equal}
+\end{align*}$$
+
+Notice that we're checking if *any* of the means are different, not necessarily that they are all completely different (i.e. two of them *could* be the same). For this, we use the `aov()` function and then we're going to store the model output into the variable `anova_res` for us to use elsewhere. The syntax for this function is also new. 
+
+```{r}
+anova_res <- aov(Score ~ Main, data=dat_anova)
+anova_res
+
+```
+
+The first agurment, `Score ~ Main` means that `Score` is our outcome/dependent variable and `Main` is our input/independent variable. This syntax using the `~` symbol creates a `formula` in R. For now, we'll leave it at that, but we'll come back to it later. we also pass the data in as a separate argument (again, we'll come back to that later).
+
+This output gives us some of the basic information that the ANOVA test produces. However, the default output doesn't give us the key takeaway stuff, i.e. a p-value, and so it's hard to intepret. We're going to need a new function for this.
+
+## The summary() function
+
+The `summary()` function is used to give more information of variables contained in R and can be used on *almost* any object we create. For example:
+
+```{r}
+summary(dat_anova)
+```
+
+We won't often use the `summary()` function on our data directly. We normally use it for outcomes (e.g. models or tests). Let's see what information we can get out of our ANOVA test:
+
+```{r}
+summary(anova_res)
+```
+
+Here is a better breakdown. The first row is showing us how the different groups effect the variance, and the second row is showing us how things are different within-groups, for the variable overall, when the group is accounted for. This is what the word *Residual* means in statistics. It's what's leftover.
+
+The first column shows us how many *degrees of freedom* there are for each of them, We have 3 groups, so the df of `Main` is the number of groups minus 1: 3-1 = 2, and the df for Residuals is the number of entries, `n`, minus the number of groups, `n-3 = 297`.
+
+The next column is the `Sum Sq`. If we add these two rows up, we will get the variance times `n-1`. I don't want to go into detail about how these two values are calculated, but it's essentially how much of the variance is the `Main` variable and how much isn't.
+
+As usual though, if we have more measurements, then the `Sum Sq` would be bigger anyway, regardless of how varied the variable is, so we standardise it by dividing by the degrees of freedom, this is the `Mean Sq`. You can see that the `Mean Sq` for `Main` is still high becaue the degrees of freedom is very low.
+
+We then have the F-Statistic which, like the t-statistic, is our test statistic. In this case it is the `Mean Sq` for the `Main` divided by the `Mean Sq` for the `Residuals`. The F-statistic follows an F-distribution, so we'd pass this through the `pf()` function to get the p-value associated with this F-Statistic (and the two degrees of freedom values). R also conveniently gives us the star rating for how significant this result is.
+
+So, we can see that the p-value is really small, so we can reject the Null Hypothesis. As we would expect, given the way we generated our data. In APA-Style, we would write this as:
+
+$$F(2,297) = 112.9,\; p < 0.001$$
+
+The standard ANOVA test has two main assumptions:
+
+* That our data is Normally distrubuted in each group.
+* That the variances in each group are the same. Known as homogeneity of variance, or homoskedasticity.
+
+It also does not tell you *which* of the groups are different from the rest, just that there is a difference there.
+
+
+## Kruskal-Wallis Test
+
+Our first assumption for the ANOVA test is that our data is Normally distributed. We can test this using the Shapiro-Wilk test just like last time, but this time, we need to do it on each group individually (we should do this for each group the t-test too):
+
+```{r}
+dat_anova %>%
+  group_by(Main) %>%
+  summarise(Shapiro.Wilk = shapiro.test(Score)$p.value)
+
+```
+For this data, all three are above the 5% significance level, so we're fine to go on. However if we start with non-normal data, the results will likely be different:
+
+`r set.seed(431430)`
+```{r}
+dat_KW <- dat_anova %>%
+  mutate(Score = rexp(n,rate = 1/(3 + (Main == "Pasta") + 2*(Main=="Pizza"))))
+
+dat_KW %>%
+  group_by(Main) %>%
+  summarise(Shapiro.Wilk = shapiro.test(Score)$p.value)
+
+```
+
+We therefore need to find an alternative for when the data is non-Normal, a non-parametric test. This is the Kruskal-Wallis test and, like previously, it uses the rank of the data and tests for significance.
+
+$$ \begin{align*}
+H_0&: \mu_A = \mu_B = \mu_C\\
+H_1&: \textrm{The means are not all equal}
+\end{align*}$$
+
+
+```{r}
+KW_res <- kruskal.test(Score ~ Main,data=dat_KW)
+```
+The test statistic this time is the Kruskal-Wallis chi-squared. As the name suggests, this test-statistic follows a Chi Square distribution, so we check it against `pchisq()` to get the p-value. The `summary()` function does not provide us with the nice table like last time and so we can't do too much with this, other than to report the $\chi^2$ statistic and the p-value.
+
+Also, an important thing to note is that the Kruskal-Wallis test does *not* assume equal variances (as the ANOVA test does), and so it can be used whenever our data is Non-Normal.
+
+## Heteroskedasticity
+
+The other assumption for ANOVA is that the variances are equal for each group. We can firstly test whether this assumption holds using either Bartlett's test or Levene's test.
+
+Barlett's Test works best when the data is Normal, Levene's test is more robust to departures from Normality, and so is fine when our data is Non-Normal (which we will also have tested).
+
+$$\begin{align*}
+H_0&: \textrm{Variances are equal}\\
+H_1&: \textrm{Variances are unequal}
+\end{align*}$$
+
+```{r}
+bartlett.test(dat_anova$Score,dat_anova$Main)
+
+```
+Here, we got a high p-value, so we can assume the variances of each are equal. However, if we multiply one of the subgroups by something, it will change the variance in that group
+
+```{r}
+dat_anova_heteroskedastic <- dat_anova %>%
+  mutate(Score = if_else(Main == "Pizza",Score*1.5,Score))
+
+dat_anova_heteroskedastic %>%
+  group_by(Main) %>%
+  summarise(variance = var(Score))
+  
+bartlett.test(dat_anova_heteroskedastic$Score,
+              dat_anova_heteroskedastic$Main)
+```
+
+This time, our $\chi^2$-test statistic (incorrectly written as K-squared) is much higher than before and so our p.value is much lower (as expected).
+
+Unfortunately, there is no built-in function for the Levene test in R. We learned that the `?` operator can show us help files from a function, but we need to know the function name, but the `??` operator can search through all our help files in all installed packages for a word.
+
+```{r, eval=F}
+??levene
+```
+
+But of course R is open source, so surely someone has made a package that can do this. So we can [Google it](https://www.google.com/search?q=Levene's+Test+R).
+
+From the first result, we can read through and find out that the package `car` contains the function `leveneTest()`, which uses that same `~` notation. But then this third result from [rdocumentation.org](www.rdocumentation.org) (which pulls data directly from CRAN) says that the `lawstat` also contains a function called `levene.test()`, which follows a more traditional syntax. So, pick one. Your choice. You definitely don't need both. So Run either:
+
+```{r, eval=F}
+install.packages("car")
+install.packages("lawstat")
+```
+And now we can perform the Levene Test on the `dat_KW` dataset. However, since I'm only using a single function from these packages, and not using anything else, I don't really see the point in loading it into my library. So I'm just going to use the function without loading the package using the `::` operator.
+
+```{r}
+car::leveneTest(Score ~ Main,data=dat_KW)
+
+lawstat::levene.test(dat_KW$Score,dat_KW$Main)
+```
+
+The `::` operator tells R to look in the `car` (or `lawstat`) package for the `leveneTest()` (or `levene.test()`) function. The syntax here is `package::function()`
+
+Our F-statistic is high, our p-value is low, therefore we assume the variances are different.
+
+## Welch's F Test
+
+If our data is Normal, but is heteroskedastic (Barlett's Test returns un-equal variance), then we would run the Welch's F Test. The `oneway.test()` function in R can perform this test:
+
+```{r}
+welch_res <- oneway.test(Score~Main,data=dat_anova_heteroskedastic,var.equal=F)
+welch_res
+```
+
+## Post-Hoc Tests
+
+As stated above, the ANOVA-like tests above do not tell us which group or groups are different. However, if we have statistically significant results, we can perform a post-hoc test on our data to see which is different. Post-hoc simply means that we are running it *after* our main analysis.
+
+After performing an ANOVA test, the **Tukey's Honest Significant Differences** test can provide these details. For this test, we don't apply it to the data, we apply it to the model that we created above (i.e. we pass the *model* as an argument)
+
+```{r}
+TukeyHSD(anova_res)
+```
+
+We can see the comparisons across each pair of groups, and see which pair (or pairs) are significantly different from eachother and which direction the difference is it.
+
+Tukey's HSD works great if we have equal variance (or are assuming to have equal variances based on Bartlett's Test), but if our variances are unequal, Tukey's HSD (much like the ANOVA test itself) isn't very robust.
+
+If we have performed a Welch's F Test, then we're better off using the **Games-Howell** post-hoc test. Again however, this is not built-in to R, so we need a new package. The `userfriendlyscience` contains the `posthocTGH()` function. So  `install.packages("userfriendlyscience")`
+
+```{r}
+userfriendlyscience::posthocTGH(dat_anova_heteroskedastic$Score,
+                            dat_anova_heteroskedastic$Main)
+```
+
+The parallel post-hoc test for non-parametric data (after we have performed a Kruskal-Wallis Test) is **Dunn's Test**. 
+
+As a recurring theme, there is no built-in Dunn's Test function, so we need to install the `dunn.test` package. This package is an example that packages do not have to be complicated. This package contains just a function, `dunn.test()` and an example dataset. That's it.
+
+```{r}
+dunn.test::dunn.test(x = dat_KW$Score,
+                     g = dat_KW$Main,method="bonferroni")
+```
+
+This function also performs the Kruskal-Wallis test above, and the post-hoc test in a single function. Again, we can see the paired differences between the groups, the test-statistic is above and the p-value is below in each of these cells.
+
+### Bonferroni
+The more tests we run, the more likely we are to find a significant result, purely due to chance. For example, in the `dunn.test()` function above, it is performing three different comparisons (Pizza vs Pasta, Steak vs Pasta and Steak vs Pizza). If we're using a significant level of 5%, then there is a 5% chance that we conclude there is a difference, even if there is not. This is called a Type I error and I'll discuss this a bit further below.
+
+If we perform *two* tests that have a 5% chance of being wrong, then our chance of being wrong goes to 9.75%. For three tests, it is 14.26% and this number keeps creeping up. If we're comparing three groups, then we need to do three pairwise tests (14.26% chance of Type I Error). If we're compaing four groups, we need to twelve pairwise tests (45.97% chance of Type I Error).
+
+The **Bonferroni Correction**, divides the p-values that we get for each pair by the number of tests we're doing in an effort to counteract this creeping of probability.
+
+## FlowChart
+
+So far, we've gone through a lot of tests and testing of assumptions. And there has been a lot of information thrown at you for these ANOVA-family of tests. So, here's a flowchart to help you make the correct decisions for your data:
+
+<style>
+.section {
+  opacity:1;
+}
+.DiagrammeR g .label{
+  font-size:20pt;
+}
+div.mermaid {
+  text-align: center;
+  vertical-align: middle;
+}
+</style>
+```{r}
+DiagrammeR::mermaid("Decision.mmd")
+```
+
+## Two-way ANOVA
+
+In the previous section, we discussed how to compare a single categorical variable with a single outcome measure. This works well when our categories are completely disjoint groups (i.e. entries only belong to one group at a time) However, this isn't always the case and often, we might have multiple categories, for example, Nationality and Gender.
+
+`r set.seed(93618)`
+```{r}
+dat_anova2 <- dat_anova %>%
+  mutate(Dessert = sample(c("Ice Cream","Cake","Biscuits"),n,replace=T)) %>%
+  mutate(Score = Score + 0.5*(Dessert == "Ice Cream") + (Dessert == "Cake"))
+
+ggplot(dat_anova2) +
+  geom_boxplot(aes(x=Main,y=Score,fill=Dessert))
+```
+
+Now, we have added a second categorical plot to our data, we could (in theory) create a new category with 9 levels of the form `Main-Dessert` (e.g. "Pizza-Ice Cream" and "Pasta Biscuits"). But, this assumes that all 9 categories are completely independent, which wouldn't be the case as there could be some association when either Main or Dessert is shared. E.g. "Steak-Cake" *might* share some similarities with "Steak-Biscuits" and with "Pizza-Cake".
+
+So, that's why we need to do something a little different. This is called a Two-Way ANOVA. For this, we're actually testing three Hypotheses:
+$$\begin{align*}
+\textrm{Test One:}&&
+H_0&: \textrm{Means are the same across Mains}\\
+&&H_1&: \textrm{Means are different across Mains}\\\\
+\textrm{Test Two:}&&
+H_0&: \textrm{Means are the same across Dessert}\\
+&&H_1&: \textrm{Means are different across Desserts}\\\\
+\textrm{Test Two:}&&
+H_0&: \textrm{No Interaction between Main & Dessert}\\
+&&H_1&: \textrm{There is an Interaction between Main & Dessert}
+\end{align*}$$
+
+We still use the `aov()` function. Where we used `Score ~ Main`, this time we multiply our other variable to the right-hand side of the `formula`
+
+```{r}
+anova2_res <- aov(Score ~ Main * Dessert,data=dat_anova2)
+summary(anova2_res)
+```
+
+The results shown here are *very* similar to the results for the one-way ANOVA. The bottom row still shows the Residuals, but now rather than splitting the variance up between a single group variable, we have three. The first two are the first two variables and the final row is the Interaction between the two. Therefore we have an F-statistic for each of our hypotheses and a p-value for each one.
+
+This tells us *which* categorical variables have an association with our outcome measure and how strong that relationship is.
+
+```{r}
+dat_anova %>%
+  mutate(Dessert = sample(c("Ice Cream","Cake","Biscuits"),n,replace=T)) %>%
+  aov(Score ~ Main * Dessert,data=.) %>%
+  summary
+```
+
+This time, we generated `Dessert`, but did not use it to change `Score` and so there is no relationship between these two variables. Which our Two-Way ANOVA test shows.
+
+## ANCOVA
+
+ANCOVA or ANalysis of COVariance is very similar to a Two-Way ANOVA test, but with a step towards the **regression** (which we'll come to later).
+
+This time, instead of including in a second grouping variable, we include a **covariable**, which is a continuous (numeric) variable that we also believe may have a relationship with our outcome measure.
+
+`r set.seed(74627)`
+```{r}
+dat_ancova <- tibble(Main = sample(c("Pizza","Pasta","Steak"),n,replace=T),
+                     Age = sample(20:60,n,replace=T)) %>%
+  mutate(Score = rnorm(n) + Age/10 
+         + 5*(Main=="Pasta") + 10*(Main=="Pizza"))
+
+ggplot(dat_ancova,aes(x=Age,y=Score,col=Main)) +
+  geom_point()
+```
+
+What we are doing in the ANCOVA test is performing an ANOVA test between our outcome and groups, whilst **controlling** for our covariable. At the same time, we are assessing whether there is a linear relationship between our covariable and our outcome, similar to finding a correlation, but **adjusting** for the group. And, just like in the ANOVA, we are assessing whether there is an interaction between the two (group and covariable).
+
+If we let our outcome measure be $y$, our groups be $A$, $B$ and $C$ and our covariable be $x$, then our three hypothesis are as follows:
+
+$$\begin{align*}
+\textrm{Test One:}&&
+H_0&: \mu_A = \mu_B = \mu_C, \;\textrm{controlled for x}\\
+&&H_1&:\textrm{The means are not all equa after controlling for x}\\\\
+\textrm{Test Two:}&&
+H_0&: \textrm{No relationship between y & x, adjusted for group}\\
+&&H_1&: \textrm{y depends on x after adjusting for group}\\\\
+\textrm{Test Two:}&&
+H_0&: \textrm{No Interaction between Group & x}\\
+&&H_1&: \textrm{There is an Interaction between Group & x}
+\end{align*}$$
+
+We run an ANCOVA test, in much the same way as a Two-way ANOVA, and we intepret the outcomes very similarly.
+
+```{r}
+ancova_res <- aov(Score ~ Main*Age,data=dat_ancova)
+summary(ancova_res)
+```
+
+Here, Main and Age have a high F-statistic and low p-value. However, their interaction does not make a difference, and therefore is consistent across groups.
+
+## MANOVA
+
+Up until here, we've only ever had a single outcome variable. However, it might be possible that we want to analyse more than one outcome at a time, based on grouped data. For this, we would use the MANOVA or Multivariate ANalysis Of VAriance. The idea is the same as previously, except now we have two (or more) outcome variables. To analyse these, we need to stick the two outcome variables together using a `cbind()` function. This function takes two or more vectors and sticks them together into a `matrix`, which is a two-dimensional extension of a vector.
+
+```{r}
+cbind( 1:4,10:13,rep(0,4))
+```
+
+There is a parallel to this called `rbind()`, which sticks them together into rows, but we don't really need that here.
+
+`r set.seed(31839)`
+```{r}
+dat_manova <- tibble(Main = sample(c("Pizza","Pasta","Steak"),n,replace=T),
+                     Score_1 = rnorm(n) + (Main=="Pasta") + 2*(Main == "Pizza"),
+                     Score_2 = rnorm(n) - (Main=="Pasta") + (Main == "Pizza"))
+
+
+manova_res <- manova(cbind(Score_1,Score_2) ~ Main,data=dat_manova)
+manova_res
+```
+
+In our default output from the `aov()` (now stored in the `anova_res` variable), we have two rows, `Sum of Squares` and `Deg. of Freedom`, and two columns, `Main` and `Residuals`. In the default for `manova()`, the `Sum of Squares` rows have been split across our two outcome variables. Just like with `aov()`, we don't get a test statistic or a p-value out of this.
+
+```{r}
+#Refresh our memory
+anova_res
+```
+Let's run the `summary()` function for more information.
+
+```{r}
+summary(manova_res)
+```
+Again, very similar to the `summary()` output for the `aov()` function. This time, we don't have a `Sum Sq`, instead it is aggregated across out outcome variables into a `Pillai` measure (which needs a bit of Linear Algebra to understand). This is our calculated test statistic, which is translated into an `approx F`. The `num Df` and `den Df` are our degrees of freedom across the two outcome variables (i.e. 2\*(3-1) fo the groups and 2\*(300-3) for the participants), and this gives us the p-value at the end (`Pr(>F)`).
+
+We can also break this output up for each of the outcome variables:
+
+```{r}
+summary.aov(manova_res)
+```
+This is the same as if we had performed a regular One-Way ANOVA on each of the variables separately.
+```{r}
+dat_manova %>%
+  aov(Score_1~Main,data=.) %>%
+  summary
+```
+
+The big difference between running on each variable separately and running them together is the p-values in the overall MANOVA test results have been adjusted in much the same way as the Bonferonni adjustments earlier.
+
+## Further ANOVA
+
+Today, we discussed a few extensions of the ANOVA test. How to add extra categories (Two-Way ANOVA), how to add covariables (ANCOVA) and how to deal with multiple outcomes (MANOVA). These three ideas can be combined to create as complicated of an ANOVA test as your heart desires, e.g. a Four-Way MANCOVA test is a thing you could do. However, as you add complexity here, the interpretation of the outcome becomes harder, and the NULL Hypothesis become more difficult to establish.
+
+# Errors
+When we are evaluating our Hypothesis, we are doing so with a pre-specified significance level. We can never be 100% sure of anything. Because of this, there is a percentage that our conclusion may be wrong. I'm going to show you a few examples of incorrect results.
+
+## Type I
+
+For a Type I Error to occur, it means we have rejected the Null, despite the fact that the underlying truth is that the Null is correct. For example, if our population average of a value is 0 ($\mu = 0$), but our data and our t-test indicate that it is non-zero, we would reject it.
+
+`r set.seed(59237)`
+```{r}
+n <- 300
+x <- rnorm(n,mean=0,sd=1)
+y <- rnorm(n,mean=0,sd=1)
+t.test(x)
+
+```
+The `x` and `y` have been generated from the same distribution, but we have concluded they are different. This is a Type I Error.
+
+## Type II Error
+
+For a Type II Error to occur, it means we have accepted the NULL, despite the fact that the underlying truth is that the Null is incorrect. For example, if our population average of group A is value is 0 ($\mu = 0$) and our group B is 0.5 ($\mu = 0.5$), but our data and our t-test indicate that it zero, we would reject it.
+
+`r set.seed(1033667)`
+```{r}
+n <- 50
+x <- rnorm(n)
+y <- rnorm(n,1)
+t.test(x,y)
+```
+
+
+# Modelling
+
+In Statistics, Testing allows us to decide (based on the data we're given) whether we believe a hypothesis to be correct or not. Our confidence in that result is based on how what significance level we chose. Modelling allows us to explore the relationship between variables in a more detailed fashion and to directly quantify that relationship.
+
+## Linear Model
+
+The simplest kind of model we can perform is a simple linear model (more commonly refered to as a univariate/univariable model). This quantifies the relationship between two variables.
+
+`r set.seed(8463298)`
+```{r}
+n <- 100
+dat_lm <- tibble(x = rnorm(n),
+                 y = 3 + 2*x + rnorm(n))
+
+p_lm <- ggplot(dat_lm,aes(x,y)) +
+  geom_point()
+
+p_lm
+```
+
+The simple way we have previously talked about finding a relationship between two continuous variables is through correlation. Let's see what this gives us:
+```{r}
+cor(dat_lm$x,dat_lm$y)
+```
+
+Quite a high correlation, which is quite visible from the plot. But this doesn't tell us very much about the relationship, just how clustered the data is.
+
+You might have heard of the phrase "line of best fit", and that's essentially what we find when we perform **linear regression** to produce a **linear model**
+```{r}
+lm_res <- lm(y ~ x,data=dat_lm)
+lm_res
+```
+
+This is telling us that the relationship between `y` and `x` can be approximated by `y = 3.083 + 1.973x`. This is very close to how we initially generated `y` from `x`, `y = 3 + 2*x + rnorm(n)`. The way we created the variables represents the *true* relationship, and we used our data to guess at what this relationship is. Remember that in the real-world, we'd never know what that *true* relationship is.
+
+We can also use the `summary()` function to get more information about these results:
+```{r}
+summary(lm_res)
+```
+This `coefficients` table looks very similar to the `summary()` results from `anova_res`. Both the `(Intercept)` and `x` term have an `Estimate` and a `Std. Error`. So the `Estimate` is what quantifies the relationship and the `Std. Error` gives us an idea of how confident we are in that value. The `t value` is the t-statistic associated with this estimate and we therefore have a p-value.
+
+If the `Estimate` were 0, then that indicates that there *isn't* a relationship between them.
+
+If we wanted to, we could create a tibble to draw the estimated relationship, `y = 3.083 + 1.973x`, and even put in confidence intervals around it using that `Std. Error` term (and the `geom_ribbon()` function). However, `ggplot2` has a function that can do this for us
+
+```{r}
+p_lm + geom_smooth(method="lm")
+```
+
+Notice we're using the `method="lm"` argument, and this tells `ggplot2` that we want to run the `lm()` function on our data. There are, of course, other methods we could do that are associated with other modelling functions, but we're not going to get into them here( `?geom_smooth` can give you some more).
+
+So what the `lm()` function is telling us is that a unit change in `x` produces a `1.973` change in `y`, starting at `3.083`
+
+## Categorical Variable
+
+We can also do this with a categorical independent variable instead of a continuous one, i.e. a grouping variable.
+
+```{r}
+anova_lm <- lm(Score ~ Main,data=dat_anova)
+anova_lm
+summary(anova_lm)
+```
+
+This time, the results are shown for each value in the categorical one, apart from the baselineline (in this case, `"Pizza"`), which is why sometimes it is important to set our levels, rather than accepting the defaults. This result is giving us the following expected `Score`:
+
+$$\begin{align*}\textrm{Score} &= (2.040) \\&+ (-1.943)\times(\textrm{Main} == \textrm{"Steak"})\\& + (-0.8138)\times(\textrm{Main} == \textrm{"Pasta"})\end{align*}$$
+The way we make these linear models is starting to look quite similar to our ANOVAs, and we even use the same `~` syntax. That's because an ANOVA *is* a linear model. The `aov()` function is a wrapper for the `lm()` function, which means that behind the scenes, R is running a `lm()` function. However since an ANOVA test is designed to evaluate a Hypothesis and a linear model is designed to analyse relationships, the results and conclusions would be presented differently. The key thing is is that a linear model is much more dynamic, and we generally do not always include interactions.
+
+## Combination
+
+In a Two-Way ANOVA or an ANCOVA, when we are combining multiple independent variables, we used the `*` symbol to tell the test we wanted to assess interactions. We can do that when modelling, and the model would estimate the combined effect of the covariates/categories, however this is not needed. To add multiple variables without interactions, we just add them with `+`.
+
+```{r}
+dat_ancova %>%
+  lm(Score ~ Main + Age,data=.) %>%
+  summary
+```
+
+## Residuals
+
+One of the key assumptions that we make when performing a linear model is that our **Residuals** will be Normally distributed. We can look into this by plotting the residuals as a histogram, and overplotting the density, and what the density *should* be
+
+```{r}
+ggplot(lm_res,aes(x = .resid)) +
+  geom_histogram(aes(y=..density..),fill="red",binwidth=0.2) +
+  geom_density()
+```
+
+We can use a Q-Q Plot to see:
+
+```{r}
+ggplot(lm_res,aes(sample = .resid)) +
+  geom_qq() + 
+  geom_qq_line()
+```
+
+Or we can run a formal Shapiro Wilks test on the residuals
+
+```{r}
+shapiro.test(lm_res$residuals)
+
+```
+
+And we can see that the residuals do indeed follow a Normal distribution.
+
+## Multivariable
+
+```{r}
+n <- 1000
+dat_random <- tibble(x1 = rnorm(n),x2 = rnorm(n),x3 = rnorm(n),
+                     z1 = sample(c("a","b","c"),n,replace=T),
+                     z2 = sample(c("a","b","c"),n,replace=T),
+                     y = x1 + 2*x2 + 3*x3 + (z1 == "b") + 2*(z1 == "c") + 3*(z2=="b"))
+
+lm(y ~ x1+x2+x3+z1+z2,data=dat_random) %>% summary
+
+```
+

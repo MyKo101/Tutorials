@@ -1,0 +1,3 @@
+output_dir: "dir"
+before_chapter_script: "_setup.R"
+delete_merged_file: true

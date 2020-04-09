@@ -1,0 +1,29 @@
+---
+title: "Introduction to Statistics Using R"
+author: 
+  name: "Michael A Barrowman"
+  email: "m.a.barrowman@ljmu.ac.uk"
+description: "An introduction to the software R, designed for LJMU Students"
+date: "`r Sys.Date()`"
+url: "https://myko101.github.io/Tutorials/LJMU_R/dir/"
+knit: "bookdown::render_book"
+site: "bookdown::bookdown_site"
+logo: "images/LJMU_R.png"
+output:
+  bookdown::gitbook:
+    config:
+      toc:
+        collapse: section
+        scroll_highlight: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Welcome {-}
+<div style= "float:left;position:relative;padding-right:30px;">
+![](images/LJMU_R.png){#id .class width=300}
+</div>
+
+Welcome to the Lecture Notes for the Current Semester's R Tutorial. Please use the links on the left to browse through the notes.

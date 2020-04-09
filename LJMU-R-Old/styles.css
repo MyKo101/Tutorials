@@ -1,0 +1,59 @@
+
+body{
+  font-family: Helvetica;
+  font-size: 18pt;
+}
+p{
+  margin-bottom: 1em;
+}
+/* Headers */
+h1 { 
+  font-size: 30pt;
+  font-weight: bold;
+  color: rgb(0,60,128);
+}
+
+h2 {
+  font-size: 24pt;
+  font-weight: bold;
+}
+
+h3{
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+h4,h5,h6{
+  font-size: 18pt;
+  font-weight: bold;
+}
+code.r{
+  font-size: 18px;
+}
+pre {
+  font-size: 18px;
+}
+
+div.tocify{
+  font-size:14pt;
+}
+
+/*Document Heading*/
+h1.title {
+  font-size: 48px;
+  font-weight: bold;
+}
+h3.subtitle{
+  font-size: 14pt;
+  font-weight: normal;
+}
+h4.author{
+  font-size: 14pt;
+  font-weight: normal;
+}
+a.email{
+  font-size: 12pt;
+}
+a.author_email{
+  font-size: 12pt;
+}
