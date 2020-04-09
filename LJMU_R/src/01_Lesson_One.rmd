@@ -102,6 +102,8 @@ I used a little bit of Jargon there, but to keep things clear. A **function** is
 Sys.time()
 ```
 
+But the key to remember is that a function has *brackets* `()` right after it's name.
+
 And, a word of warning, R is **Case Sensitive**. This means you need to be careful that you use upper and lower case appropriately.
 
 ```{r error=T}
@@ -476,3 +478,4 @@ plot(x,probs,type="l",main="cdf")
 
 layout(1)
 ```
+
