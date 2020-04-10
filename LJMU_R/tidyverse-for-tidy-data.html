@@ -283,7 +283,7 @@ a %&gt;%
 <span id="cb99-3"><a href="tidyverse-for-tidy-data.html#cb99-3"></a><span class="st">  </span>sum <span class="op">%&gt;%</span></span>
 <span id="cb99-4"><a href="tidyverse-for-tidy-data.html#cb99-4"></a><span class="st">  </span>sqrt <span class="op">%&gt;%</span></span>
 <span id="cb99-5"><a href="tidyverse-for-tidy-data.html#cb99-5"></a><span class="st">  </span>log</span></code></pre></div>
-<pre><code>## [1] 1.134155</code></pre>
+<pre><code>## [1] 1.178463</code></pre>
 <p>The shortcut to quickly enter this in RStudio is Ctrl/Cmd + Alt + M</p>
 </div>
 <div id="loading-data" class="section level2" number="2.3">
@@ -360,18 +360,18 @@ a %&gt;%
 <span id="cb107-3"><a href="tidyverse-for-tidy-data.html#cb107-3"></a>         <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">150</span>),</span>
 <span id="cb107-4"><a href="tidyverse-for-tidy-data.html#cb107-4"></a>         <span class="dt">x =</span> x <span class="op">+</span><span class="st"> </span>y)</span></code></pre></div>
 <pre><code>## # A tibble: 150 x 7
-##    ID    DOB        Gender Ht    Wgt       x      y
-##    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 001   22/03/1965 m      5 6   7 1   0.629 0.0866
-##  2 002   17/04/1977 f      5 9   11 0  1.57  0.883 
-##  3 003   24/07/1966 f      5 4   9 8   0.700 0.127 
-##  4 004   22/02/1985 Female 5 7   11 1  1.90  0.930 
-##  5 005   30/07/1985 M      6 0   10 10 1.07  0.524 
-##  6 006   09/07/1987 male   6 2   11 12 1.11  0.843 
-##  7 007   23/01/1995 female 5 10  10 2  0.700 0.189 
-##  8 008   31/12/1992 M      6 3   12 1  1.13  0.585 
-##  9 009   24/01/1952 Male   5 4   7 10  0.922 0.419 
-## 10 010   11/06/1953 F      5 2   8 6   1.71  0.934 
+##    ID    DOB        Gender Ht    Wgt       x     y
+##    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 001   22/03/1965 m      5 6   7 1   1.37  0.762
+##  2 002   17/04/1977 f      5 9   11 0  0.764 0.508
+##  3 003   24/07/1966 f      5 4   9 8   0.844 0.528
+##  4 004   22/02/1985 Female 5 7   11 1  1.30  0.604
+##  5 005   30/07/1985 M      6 0   10 10 1.43  0.478
+##  6 006   09/07/1987 male   6 2   11 12 0.715 0.228
+##  7 007   23/01/1995 female 5 10  10 2  0.980 0.330
+##  8 008   31/12/1992 M      6 3   12 1  0.424 0.357
+##  9 009   24/01/1952 Male   5 4   7 10  1.61  0.978
+## 10 010   11/06/1953 F      5 2   8 6   0.803 0.286
 ## # ... with 140 more rows</code></pre>
 <p>Note that this is the same as running <code>mutate(dat,x=runif(150),y=runif(150),x=x+y)</code>.</p>
 <p>Right now, we’ve not stored the output from the previous <code>mutate()</code> call, <code>dat</code> is still as it was when we loaded it with the <code>ID</code> variable stored as a <code>character</code>. See:</p>
