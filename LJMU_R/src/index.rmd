@@ -25,7 +25,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Welcome {-}
 <div style= "float:left;position:relative;padding-right:30px;">
-![](images/LJMU_R.png){#id .class width=300}
+![](images/LJMU_R.png){#id .class width=200}
 </div>
-
-Welcome to the Lecture Notes for LJMU's R Tutorial. Please use the links on the left to browse through the notes.
+Welcome to the Lecture Notes for LJMU's R Tutorial. Please use the links on the left to browse through the notes. If the links don't appear, click the three bars (![](images/Three_Bars.png){#id .class height=16px}) in the top left. Or, view at it's [source](https://michaelbarrowman.co.uk/Tutorials/LJMU_R)
