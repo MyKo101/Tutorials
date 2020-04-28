@@ -22,7 +22,7 @@ library(tidyverse)
 Have you ever tried moving a table in Word? How about inserting an image into Google Docs? Switching between your stats program and report becoming a nightmare? Do you hate citations [@Testcite]?
 
 # What can we do?
-This course will help you to transition smoothly into the world of RMarkdown, where you can do your statistical analysis and write your entire report/essay in a single document! RMarkdown takes care of things like formatting and figure/table placement for you without worrying about the nitty gritty, see Table \@ref(tab:One) for details
+This course will help you to transition smoothly into the world of RMarkdown, where you can do your statistical analysis and write your entire report/essay in a single document! RMarkdown takes care of things like formatting and figure/table placement for you without worrying about the nitty gritty.
 
 ```{r, echo=F}
 df <- tibble(x=runif(20),
@@ -31,7 +31,7 @@ knitr::kable(head(df),caption="Here's some data!",digits=3,label="One")
 ```
 
 # What can we make?
-RMarkdown also unifies your output: Word, PDF, Webpage, Presentations and Posters can all come out of a singe document with the touch of a button.
+RMarkdown also unifies your output: Word, PDF and Webpage. It can also produce Presentations and Posters all from a singe document with the touch of a button. Cross-Refencing is a breeze, as can be seen in \@ref(tab:One) and \@ref(fig:Two).
 
 
 ```{r, fig.cap="Plots are easy!",echo=F,label="Two",fig.align="center"}
@@ -40,7 +40,7 @@ ggplot(df) + geom_point(aes(x,y))
 
 
 # How?
-We combine elements of R (the statistical package) and Markdown (the way you format comments on Reddit) into one system and *knit* them into a document. For an example of what you'll be able to produce after this session, see here:
+We combine elements of R (the statistical package) and Markdown (the way you format comments on forums like Reddit) into one system and *knit* them into a document. For an example of what you'll be able to produce after this session, see here::
 
 * [HTML](Example.html) A html version of this file
 * [PDF](Example.pdf) A pdf version of this file
