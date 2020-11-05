@@ -53,6 +53,7 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="favicon.png">
 
 
 <style type="text/css">
@@ -131,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Statistics in R</a></li>
 <li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> R &amp; RStudio</a>
@@ -243,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next port of call should be Google/Ecosia/Bing or whatever your Search Engine of choice is. If you have a question that you need to know, type in “R” and then just <em>ask</em> that question to your search engine. I don’t mean try to phrase it in a certain way, I mean write the question exactly how you would ask it!</p>
 <center>
 <div style="position:relative;padding-bottom:30px;padding-top:30px;">
-<p><img src="src/images/Google_Mean.png" id="id" class="class" style="width:80.0%" /></p>
+<p><img src="src/images/01_Google_Mean.png" id="id" class="class" style="width:80.0%" /></p>
 </div>
 </center>
 <p>When you search for something, a lot of results will probably be tutorials on how to do what you’re trying to do. If what you’re asking is a common question, these will be good resources.</p>
@@ -265,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 1 2 3</code></pre>
 <p>I used a little bit of Jargon there, but to keep things clear. A <strong>function</strong> is a command that tells R to do <em>something</em> and an <strong>argument</strong> is the information or data you give to the function so it can do it’s job. Sometimes functions don’t need arguments:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introduction-to-r.html#cb10-1"></a><span class="kw">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2020-11-05 00:13:16 GMT&quot;</code></pre>
+<pre><code>## [1] &quot;2020-11-05 01:26:24 GMT&quot;</code></pre>
 <p>But the key to remember is that a function has <em>brackets</em> <code>()</code> right after it’s name.</p>
 <p>And, a word of warning, R is <strong>Case Sensitive</strong>. This means you need to be careful that you use upper and lower case appropriately.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction-to-r.html#cb12-1"></a><span class="kw">sys.time</span>()</span></code></pre></div>
@@ -523,8 +524,7 @@ F(x) = \int_{-\infty}^x f(u) \;\textrm{d}u = \textrm{Prob}\left(X &lt; x\right)
 <h4><span class="header-section-number">1.5.1.4</span> Random Function</h4>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-r.html#cb91-1"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb91-2"><a href="introduction-to-r.html#cb91-2"></a><span class="kw">head</span>(z)</span></code></pre></div>
-<pre><code>## [1] -1.156320430 -0.002846483  0.375596152  1.109888911 -0.823263576
-## [6] -0.384256491</code></pre>
+<pre><code>## [1] -0.3667038  0.5335182  0.5094883 -0.8728738  1.3966460 -0.1902307</code></pre>
 <p>If you were to print out the <code>z</code> variable, you’d see 100 random numbers. The first argument we pass to the function <code>rnorm()</code> tells it how many random numbers to generate. These random numbers have been drawn from the Standard Normal distribution and so they will follow that distribution. We can see this with the following plot:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-r.html#cb93-1"></a><span class="kw">hist</span>(z)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" />

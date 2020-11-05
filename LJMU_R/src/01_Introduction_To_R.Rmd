@@ -68,7 +68,7 @@ Next port of call should be Google/Ecosia/Bing or whatever your Search Engine of
 
 <center>
 <div style= "position:relative;padding-bottom:30px;padding-top:30px;">
-![](src/images/Google_Mean.png){#id .class width=80%}
+![](src/images/01_Google_Mean.png){#id .class width=80%}
 </div>
 </center>
 
