@@ -2,5 +2,8 @@ output_dir: ".."
 before_chapter_script: "_setup.R"
 delete_merged_file: true
 rmf_files: ["index.rmd",
-            "01_Lesson_One.rmd",
-            "02_Lesson_Two.rmd"]
+            "01_Introduction_To_R.Rmd",
+            "02_Enter_The_Tidyverse_Verbs.Rmd",
+            "03_Enter_The_Tidyverse_Whats_Next.Rmd",
+            "04_Show_Your_Work.Rmd",
+            "05_Final_Coding.Rmd"]

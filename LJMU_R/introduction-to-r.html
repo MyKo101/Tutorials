@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Introduction to R | Introduction to Statistics Using R</title>
+  <title>1 Introduction to R | Statistics In R</title>
   <meta name="description" content="An introduction to the software R, designed for LJMU Students" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Introduction to R | Introduction to Statistics Using R" />
+  <meta property="og:title" content="1 Introduction to R | Statistics In R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://myko101.github.io/Tutorials/LJMU_R/" />
   
@@ -16,14 +16,14 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Introduction to R | Introduction to Statistics Using R" />
+  <meta name="twitter:title" content="1 Introduction to R | Statistics In R" />
   
   <meta name="twitter:description" content="An introduction to the software R, designed for LJMU Students" />
   
 
 
 
-<meta name="date" content="2020-06-09" />
+<meta name="date" content="2020-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,8 +31,8 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="tidyverse-for-tidy-data.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<link rel="next" href="enter-the-tidyverse-verbs.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,7 +50,9 @@
 
 
 
-<link rel="shortcut icon" href="favicon.png">
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -163,60 +165,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Data Distributions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html"><i class="fa fa-check"></i><b>2</b> Tidyverse for Tidy Data</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#packages"><i class="fa fa-check"></i><b>2.1</b> Packages</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#installing-packages"><i class="fa fa-check"></i><b>2.1.1</b> Installing packages</a></li>
-<li class="chapter" data-level="2.1.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#documentation"><i class="fa fa-check"></i><b>2.1.2</b> Documentation</a></li>
-<li class="chapter" data-level="2.1.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#loading-packages"><i class="fa fa-check"></i><b>2.1.3</b> Loading packages</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-pipe"><i class="fa fa-check"></i><b>2.2</b> The Pipe</a></li>
-<li class="chapter" data-level="2.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#loading-data"><i class="fa fa-check"></i><b>2.3</b> Loading Data</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#messy-data"><i class="fa fa-check"></i><b>2.3.1</b> Messy Data!</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#changing-our-data"><i class="fa fa-check"></i><b>2.4</b> Changing our data</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-mutate-function"><i class="fa fa-check"></i><b>2.4.1</b> The mutate() function</a></li>
-<li class="chapter" data-level="2.4.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#neat-code"><i class="fa fa-check"></i><b>2.4.2</b> Neat code</a></li>
-<li class="chapter" data-level="2.4.3" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-rename-function"><i class="fa fa-check"></i><b>2.4.3</b> The rename() function</a></li>
-<li class="chapter" data-level="2.4.4" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-recode-function"><i class="fa fa-check"></i><b>2.4.4</b> The recode() function</a></li>
-<li class="chapter" data-level="2.4.5" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-if_else-function"><i class="fa fa-check"></i><b>2.4.5</b> The if_else() function</a></li>
-<li class="chapter" data-level="2.4.6" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-case_when-function"><i class="fa fa-check"></i><b>2.4.6</b> The case_when() function</a></li>
-<li class="chapter" data-level="2.4.7" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#boolean-logic"><i class="fa fa-check"></i><b>2.4.7</b> Boolean Logic</a></li>
-<li class="chapter" data-level="2.4.8" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-factor-function"><i class="fa fa-check"></i><b>2.4.8</b> The factor() function</a></li>
-<li class="chapter" data-level="2.4.9" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-separate-function"><i class="fa fa-check"></i><b>2.4.9</b> The separate() function</a></li>
-<li class="chapter" data-level="2.4.10" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-mutate_at-function"><i class="fa fa-check"></i><b>2.4.10</b> The mutate_at() function</a></li>
-<li class="chapter" data-level="2.4.11" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-select-function"><i class="fa fa-check"></i><b>2.4.11</b> The select() function</a></li>
-<li class="chapter" data-level="2.4.12" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#dates"><i class="fa fa-check"></i><b>2.4.12</b> Dates</a></li>
-<li class="chapter" data-level="2.4.13" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-filter-function"><i class="fa fa-check"></i><b>2.4.13</b> The filter() function</a></li>
-<li class="chapter" data-level="2.4.14" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-summarise-function"><i class="fa fa-check"></i><b>2.4.14</b> The summarise() function</a></li>
-<li class="chapter" data-level="2.4.15" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-group_by-function"><i class="fa fa-check"></i><b>2.4.15</b> The group_by() function</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#combining-data"><i class="fa fa-check"></i><b>2.5</b> Combining data</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-_join-functions"><i class="fa fa-check"></i><b>2.5.1</b> The *_join() functions</a></li>
-<li class="chapter" data-level="2.5.2" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-pivot_functions"><i class="fa fa-check"></i><b>2.5.2</b> The pivot_*()functions</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="tidyverse-for-tidy-data.html"><a href="tidyverse-for-tidy-data.html#the-cheat-sheets"><i class="fa fa-check"></i><b>2.6</b> The Cheat Sheets</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="how-do-i-look.html"><a href="how-do-i-look.html"><i class="fa fa-check"></i><b>3</b> How Do I Look?</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-ggplot-function"><i class="fa fa-check"></i><b>3.1</b> The ggplot() function</a></li>
-<li class="chapter" data-level="3.2" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-aes-function"><i class="fa fa-check"></i><b>3.2</b> The aes() function</a></li>
-<li class="chapter" data-level="3.3" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_point-function"><i class="fa fa-check"></i><b>3.3</b> The geom_point() function</a></li>
-<li class="chapter" data-level="3.4" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_line-function"><i class="fa fa-check"></i><b>3.4</b> The geom_line() function</a></li>
-<li class="chapter" data-level="3.5" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_histogram-function"><i class="fa fa-check"></i><b>3.5</b> The geom_histogram() function</a></li>
-<li class="chapter" data-level="3.6" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_density-function"><i class="fa fa-check"></i><b>3.6</b> The geom_density() function</a></li>
-<li class="chapter" data-level="3.7" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_bar-function"><i class="fa fa-check"></i><b>3.7</b> The geom_bar() function</a></li>
-<li class="chapter" data-level="3.8" data-path="how-do-i-look.html"><a href="how-do-i-look.html#long-vs-wide"><i class="fa fa-check"></i><b>3.8</b> Long vs Wide</a></li>
-<li class="chapter" data-level="3.9" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-geom_ribbon-function"><i class="fa fa-check"></i><b>3.9</b> The geom_ribbon() function</a></li>
-<li class="chapter" data-level="3.10" data-path="how-do-i-look.html"><a href="how-do-i-look.html#zooming"><i class="fa fa-check"></i><b>3.10</b> Zooming</a></li>
-<li class="chapter" data-level="3.11" data-path="how-do-i-look.html"><a href="how-do-i-look.html#labelling"><i class="fa fa-check"></i><b>3.11</b> Labelling</a></li>
-<li class="chapter" data-level="3.12" data-path="how-do-i-look.html"><a href="how-do-i-look.html#other-aesthetics"><i class="fa fa-check"></i><b>3.12</b> Other aesthetics</a></li>
-<li class="chapter" data-level="3.13" data-path="how-do-i-look.html"><a href="how-do-i-look.html#the-ggsave-function"><i class="fa fa-check"></i><b>3.13</b> The ggsave() function</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html"><i class="fa fa-check"></i><b>2</b> Enter The Tidyverse: Verbs</a></li>
+<li class="chapter" data-level="3" data-path="enter-the-tidyverse-whats-next.html"><a href="enter-the-tidyverse-whats-next.html"><i class="fa fa-check"></i><b>3</b> Enter The Tidyverse: What’s Next?</a></li>
+<li class="chapter" data-level="4" data-path="show-your-work.html"><a href="show-your-work.html"><i class="fa fa-check"></i><b>4</b> Show Your Work</a></li>
+<li class="chapter" data-level="5" data-path="final-coding.html"><a href="final-coding.html"><i class="fa fa-check"></i><b>5</b> Final Coding</a></li>
 </ul>
 
       </nav>
@@ -226,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics Using R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistics In R</a>
           </h1>
         </div>
 
@@ -241,19 +193,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="r" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> R</h3>
 <div style="float:left;position:relative;padding-right:10px;">
-<p><img src="images/R_logo.png" id="id" class="class" width="80" height="80" /></p>
+<p><img src="src/images/01_R_logo.png" id="id" class="class" width="80" height="80" /></p>
 </div>
 <p>R is a programming language that is designed to work quickly and efficiently with large amounts of data, this is done through the unique way it processes this data. It is open source, meaning that other people from around the world can easily contribute code that you can use through add-ons, known as <code>packages</code>. Another reason for R’s popularity is that it (and the applications that run it) are <strong>free</strong> and (perhaps because it is free) the support online (from other ordinary users) is incredibly helpful.</p>
 </div>
 <div id="rstudio" class="section level3" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> RStudio</h3>
 <div style="float:right;position:relative;padding-left:10px;">
-<p><img src="images/rstudio-ball.png" id="id" class="class" width="80" height="80" /></p>
+<p><img src="src/images/01_rstudio-ball.png" id="id" class="class" width="80" height="80" /></p>
 </div>
 <p>If you try to download R directly, you will also download a program called RGui. This is the default program for running R code. For what it does, RGui is <em>fine</em>. But we don’t want <em>fine</em>, we want <strong>GREAT</strong>! So we’re going to use another program called RStudio. RStudio organises your workspace a little bit better than the default RGui and allows for better interacticve help features which we’ll discuss later. Below is an example of what RStudio should look like.</p>
 <center>
 <div style="position:relative;padding-bottom:30px;padding-top:30px;">
-<p><img src="images/rstudio-windows.png" id="id" class="class" style="width:80.0%" /></p>
+<p><img src="src/images/01_rstudio_windows.png" id="id" class="class" style="width:80.0%" /></p>
 </div>
 </center>
 <p>The screenshow shows the four panes that we usually work with. Top-Left shows the <strong>Script</strong>, which is the code file we’re currently working in. Code written here won’t be run immediately, but it allows us to save code to be re-run later. Bottom-Left shows the <strong>Console</strong>, code written here <em>will</em> be run, so be careful what you type here. Top-Right is the <strong>Workspace</strong>, which shows the variables/data that RStudio is storing for us and that we can use. Bottom-Right shows the <strong>Viewer</strong>, which primarily displays Plots and Help. Of course there is a lot more going on here, but for the most part, these are the important bits.</p>
@@ -291,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next port of call should be Google/Ecosia/Bing or whatever your Search Engine of choice is. If you have a question that you need to know, type in “R” and then just <em>ask</em> that question to your search engine. I don’t mean try to phrase it in a certain way, I mean write the question exactly how you would ask it!</p>
 <center>
 <div style="position:relative;padding-bottom:30px;padding-top:30px;">
-<p><img src="images/Google_Mean.png" id="id" class="class" style="width:80.0%" /></p>
+<p><img src="src/images/Google_Mean.png" id="id" class="class" style="width:80.0%" /></p>
 </div>
 </center>
 <p>When you search for something, a lot of results will probably be tutorials on how to do what you’re trying to do. If what you’re asking is a common question, these will be good resources.</p>
@@ -313,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 1 2 3</code></pre>
 <p>I used a little bit of Jargon there, but to keep things clear. A <strong>function</strong> is a command that tells R to do <em>something</em> and an <strong>argument</strong> is the information or data you give to the function so it can do it’s job. Sometimes functions don’t need arguments:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introduction-to-r.html#cb10-1"></a><span class="kw">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2020-06-09 20:11:02 BST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-11-05 00:13:16 GMT&quot;</code></pre>
 <p>But the key to remember is that a function has <em>brackets</em> <code>()</code> right after it’s name.</p>
 <p>And, a word of warning, R is <strong>Case Sensitive</strong>. This means you need to be careful that you use upper and lower case appropriately.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction-to-r.html#cb12-1"></a><span class="kw">sys.time</span>()</span></code></pre></div>
@@ -571,7 +523,8 @@ F(x) = \int_{-\infty}^x f(u) \;\textrm{d}u = \textrm{Prob}\left(X &lt; x\right)
 <h4><span class="header-section-number">1.5.1.4</span> Random Function</h4>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-r.html#cb91-1"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb91-2"><a href="introduction-to-r.html#cb91-2"></a><span class="kw">head</span>(z)</span></code></pre></div>
-<pre><code>## [1] -1.0184620 -0.3896440  0.1468796 -0.4595894 -1.7630333 -1.0448115</code></pre>
+<pre><code>## [1] -1.156320430 -0.002846483  0.375596152  1.109888911 -0.823263576
+## [6] -0.384256491</code></pre>
 <p>If you were to print out the <code>z</code> variable, you’d see 100 random numbers. The first argument we pass to the function <code>rnorm()</code> tells it how many random numbers to generate. These random numbers have been drawn from the Standard Normal distribution and so they will follow that distribution. We can see this with the following plot:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-r.html#cb93-1"></a><span class="kw">hist</span>(z)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" />
@@ -606,7 +559,7 @@ This histogram shows where all the values in the data in <code>z</code> lie. We 
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tidyverse-for-tidy-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="enter-the-tidyverse-verbs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
