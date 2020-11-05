@@ -19,8 +19,14 @@ output:
       in_header: "../favicon.html"
 ---
 
-```{r setup, include=FALSE}
+```{r setup00, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+pkgs <- c("tidyverse","kableExtra")
+purrr::walk(pkgs,library,character.only=T)
+my_kbl <- function(x,...,full_width=T)
+  x %>%
+  kbl(...) %>%
+  kable_styling(bootstrap_options = c("striped", "hover","condensed"),full_width=full_width)
 ```
 
 # Statistics in R {-}

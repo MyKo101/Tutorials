@@ -1,5 +1,17 @@
 # Introduction to R
 
+
+```{r setup01, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pkgs <- c("tidyverse","kableExtra")
+purrr::walk(pkgs,library,character.only=T)
+my_kbl <- function(x,...,full_width=T)
+  x %>%
+  kbl(...) %>%
+  kable_styling(bootstrap_options = c("striped", "hover","condensed"),full_width=full_width)
+```
+
+
 ## R & RStudio
 
 ### R
@@ -7,7 +19,7 @@
 ![](src/images/01_R_logo.png){#id .class width=80 height=80}
 </div>
 
-R is a programming language that is designed to work quickly and efficiently with large amounts of data, this is done through the unique way it processes this data. It is open source, meaning that other people from around the world can easily contribute code that you can use through add-ons, known as `packages`. Another reason for R's popularity is that it (and the applications that run it) are **free** and (perhaps because it is free) the support online (from other ordinary users) is incredibly helpful.
+R is a programming language that is designed to work quickly and efficiently with large amounts of data, this is done through the unique way it processes this data. It is open source, meaning that other people from around the world can easily contribute code that you can use through add-ons, known as `packages`. Another reason for R's popularity is that it (and the applications that run it) are **free** and the support online (from other ordinary users) is incredibly helpful.
 
 
 ### RStudio
@@ -23,7 +35,7 @@ If you try to download R directly, you will also download a program called RGui.
 </div>
 </center>
 
-The screenshow shows the four panes that we usually work with. Top-Left shows the **Script**, which is the code file we're currently working in. Code written here won't be run immediately, but it allows us to save code to be re-run later. Bottom-Left shows the **Console**, code written here *will* be run, so be careful what you type here. Top-Right is the **Workspace**, which shows the variables/data that RStudio is storing for us and that we can use. Bottom-Right shows the **Viewer**, which primarily displays Plots and Help. Of course there is a lot more going on here, but for the most part, these are the important bits.
+The screenshot shows the four panes that we usually work with. Top-Left shows the **Script**, which is the code file we're currently working in. Code written here won't be run immediately, but it allows us to save code to be re-run later. Bottom-Left shows the **Console**, code written here *will* be run, so be careful what you type here. Top-Right is the **Workspace**, which shows the variables/data that RStudio is storing for us and that we can use. Bottom-Right shows the **Viewer**, which primarily displays Plots and Help. Of course there is a lot more going on here, but for the most part, these are the important bits.
 
 Remember: R is the **language** and RStudio is the **application**, but you can't use RStudio without R! (That said, I'm probably going to use the two interchangeably throughout)
 
@@ -35,17 +47,17 @@ When you first open RStudio, what you see won't be like the screenshot. That's b
 
 
 In the **Console** pane, type `2+2` and hit Enter.
-```{r}
+```{r add2and2}
 2+2
 ```
 
 RStudio just ran the code immediately. The `[1]` here just means that the `4` is the first result from what R has calculated (we'll get on to that in a bit). Next, with the Console still selected, press up and RStudio will recall the previously run line of code. and you can change the code and you run it again
-```{r}
+```{r add2and3}
 2+3
 ```
 
 This time, in the **Script** pane, type `pi+1`, hightlight it and press Ctrl + Enter (or Cmd + Enter on Mac). 
-```{r}
+```{r addpiand1}
 pi+1
 ```
 This will automatically transfer the code into the **Console** and run it. Importantly, however the code is still in the **Script** pane, ready to be edited and/or used again.
@@ -53,10 +65,127 @@ This will automatically transfer the code into the **Console** and run it. Impor
 
 **Congratulations**! You just did some coding!
 
+## Data Types
+
+Within R, and many other programming languages, we have different types of data. Here I'm going to quickly run through the three basic ones that you're likely to encounter, and as the course goes on I'll introduce a couple more. But before I can do that, we need to discuss _variables_
+
+### Variables
+
+Most of what we do in R is to create and store data in variables, for us to use later. Here we're going to create a variable, called `x` and store a value inside
+
+```{r Makex}
+x <- 2
+```
+The `<-` symbol is called the _assignment operator_ and it assigns the value of `2` to the variable `x`.
+
+Typing this into the *Console* and running it (or into the Script and _executing_ it) doesn't appear to do much. However, if we look in the Environment Pane, we can see that it's now been populated with a table that says `x` and `2`. This gives us the _name_ of our variable and the value stored within it. You can think of these as boxes with labels. We can interact with what's in the box, by referring to it's label. For example
+
+```{r xadd2}
+x + 2
+```
+
+Looks in the box labeled `x`, pulls out it's value, `2`, adds `2` to it and then outputs the result, just like before. In fact, earlier we used a variable called `pi`, which is by default assigned the value of `3.141592...`
+
+### Numeric Data
+
+The most common kind of data we can use is numeric, and this is what we've just made. We created `x` as a numeric variable with the value of `2`. With numeric data, we can perform the standard mathematical operators as you would expect:
+
+```{r NumericOperators, echo=F}
+tribble(
+  ~Symbol,~Description,
+  "+","Adds two values together",
+  "*","Multiplies two values together",
+  "-","Subtracts one value from the other",
+  "/","Divides one value by the other",
+  "^","Takes one value to the power of the other"
+) %>%
+  my_kbl(full_width = F,escape=F)
+```
+
+Addition, multiplication, division, subtraction and exponentiation. We also have comparitors to check the relationship between two values:
+
+```{r ComparisonOperators, echo=F}
+tribble(
+  ~Symbol,~Description,
+  "==","Checks if two values are equal",
+  "!=","Checks if two values are not equal",
+  "<","Checks if one value is smaller than the other",
+  "<=","Checks if one value is smaller than or equal to the other",
+  ">","Checks if one value is larger than the other",
+  ">=","Checks if one value is larger than or equal to the other") %>%
+  my_kbl(full_width=F)
+```
+
+In order, these check whether two values are equal, not equal, less than, greater than, less than or equal to and greater than or equal to. For example, we can run the following code ad get an appropriate outputs:
+
+```{r xcompared}
+x == 2
+x > 4
+```
+
+This leads us to our second data type...
+
+### Logical Data
+
+Logical, or binary, data consists of `TRUE` or `FALSE` statements. The above values can actually be stored into variables using the assignment operator
+
+```{r MakeyMakez}
+y <- x == 2
+z <- x > 4
+
+y
+z
+```
+
+Logical data has it's own group of logical operators, which are different to the above ones:
+
+```{r LogicalOperators, echo=F}
+tribble(
+  ~Symbol,~Description,
+  "&","And - Are they both TRUE?",
+  "|","Or - Is one of the TRUE?",
+  "!","Not - Negates the value"
+) %>%
+  my_kbl(full_width=F)
+
+```
+For example, we can combine the values of `y` & `z` above like so:
+
+```{r LogicalOpInAction}
+y & z # Are they both TRUE?
+y | !z #Is y TRUE or is z FALSE?
+```
+
+### Character Data
+
+Characters consist of all the other symbols we use and when they are combined, they are known as a _string_. To create a string in R, we wrap it in quotation marks
+
+```{r MakeString}
+x <- "hello"
+```
+
+Note that when we run the above, the value of `x` in our *Environment* pane has now changed to match this new value.
+
+With characters, you've got to be a little wary asit can be very easy to get your _strings_ and your _numerics_ mixed up. For example, the following throws an error:
+
+```{r CharacterError, error=T}
+"2" + "3"
+```
+
+A lot of the time, _character_ and _string_ are used interchangeably, but to be specific, a _character_ is a single symbol, whereas a _string_, well, a string of them.
+
+Unfortunately, there aren't any operators that act on characters, however we have plenty of *Functions* that do. We'll come back to functions soon, but know that they form a core part of coding in R. They take inputs, called _arguments_ or _parameters_ and provide us with outputs. A common function is the `paste()` function which _can_ be used on strings:
+
+```{r pasteeg}
+paste("Hello","World")
+```
+The comma here indicates that we are providing _two_ arguments to the function. The first is the character string "Hello" and the second is "World", the `paste()` function sticks these two together to form a new, single string "Hello World", notice how it also adds a space between these two strings.
+
+
 ## Help
 ### Help Files
 
-For any problem you might have, your first port of call in RStudio is the `?` symbol. R mostly works with **functions** (which we will get to prety soon), and so if you need help in RStudio, you can type a question mark followed by the name of that function and help will pop up in the **Viewer** pane
+For any problem you might have, your first port of call in RStudio is the `?` symbol. The easiest way to get help is to type a question mark followed by the name of the function that you want to know more about and help will pop up in the **Viewer** pane
 
 ```
 ?mean
@@ -91,12 +220,18 @@ Remember, never feel like you're asking a stupid question. If you don't know the
 
 ### Vectors
 
-In mathematics, a vector is usually a set of ordered numbers which can be used to represent a point in 2/3D space. However, R uses vectors in a slightly different manner to essentially mean a list of data (although a `list` is a different thing in R). I can create a vector in R by using the `c` *function* and passing some numbers as *arguments*, separated by a comma.
-```{r}
+In mathematics, a vector is usually a set of ordered numbers which can be used to represent a point in 2/3D space. However, R uses vectors in a slightly different manner to essentially mean a list of data (although a `list` is a different thing in R). I can create a vector in R by using the `c()` function and passing some numbers as arguments, separated by a comma.
+```{r cnumericeg}
 c(1,2,3)
 ```
+I can also create a vector out of characters, or logical data:
+```{r ccharactereg}
+c("hello","world")
+c(TRUE,FALSE)
+```
+Notice that this time, the "hello" and "world" are shown to be seperate, rather than earlier when they were a single string.
 
-I used a little bit of Jargon there, but to keep things clear. A **function** is a command that tells R to do *something* and an **argument** is the information or data you give to the function so it can do it's job. Sometimes functions don't need arguments:
+Functions don't always need arguments though, as the below function can run fine and gives us the current time.
 
 ```{r}
 Sys.time()
@@ -114,13 +249,9 @@ We've now created a vector of numbers but we've not done anything with these num
 ```{r}
 c(1,2,3) + 10
 ```
+Here, we created a vector of numerics, and then performed an operator on that vector. R did this for each individual element of our vector.
 
-In the jargon of R (and computer programming in general), the addition symbol (`+`) here is called an **operator**. Operators take something on the left and something on the right and do something with them. Here are several more and you should recognise most of them:
-```{}
-+ - * / < > ^ == != :
-```
-
-In order: Addition (`+`), Subtraction (`-`), Multiplication (`*`), Division (`/`), Less Than (`<`), Greater Than (`>`), Exponentiation (`^`), Equivalency (`==`) (i.e. are these two things the same?) and Non-Equivalency (`!=`) (are these two things different?). The last one, is probably new to you. the `:` operator works with numbers to create a vector that runs from the first number to the second and is very useful for quickly creating big vectors.
+One last operator that we've not mentioned yet is the _sequence_ operator, `:`. This operator works with numbers to create a vector that runs from the first number to the second and is very useful for quickly creating big vectors.
 
 ```{r}
 1:100
@@ -130,70 +261,25 @@ This also demonstrates what the `[1]` meant earlier. The element next to it is t
 What do you think is happening here?
 ```{r}
 length(1:1000)
-
 ```
+
 
 what happens if you run the code `length(1:(10^6))`? And what about `length(1:(10^15))`. Try 
 ```{r  error=T}
 length(1:(10^16))
 ```
 
-
 R doesn't even try it. R knows its limits But it can make it up to 10<sup>15</sup>, which means that R created a vector that was 10<sup>15</sup> elements long before figuring out its length. And it did it really quickly (because R is good with vectors)
 
-### Data Types
-
-We've just learned about **Vectors** as lists<sup>(even though `list` means something else)</sup> of numbers. But Vectors can also be `character` vectors. Sometimes called `strings`, character vectors just means words:
-```{r}
-c("Hello","World")
-```
-
-Another basic data type in R is the `logical`, which represents `TRUE` or `FALSE` values.
-```{r}
-c("red","blue","green","yellow") == "red"
-```
-
-Here, we created a vector of characters and then checked whether each of them (one-by-one) were equal to the character vector `"red"`. Again, however, remember that R is *Case Senstive*:
-```{r}
-"red" == "Red"
-```
-
-We can also multiply `logical` values by `numeric` values (i.e. numbers) and R will interpret a `TRUE` as being 1 and a `FALSE` as being 0.
-
-### Assignment
-Consider the following line of code:
-
-```{r}
-length(c("Hello","World")) - 1
-```
-
-There are many steps happening here. First,the `c` function took in the two arguments `"Hello"` and `"World"`, realised they were characters (rather than numbers), put them together into a vector (that's its job) and then passed that vector as a *single* argument to the `length` function. Finally, we subtracted `1` from the result.
-
-Now consider the following line of code:
-```{r}
-x <- c("Hello","World")
-length(x) - 1
-```
-Much easier to read and follow. We created the vector in the same way, but then we used the `<-` operator to put it in a box called `x`. On the next line, we put that box into the `length` function, and then subtracted the 1. This *box* is called a variable, and if you run this line of code, you'll notice that the `x` variable now populated our **Workspace** pane in the Top-Right. The **Workspace** pane tells us the data type (`chr` is short for `character`) and we can tell that the length is 2 from the bit that says `[1:2]` (we'll unravel this soon, too).
-
-Being able to assign variables is a kay part of using R (and again, programming in general). Once these variables have been assigned, we can use them again and again, and re-assign them as and when we need, and even use them to re-assign themselves!
-
-```{r}
-x <- 2
-x + 2
-x + 3
-```
-```{r}
-x <- x + 1
-x
-```
 ### Subsetting
 
-Now, `x` in our **Workspace** pane is just a single number (not a vector). But we can obviously change that
-```{r}
+As previously shown, data can be assigned to a, this includes vectors.
+
+```{r assignvectorx}
 x <- c(2,4,6,8,10)
 ```
-We're once again told it's data type (this time its an `int`), and its length is 5 from the `[1:5]`. When we're working with vectors, sometimes we need to grab out just some of the elements and not all of them. For this, we use **extraction**. If we want to pull out the third element of a vector, we enclose that number in square brackets, `[` and `]`, to tell R that we are extracting data from a vector: `x[3]`. We can also pass a vector into the subsetting to grab more than one element:
+
+Looking up at the *Environment* pane again, we're told it's data type (this time its an `int`), and its length is 5 from the `[1:5]`. When we're working with vectors, sometimes we need to grab out just some of the elements and not all of them. For this, we use *subsetting* or *extraction*. If we want to pull out the third element of a vector, we enclose that number in square brackets, `[` and `]`, to tell R that we are extracting data from a vector: `x[3]`. We can also pass a vector into the subsetting to grab more than one element:
 ```{r}
 x[c(1,2,3)]
 ```
@@ -237,7 +323,7 @@ Now that we have the basics, we can move onto some statistical work using data. 
 
 An important note when loading data using `read.csv()` or a similar function is that the file directory needs to use forward slashes (`/`) rather than backward slashes (`\`). Basically, copy the folder directory, but replace the slashes:
 
-```{r eval=F}
+```
 dat <- read.csv("M:\Documents\My Data.csv") # This line won't work
 dat <- read.csv("M:/Documents/My Data.csv") # This works!
 ```
@@ -249,7 +335,7 @@ head(iris)
 ```
 The function `data()` can be used to load up a Built-in datasets (useful for examples and practising!). As previously said, `head()` now displays the first 6 *rows* of our data, which is a table (known in R as a `data.frame`).
 
-Double click on `iris` in the **Workspace** and a new tab will open up in place of the **Script** pane. This shows the full table and allows us to scroll. There are five variables in `iris`: `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width` and `Species` (note the capitalisation!).
+Double click on `iris` in the *Environment* and a new tab will open up in place of the *Script* pane. This shows the full table and allows us to scroll. There are five variables in `iris`: `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width` and `Species` (note the capitalisation!).
 
 Similar to a vector, we can subset in a `data.frame` using the square brackets, however since `iris` is a table, R needs two values, one for the *row* and a second for the *column*, separated by a comma (again, we can extract multiple rows/columns by using vectors)
 ```{r}
