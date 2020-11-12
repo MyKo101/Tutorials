@@ -1,3 +1,402 @@
 # Enter The Tidyverse: Verbs
 
-Coming Soon...
+## Introduction
+
+```{r setup02, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pkgs <- c("tidyverse","kableExtra")
+purrr::walk(pkgs,library,character.only=T)
+my_kbl <- function(x,...,full_width=T)
+  x %>%
+  kbl(...) %>%
+  kable_styling(bootstrap_options = c("striped", "hover","condensed"),full_width=full_width)
+```
+
+
+In this week's session, we will discuss R's add-on mechanic, where we can include `packages` within our projects and focus on a specific family of packages called the `tidyverse`
+
+## Packages
+
+A lot of computer programs have add-ons that do not come included in the main piece of software. A big (money-making) example of this is downloadable content is video games, whether it's a an aesthetic DLC such as a hat in _Among Us_ or new level packs in _Call of Duty_. But this concept is true for TV bundles, _Sky_ can be subscribed on it's own or with _Sky Movies_ or _Sky Sports_. You could even think of downloading Apps on your phone as additional content since they don't come with your phone's OS by default. Or even the video games themselves are additional content for your console. This kind of approach to media is called **modular**.
+
+Modular design has become very popular and is a key aspect of many _Open Source_ pieces of software. Open Source means users can edit the underlying program and it isn't locked in to the official developers. For beginners, it would be highly discouraged to actually do this. But there are R whizzes out there who do this kind of thing.
+
+The product of what they do are called `packages`. Packages are bundles of code that R will load up ready to for you, the user, to use. These mostly consist of new `functions` and occasionally `data`, and usually include documentation on how to use the functions and data.
+
+The `tidyverse` is a little different as it's a _meta-package_, which means it's actually made up of a few other packages. When we install or load it, it's actually installing & loading a few other packages, which is why it can take a while to install.
+
+### Installing packages
+
+To get a new `package`, we can use the `install.packages()` function and supply the name of the package we want as a string:
+
+```{r installpackage, eval=FALSE}
+install.packages("tidyverse")
+```
+
+Packages are generally stored in an online repository called CRAN. When you run `install.packages()`, R will search CRAN for the package you're trying to install and if it finds it, it'll download and install it for you. It's that easy. There are other ways to install packages, but this is the most common and basic.
+
+However, just because we've installed it, doesn't mean we can use it yet. To load it up ready to go, we need to use the `library()` function. This time, we don't need the quotes as R will find the package as it is:
+
+```{r libraryeg}
+library(tidyverse)
+```
+It also gives us a little bit of information about what's actually happened here. The `tidyverse` has loaded up all these other packages, e.g. `ggplot2`, `purrr` and `dplyr`.
+
+The _Conflicts_ section just means that `dplyr` has a function called `filter()`, but so does the `stats` package. The `stats` package is loaded when you open R and includes functions like `mean()` and `sd()`. Since we loaded `dplyr` last (as part of `tidyverse`) if we try to call these functions which have the same names, R will use the ones found in `dplyr`, rather than those found in `stats`. The `filter()` and `lag()` functions in the `stats` package don't get used much, so it's fine to do this and `filter()` in `dplyr` is incredibly useful.
+
+This `dplyr` package is where most of the functions we're going to discuss today come from. As well as these packages that have been _loaded_ by `tidyverse`, there were also some others that were installed, but we don't need them right now and they can stay in the background.
+
+### CRAN
+
+CRAN stands for _Comprehensive R Archive Network_. When you installed R in the first place, you would have also installed it from CRAN. When a developer wants to publish a package, CRAN is the main place where they go (although there are others, such as BioConductor or github). The reason being is that it's hosted by _The R Team_ and the `install.packages()` comes built in to R. You don't need anything else to get packages from CRAN.
+
+<div style= "position:relative;padding-bottom:30px;padding-top:30px;">
+![](src/images/02_CRAN_tidyverse.png){#id .class width=80%}
+
+This is an example of what a CRAN page for a package looks like; this is the CRAN page for `tidyverse` and is a standard layout for CRAN pages. Yes, it looks pretty boring. You can find this page [here](https://cran.r-project.org/web/packages/tidyverse/index.html)
+
+Most of this screenshot won't actually be very useful to you as R newbies, but there are some key parts.
+
+* Name - Every package has a Name, here it's `tidyverse`
+* Title - Usually a few words to describe what the package does and is shown after the name on CRAN, here it's _"Easily Install and Load the 'Tidyverse'"_
+* Description - A paragraph to describe in more detail what the package does, and can include links, etc...
+* Version - R package are version controlled and so newer version may not be back compatible. This shouldn't be a problem for you at this point
+* Depends - What other packages does this package require. For example, `tidyverse` requires the `broom` package to be installed, and includes which version it needs. The `install.packages()` function also installs all these dependencies so you don't need to worry about them.
+* Author & Maintainer - The person that wrote and/or manages the package. If you wish to reference a package in your work, you can use this information
+* Citation - CRAN also provides a Citation reference which is compatible with most referencing software
+* Reference Manual & Vignette - Useful Documentation
+
+There are of course more things on this page, but most of it isn't particularly useful. The main pieces I wanted to show you are the _Reference Manual_ and the _Vignettes_
+
+#### Reference Manual
+
+Previously, we used the `?` operator to bring up help files. R packages also include these help files for the functions that they provide and these are all compiled into a single pdf, which is the _Reference Manual_.
+
+If you want a formal run through of what every function in a package does, this is where you will find it. However, it can be a bit dull and is most useful as a reference (thus the name)
+
+#### Vignettes
+
+Vignettes are much more useful for users. They provide a walk-through or guide on how to use this package and will usually include examples of using the package in action. If you're interested in using a new package that you've never used before, this is the place to start.
+
+The `tidyverse` vignettes are more about the structure of the `tidyverse`, however if we were to look at another, say for [`dplyr`](https://cran.r-project.org/web/packages/dplyr/vignettes/base.html), it walks us through like a tutorial on the best practices with this package. A lot of what's discussed in this vignette will be covered today.
+
+## The Pipe
+
+One of the most important things to come with the `tidyverse` is the `%>%` pipe operator. The pipe allows us to create simple and smooth workflows. It basically takes whatever is on the left of the operator and passes it to a function on the right. Here are a few pieces of code, using the `magrittr` package to demonstrate what I mean
+
+```{r loadmagrittr,results='hide'}
+library(magrittr)
+```
+
+The following three lines of code are equivalent.
+
+```{r pipeg1}
+2 + 3 #This is using basic operations
+add(2,3) #This uses the `add()` function from magrittr
+2 %>% add(3) # This uses the pipe
+```
+
+In this toy example, the first version is the simplest, but that's because we have an operator to do addition. If we didn't have this operator (say we were using the `mean()` function instead), then we'd need to do the second version with the `add()` function. The third shows the same line of code with the pipe.
+
+Here we have given the value on the left, `2` as the first argument of `add()`, and then also supplied the second argument.
+
+Here is a much more complicated example:
+```{r pipeegformula}
+3*(1 + (2 +3)/5)
+```
+When trying to calculate this, we're working from the inside brackets outwards. We first need to figure out which bracket gets evaluated first and work from there. R can do this easily, but it can be tricky for a reader or someone writing this out to not get confused.
+
+```{r pipeegfunctions}
+multiply_by(add(divide_by(add(2,3),5),1),3)
+```
+This problem of figuring out where to start is made even harder when we're dealing with functions, rather than operations. Most of the processes we perform in R use functions and so this kind of line is what we'd most often be dealing with. It's really confusing.
+
+We could simplify it a bit by doing each line of code on a new line and replacing the variable with a new value:
+```{r pipegvariable}
+x <- 2
+x <- add(x,3)
+x <- divide_by(x,5)
+x <- add(x,1)
+x <- multiply_by(x,3)
+x
+```
+However, this involves a lot of repetition. If we have to type the same thing out over and over again, we're _very_ likely to type something wrong. In fact, when writing that example out, I typed it wrong and produced this, can you spot the error:
+
+```{r pipeegwrong}
+x <- 2
+x <- add(x,2)
+x <- divide_by(x,5)
+x <- add(x,1)
+x <- multiply_by(x,3)
+x
+```
+
+So rather than repeatedly re-assigning a variable, we can simply _pipe_ the output from one function into the next function. These are known as pipelines and it demonstrates a clear order of what functions you're doing.
+
+```{r pipeegline}
+2 %>%
+  add(3) %>%
+  divide_by(5) %>%
+  add(1) %>%
+  multiply_by(3)
+```
+
+It isn't necessary to move onto a new line for each function, the following works just as well:
+
+```{r pipeegoneline}
+2 %>% add(3) %>% divide_by(5) %>% add(1) %>% multiply_by(3)
+```
+and while this is more concise, if you are doing many functions, this, again can look messy. Getting into the habit of creating a new line for each function will improve readability when you're coming back to look at your code in the future.
+
+**Remember that when using the pipe, the following operations are equivalent**
+```
+f(a,b,c)
+a %>% f(b,c)
+```
+
+Functions from the `tidyverse` and a lot of other packages which follow the `tidyverse` style (or philosopy as described in the [`tidyverse` vignette/manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html)) will generally take your data set as their first argument and will return another, updated data set. This allows you to make a really smooth chain of functions.
+
+## Tibbles
+
+In the previous lesson, we loaded up a dataset called `iris`. By default, data sets are loaded as a structure called a `data.frame`. The `tidyverse` team have built on this by creating a new structure nicknamed a `tibble` (officially they're called `tbl_df`, short for table data frame), which works mostly the same, but it prints its data much neater and is a little more consistent in how we interact with it. Here's an example from the `tidyverse`
+
+```{r starwarsload}
+starwars
+```
+
+Notice how, when printing, we are only shown the first 10 rows and first few columns. It also gives us an indication of how many other rows there are and what other columns are present. If we were to print out a native `data.frame` from base R, we would have been shown _everything_ and it would clog up our **Console**. If you're brave, then run `as.data.frame(starwars)` and it will convert this tibble into a dataframe and show just how messy it can be.
+
+The way that the data is organised above is the most common way of arranging our data. Each row is known as an _observation_ and will usually be a single participant. Each column is a _variable_ associated with that observation. Notice in the above, the third observation has a `name` variable of `"R2-D2"`and a `mass` variable of `32.0`. Because each _variable_ should be consistent, they are stored as vectors. As we recall, vectors must all be the same type. For every participant in this dataset, `height` is an _integer_ indicated by the `<int>` under the variable name, meaning a whole number and `eye_color` is a _character_ indicated by `<chr>`.
+
+We can also see the names of the variables in our dataset by using the `names()` function, or get the dimensions by using `nrow()`, `ncol()` or `dim()`:
+```{r names}
+names(starwars)
+nrow(starwars)
+ncol(starwars)
+dim(starwars)
+```
+
+There are a few other advantages of tibbles over data.frames that are a lot more technical, so feel free to read about them yourself by loading the help file using `?tbl_df`
+
+## One Table Verbs
+
+In the `tidyverse` functions that do things to your data are known as _verbs_. Which makes sense since _verbs_ are "doing words" and we are doing something to our data. Today, we're going to have a look at some of the verbs which act on a single dataset. There are a few that can act on two tables (allowing them to be combined into one table), but for now, we'll stick with one.
+
+### filter()
+
+The filter function allows us to pick out specific observations from our dataset depending on other values in our dataset.
+
+```{r filter}
+starwars %>%
+  filter(homeworld == "Naboo")
+```
+
+This has pulled out just the participants in the dataset that are from the planet `"Naboo"`. Can you see how this has worked? It has created a _logical_ vector, `homeworld == "Naboo"` from the data within the tibble. We could do this without using `filter()` by just using the functions available without the `tidyverse` stuff, but it's messier:
+
+```{r filterbase}
+starwars[starwars$homeworld == "Naboo" & !is.na(starwars$homeworld),]
+```
+So firstly, we have to specify that `homeworld` is a variable in the `starwars` dataset, which we don't have to when using `filter()`. And perhaps more confusingly, we have to use this `!is.na(starwars$homeworld)` bit. The function, `is.na()` will check if values are missing, which are usually shown as `NA` and are slightly greyed out, e.g. R2-D2's hair colour is `NA` because they don't have any! `filter()` deals with this check and will ignore `NA` values, but the default R method does not and so we have to specify this.
+
+We can combine multiple criteria to hone in on which parts of our data we want to look at:
+
+```{r filtermulti}
+starwars %>%
+  filter(species == "Human",
+         gender == "feminine")
+```
+
+This is the same as using the `&` operator between each of these criteria, therefore, this returns all observations where _all_ of the criteria are `TRUE` and we can use as many as we want. If we want to get observations where any of some criteria are true, we can use the `|` operator:
+
+```{r filteror}
+starwars %>%
+  filter(homeworld == "Naboo" | species == "Human")
+```
+
+We can even use that `is.na()` function here to look for missing data, which can allow us to investigate holes in our data sets:
+
+```{r filtermissing}
+starwars %>%
+  filter(is.na(birth_year))
+```
+
+### slice()
+
+The slice function is a little bit cruder than the `filter()` function, in that it wants numbers to pull out certain observations. So we can't make it depend on criteria from our data, but it can be useful to preview certain subsections of it.
+
+```{r slice20}
+starwars %>%
+  slice(51:60)
+```
+
+Similar to how we subsetted vectors and data.frames previously, we can also say which rows we don't want, so if I don't want the first 10 rows, I can use `-(1:10)`
+
+```{r slicenot}
+starwars %>%
+  slice(-(1:10))
+```
+
+
+It also has a few sibling functions which can come in handy for investigating our data. The first allows us to pull out a _random_ set of observations:
+
+```{r slicesample}
+starwars %>%
+  slice_sample(n=10)
+```
+There are also `slice_min()` or `slice_max()` which are used to pull out the rows with the highest or lowest values of a variable
+
+```{r sliceminmax}
+starwars %>%
+  slice_max(mass,n=3)
+```
+
+
+### arrange()
+
+Sometimes we may wish to re-arrange our data into a neater ordering. The `arrange()` function does just that. It'll sort your data by whatever variable(s) are passed to it:
+
+```{r arrange1}
+starwars %>%
+  arrange(name)
+```
+And if we have ties, such as with `mass`, we can add a second sorting variable.
+
+```{r arrange2}
+starwars %>%
+  arrange(mass,height)
+```
+
+Notice this is sorted by `mass` first and then `height`.
+
+When using `arrange()`, `NA` values will always be put to the bottom of our tibble, which we can see by using the `tail()` function, which gives the _bottom_ 6 rows of a tibble. Here the mass & height are all `NA`.
+
+```{r arrangetail}
+starwars %>%
+  arrange(mass,height) %>%
+  tail
+```
+
+By default, R will sort numeric data in ascending order and characters in alphabetical order. If we want to reverse this, we can use the `desc()` function:
+
+```{r arrangedesc}
+starwars %>%
+  arrange(desc(mass))
+```
+Once again, the `NA` values are at the bottom.
+
+### select()
+
+The previous verbs all did something related to the _rows_ in our data, whether that was extracting some subset of rows, or to organise the rows of our data better. `select()` acts similar to `filter()` but to extract _columns_ or _variables_, rather than rows (observations)
+
+```{r select1}
+starwars %>%
+  select(name,height,mass)
+```
+
+For this, we have selected only three variables. There are a few different ways we can use `select()`, depending on what we want to do.
+
+Again, we can say what we don't want:
+
+```{r selectnot}
+starwars %>%
+  select(-eye_color,-skin_color)
+```
+
+We can use numbers, similar to `slice()` to get the nth columns
+
+```{r selectnum}
+starwars %>%
+  select(1,4,5,7:9)
+```
+
+Personally, I don't tend to use the numeric version, as I prefer to use the names of the variables I'm getting. Above, I used `7:9` to create a vector `7 8 9` and pull them. We can actully do this using the variable names (but this doesn't work outside of `tidyverse`)
+
+```{r selectseq}
+starwars %>%
+  select(name:eye_color)
+```
+
+One final thing we can use `select()` for is to rearrange our variables. The variables in `select()` will be in the order supplied:
+
+```{r selectarrange}
+starwars %>%
+  select(height,mass,name)
+```
+
+But, what if we want to bring just one or two variables to the left (so we can see them easier) and not drop the rest? Well that's where a little `tidy helper` called `everything()` comes in:
+
+```{r selecteverything}
+starwars %>%
+  select(homeworld,species,everything())
+```
+
+It basically acts as a filler for all the "other" variables that haven't been mentioned in `select()` yet, and will retain the order of them  as they appear in the dataset.
+
+Now that we know how to do something to our columns and our rows seperately, it makes sense to want to combine them. As discussed earlier, this is made very easy using the `%>%` pipe.
+
+```{r filterselect}
+starwars %>%
+  filter(gender == "feminine") %>%
+  select(name,height,mass,homeworld,species)
+```
+
+`filter()` outputs a tibble, which can then be passed to `select()` with ease.
+
+### mutate()
+
+The mutate function is really the powerhouse of the `tidyverse` and behind the `%>%` pipe, you will probably use it a lot. It allows us to _mutate_ or _change_ our data as we need. This can be to change existing variables or to create new ones. First, we will convert `height` from cm to m by dividing by 100
+
+```{r mutateheightcm}
+starwars %>%
+  mutate(height = height/100)
+```
+
+We can combine multiple _mutations_ in a single `mutate()` function and R will perform them in order. This also means if we change a variable in one command, the updated version will be used from then on. It's also worth pointing out that new variables will by default be put at the end of our data, but we can use the `.before` or `.after` arguments to squeeze them in earlier (notice that there is a dot at the start of these agrgument names, it's `.before` not `before`)
+
+```{r mutateheightbmi}
+starwars %>%
+  mutate(height = height/100,
+         BMI = mass/height^2,
+         .after = mass)
+```
+
+Any fundamental changes that need to be made to your data, can be done using this `mutate()` function, and we will explore this much more in the future.
+
+### summarise()
+
+So now we can manipulate our data as a whole, but that's no good if we can't provide a summary of our data. As the name suggests, the `summarise()` function does exactly that. It performs functions on the variables as a whole and returns some sort of summary statistic (depending on what we ask for), and it returns that as another tibble
+
+```{r summary1}
+starwars %>%
+  summarise(mass_avg = mean(mass, na.rm=T),
+            mass_sd = sd(mass, na.rm=T))
+```
+
+Notice that for these two functions, `mean()` and `sd()`, I need to pass an extra argument, the `na.rm=T` just tells R to ignore the `NA` values. Otherwise, the default means that both of these functions would return `NA` (seems a bit silly, but it can be useful for spotting errors).
+
+### group_by()
+
+The final thing on today's agenda is the `group_by()` function which allows us to group our data in meaningful ways. This is exceptionally useful with the `summarise()` function above, as it can give us summary statistics based on other variables. Firstly, what does it look like to _group_ our data?
+
+```{r group}
+starwars %>%
+  group_by(gender)
+```
+
+The data looks mostly the same, except we now have a bit of information telling us that the data has been grouped and how many groups there are.
+
+But it gets more interesting when we perform a `summarise()`:
+
+```{r summarisegroup}
+starwars %>%
+  group_by(gender) %>%
+  summarise(number = n(),
+            mass_avg = mean(mass, na.rm=T),
+            mass_sd = sd(mass, na.rm=T),
+            height_avg = mean(height, na.rm=T),
+            height_sd = sd(height, na.rm=T),
+            .groups="drop")
+```
+
+This time we get a row of data for each of our groups. If we were to have more groups, we'd have more rows. I used a few other new things here. The `n()` function will return the size of each group, and so can be useful here when summarising our data. I also passed an argument called `.groups`, which just stops R from telling me that it has ungrouped my data (this is a bit of a bug and hopefully will be removed in future versions).
+

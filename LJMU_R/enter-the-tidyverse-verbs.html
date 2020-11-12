@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2020-11-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-distributions"><i class="fa fa-check"></i><b>1.6.1</b> Data Distributions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html"><i class="fa fa-check"></i><b>2</b> Enter The Tidyverse: Verbs</a></li>
+<li class="chapter" data-level="2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html"><i class="fa fa-check"></i><b>2</b> Enter The Tidyverse: Verbs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#installing-packages"><i class="fa fa-check"></i><b>2.2.1</b> Installing packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#cran"><i class="fa fa-check"></i><b>2.2.2</b> CRAN</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#the-pipe"><i class="fa fa-check"></i><b>2.3</b> The Pipe</a></li>
+<li class="chapter" data-level="2.4" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#tibbles"><i class="fa fa-check"></i><b>2.4</b> tibbles()</a></li>
+<li class="chapter" data-level="2.5" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#one-table-verbs"><i class="fa fa-check"></i><b>2.5</b> One Table Verbs</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#filter"><i class="fa fa-check"></i><b>2.5.1</b> filter()</a></li>
+<li class="chapter" data-level="2.5.2" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#slice"><i class="fa fa-check"></i><b>2.5.2</b> slice()</a></li>
+<li class="chapter" data-level="2.5.3" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#arrange"><i class="fa fa-check"></i><b>2.5.3</b> arrange()</a></li>
+<li class="chapter" data-level="2.5.4" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#select"><i class="fa fa-check"></i><b>2.5.4</b> select()</a></li>
+<li class="chapter" data-level="2.5.5" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#mutate"><i class="fa fa-check"></i><b>2.5.5</b> mutate()</a></li>
+<li class="chapter" data-level="2.5.6" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#summarise"><i class="fa fa-check"></i><b>2.5.6</b> summarise()</a></li>
+<li class="chapter" data-level="2.5.7" data-path="enter-the-tidyverse-verbs.html"><a href="enter-the-tidyverse-verbs.html#group_by"><i class="fa fa-check"></i><b>2.5.7</b> group_by()</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="enter-the-tidyverse-whats-next.html"><a href="enter-the-tidyverse-whats-next.html"><i class="fa fa-check"></i><b>3</b> Enter The Tidyverse: What’s Next?</a></li>
 <li class="chapter" data-level="4" data-path="show-your-work.html"><a href="show-your-work.html"><i class="fa fa-check"></i><b>4</b> Show Your Work</a></li>
 <li class="chapter" data-level="5" data-path="final-coding.html"><a href="final-coding.html"><i class="fa fa-check"></i><b>5</b> Final Coding</a></li>
@@ -196,8 +216,620 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="enter-the-tidyverse-verbs" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Enter The Tidyverse: Verbs</h1>
-<p>Coming Soon…</p>
+<div id="introduction" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<p>In this week’s session, we will discuss R’s add-on mechanic, where we can include <code>packages</code> within our projects and focus on a specific family of packages called the <code>tidyverse</code></p>
+</div>
+<div id="packages" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Packages</h2>
+<p>A lot of computer programs have add-ons that do not come included in the main piece of software. A big (money-making) example of this is downloadable content is video games, whether it’s a an aesthetic DLC such as a hat in <em>Among Us</em> or new level packs in <em>Call of Duty</em>. But this concept is true for TV bundles, <em>Sky</em> can be subscribed on it’s own or with <em>Sky Movies</em> or <em>Sky Sports</em>. You could even think of downloading Apps on your phone as additional content since they don’t come with your phone’s OS by default. Or even the video games themselves are additional content for your console. This kind of approach to media is called <strong>modular</strong>.</p>
+<p>Modular design has become very popular and is a key aspect of many <em>Open Source</em> pieces of software. Open Source means users can edit the underlying program and it isn’t locked in to the official developers. For beginners, it would be highly discouraged to actually do this. But there are R whizzes out there who do this kind of thing.</p>
+<p>The product of what they do are called <code>packages</code>. Packages are bundles of code that R will load up ready to for you, the user, to use. These mostly consist of new <code>functions</code> and occasionally <code>data</code>, and usually include documentation on how to use the functions and data.</p>
+<p>The <code>tidyverse</code> is a little different as it’s a <em>meta-package</em>, which means it’s actually made up of a few other packages. When we install or load it, it’s actually installing &amp; loading a few other packages, which is why it can take a while to install.</p>
+<div id="installing-packages" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Installing packages</h3>
+<p>To get a new <code>package</code>, we can use the <code>install.packages()</code> function and supply the name of the package we want as a string:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="enter-the-tidyverse-verbs.html#cb107-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>Packages are generally stored in an online repository called CRAN. When you run <code>install.packages()</code>, R will search CRAN for the package you’re trying to install and if it finds it, it’ll download and install it for you. It’s that easy. There are other ways to install packages, but this is the most common and basic.</p>
+<p>However, just because we’ve installed it, doesn’t mean we can use it yet. To load it up ready to go, we need to use the <code>library()</code> function. This time, we don’t need the quotes as R will find the package as it is:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="enter-the-tidyverse-verbs.html#cb108-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>It also gives us a little bit of information about what’s actually happened here. The <code>tidyverse</code> has loaded up all these other packages, e.g. <code>ggplot2</code>, <code>purrr</code> and <code>dplyr</code>.</p>
+<p>The <em>Conflicts</em> section just means that <code>dplyr</code> has a function called <code>filter()</code>, but so does the <code>stats</code> package. The <code>stats</code> package is loaded when you open R and includes functions like <code>mean()</code> and <code>sd()</code>. Since we loaded <code>dplyr</code> last (as part of <code>tidyverse</code>) if we try to call these functions which have the same names, R will use the ones found in <code>dplyr</code>, rather than those found in <code>stats</code>. The <code>filter()</code> and <code>lag()</code> functions in the <code>stats</code> package don’t get used much, so it’s fine to do this and <code>filter()</code> in <code>dplyr</code> is incredibly useful.</p>
+<p>This <code>dplyr</code> package is where most of the functions we’re going to discuss today come from. As well as these packages that have been <em>loaded</em> by <code>tidyverse</code>, there were also some others that were installed, but we don’t need them right now and they can stay in the background.</p>
+</div>
+<div id="cran" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> CRAN</h3>
+<p>CRAN stands for <em>Comprehensive R Archive Network</em>. When you installed R in the first place, you would have also installed it from CRAN. When a developer wants to publish a package, CRAN is the main place where they go (although there are others, such as BioConductor or github). The reason being is that it’s hosted by <em>The R Team</em> and the <code>install.packages()</code> comes built in to R. You don’t need anything else to get packages from CRAN.</p>
+<div style= "position:relative;padding-bottom:30px;padding-top:30px;">
+<p><img src="src/images/02_CRAN_tidyverse.png" id="id" class="class" style="width:80.0%" /></p>
+<p>This is an example of what a CRAN page for a package looks like; this is the CRAN page for <code>tidyverse</code> and is a standard layout for CRAN pages. Yes, it looks pretty boring. You can find this page <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">here</a></p>
+<p>Most of this screenshot won’t actually be very useful to you as R newbies, but there are some key parts.</p>
+<ul>
+<li>Name - Every package has a Name, here it’s <code>tidyverse</code></li>
+<li>Title - Usually a few words to describe what the package does and is shown after the name on CRAN, here it’s <em>“Easily Install and Load the ‘Tidyverse’”</em></li>
+<li>Description - A paragraph to describe in more detail what the package does, and can include links, etc…</li>
+<li>Version - R package are version controlled and so newer version may not be back compatible. This shouldn’t be a problem for you at this point</li>
+<li>Depends - What other packages does this package require. For example, <code>tidyverse</code> requires the <code>broom</code> package to be installed, and includes which version it needs. The <code>install.packages()</code> function also installs all these dependencies so you don’t need to worry about them.</li>
+<li>Author &amp; Maintainer - The person that wrote and/or manages the package. If you wish to reference a package in your work, you can use this information</li>
+<li>Citation - CRAN also provides a Citation reference which is compatible with most referencing software</li>
+<li>Reference Manual &amp; Vignette - Useful Documentation</li>
+</ul>
+<p>There are of course more things on this page, but most of it isn’t particularly useful. The main pieces I wanted to show you are the <em>Reference Manual</em> and the <em>Vignettes</em></p>
+<div id="reference-manual" class="section level4" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Reference Manual</h4>
+<p>Previously, we used the <code>?</code> operator to bring up help files. R packages also include these help files for the functions that they provide and these are all compiled into a single pdf, which is the <em>Reference Manual</em>.</p>
+<p>If you want a formal run through of what every function in a package does, this is where you will find it. However, it can be a bit dull and is most useful as a reference (thus the name)</p>
+</div>
+<div id="vignettes" class="section level4" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> Vignettes</h4>
+<p>Vignettes are much more useful for users. They provide a walk-through or guide on how to use this package and will usually include examples of using the package in action. If you’re interested in using a new package that you’ve never used before, this is the place to start.</p>
+<p>The <code>tidyverse</code> vignettes are more about the structure of the <code>tidyverse</code>, however if we were to look at another, say for <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/base.html"><code>dplyr</code></a>, it walks us through like a tutorial on the best practices with this package. A lot of what’s discussed in this vignette will be covered today.</p>
+</div>
+</div>
+</div>
+<div id="the-pipe" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> The Pipe</h2>
+<p>One of the most important things to come with the <code>tidyverse</code> is the <code>%&gt;%</code> pipe operator. The pipe allows us to create simple and smooth workflows. It basically takes whatever is on the left of the operator and passes it to a function on the right. Here are a few pieces of code, using the <code>magrittr</code> package to demonstrate what I mean</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="enter-the-tidyverse-verbs.html#cb109-1"></a><span class="kw">library</span>(magrittr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     set_names</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     extract</code></pre>
+<p>The following three lines of code are equivalent.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="enter-the-tidyverse-verbs.html#cb113-1"></a><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="co">#This is using basic operations</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="enter-the-tidyverse-verbs.html#cb115-1"></a><span class="kw">add</span>(<span class="dv">2</span>,<span class="dv">3</span>) <span class="co">#This uses the `add()` function from magrittr</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="enter-the-tidyverse-verbs.html#cb117-1"></a><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add</span>(<span class="dv">3</span>) <span class="co"># This uses the pipe</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>In this toy example, the first version is the simplest, but that’s because we have an operator to do addition. If we didn’t have this operator (say we were using the <code>mean()</code> function instead), then we’d need to do the second version with the <code>add()</code> function. The third shows the same line of code with the pipe.</p>
+<p>Here we have given the value on the left, <code>2</code> as the first argument of <code>add()</code>, and then also supplied the second argument.</p>
+<p>Here is a much more complicated example:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="enter-the-tidyverse-verbs.html#cb119-1"></a><span class="dv">3</span><span class="op">*</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">+</span><span class="dv">3</span>)<span class="op">/</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>When trying to calculate this, we’re working from the inside brackets outwards. We first need to figure out which bracket gets evaluated first and work from there. R can do this easily, but it can be tricky for a reader or someone writing this out to not get confused.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="enter-the-tidyverse-verbs.html#cb121-1"></a><span class="kw">multiply_by</span>(<span class="kw">add</span>(<span class="kw">divide_by</span>(<span class="kw">add</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="dv">5</span>),<span class="dv">1</span>),<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>This problem of figuring out where to start is made even harder when we’re dealing with functions, rather than operations. Most of the processes we perform in R use functions and so this kind of line is what we’d most often be dealing with. It’s really confusing.</p>
+<p>We could simplify it a bit by doing each line of code on a new line and replacing the variable with a new value:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="enter-the-tidyverse-verbs.html#cb123-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb123-2"><a href="enter-the-tidyverse-verbs.html#cb123-2"></a>x &lt;-<span class="st"> </span><span class="kw">add</span>(x,<span class="dv">3</span>)</span>
+<span id="cb123-3"><a href="enter-the-tidyverse-verbs.html#cb123-3"></a>x &lt;-<span class="st"> </span><span class="kw">divide_by</span>(x,<span class="dv">5</span>)</span>
+<span id="cb123-4"><a href="enter-the-tidyverse-verbs.html#cb123-4"></a>x &lt;-<span class="st"> </span><span class="kw">add</span>(x,<span class="dv">1</span>)</span>
+<span id="cb123-5"><a href="enter-the-tidyverse-verbs.html#cb123-5"></a>x &lt;-<span class="st"> </span><span class="kw">multiply_by</span>(x,<span class="dv">3</span>)</span>
+<span id="cb123-6"><a href="enter-the-tidyverse-verbs.html#cb123-6"></a>x</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>However, this involves a lot of repetition. If we have to type the same thing out over and over again, we’re <em>very</em> likely to type something wrong. In fact, when writing that example out, I typed it wrong and produced this, can you spot the error:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="enter-the-tidyverse-verbs.html#cb125-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb125-2"><a href="enter-the-tidyverse-verbs.html#cb125-2"></a>x &lt;-<span class="st"> </span><span class="kw">add</span>(x,<span class="dv">2</span>)</span>
+<span id="cb125-3"><a href="enter-the-tidyverse-verbs.html#cb125-3"></a>x &lt;-<span class="st"> </span><span class="kw">divide_by</span>(x,<span class="dv">5</span>)</span>
+<span id="cb125-4"><a href="enter-the-tidyverse-verbs.html#cb125-4"></a>x &lt;-<span class="st"> </span><span class="kw">add</span>(x,<span class="dv">1</span>)</span>
+<span id="cb125-5"><a href="enter-the-tidyverse-verbs.html#cb125-5"></a>x &lt;-<span class="st"> </span><span class="kw">multiply_by</span>(x,<span class="dv">3</span>)</span>
+<span id="cb125-6"><a href="enter-the-tidyverse-verbs.html#cb125-6"></a>x</span></code></pre></div>
+<pre><code>## [1] 5.4</code></pre>
+<p>So rather than repeatedly re-assigning a variable, we can simply <em>pipe</em> the output from one function into the next function. These are known as pipelines and it demonstrates a clear order of what functions you’re doing.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="enter-the-tidyverse-verbs.html#cb127-1"></a><span class="dv">2</span> <span class="op">%&gt;%</span></span>
+<span id="cb127-2"><a href="enter-the-tidyverse-verbs.html#cb127-2"></a><span class="st">  </span><span class="kw">add</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span></span>
+<span id="cb127-3"><a href="enter-the-tidyverse-verbs.html#cb127-3"></a><span class="st">  </span><span class="kw">divide_by</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span></span>
+<span id="cb127-4"><a href="enter-the-tidyverse-verbs.html#cb127-4"></a><span class="st">  </span><span class="kw">add</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb127-5"><a href="enter-the-tidyverse-verbs.html#cb127-5"></a><span class="st">  </span><span class="kw">multiply_by</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>It isn’t necessary to move onto a new line for each function, the following works just as well:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="enter-the-tidyverse-verbs.html#cb129-1"></a><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">divide_by</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>and while this is more concise, if you are doing many functions, this, again can look messy. Getting into the habit of creating a new line for each function will improve readability when you’re coming back to look at your code in the future.</p>
+<p><strong>Remember that when using the pipe, the following operations are equivalent</strong></p>
+<pre><code>f(a,b,c)
+a %&gt;% f(a,b)</code></pre>
+<p>Functions from the <code>tidyverse</code> and a lot of other packages which follow the <code>tidyverse</code> style (or philosopy as described in the <a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html"><code>tidyverse</code> vignette/manifesto</a>) will generally take your data set as their first argument and will return another, updated data set. This allows you to make a really smooth chain of functions.</p>
+</div>
+<div id="tibbles" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> tibbles()</h2>
+<p>In the previous lesson, we loaded up a dataset called <code>iris</code>. By default, data sets are loaded as a structure called a <code>data.frame</code>. The <code>tidyverse</code> team have built on this by creating a new structure nicknamed a <code>tibble</code> (officially they’re called <code>tbl_df</code>, short for table data frame), which works mostly the same, but it prints its data much neater and is a little more consistent in how we interact with it. Here’s an example from the <code>tidyverse</code></p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="enter-the-tidyverse-verbs.html#cb132-1"></a>starwars</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke~    172    77 blond      fair       blue            19   male  mascu~
+##  2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   none  mascu~
+##  3 R2-D2     96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~
+##  4 Dart~    202   136 none       white      yellow          41.9 male  mascu~
+##  5 Leia~    150    49 brown      light      brown           19   fema~ femin~
+##  6 Owen~    178   120 brown, gr~ light      blue            52   male  mascu~
+##  7 Beru~    165    75 brown      light      blue            47   fema~ femin~
+##  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   none  mascu~
+##  9 Bigg~    183    84 black      light      brown           24   male  mascu~
+## 10 Obi-~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Notice how, when printing, we are only shown the first 10 rows and first few columns. It also gives us an indication of how many other rows there are and what other columns are present. If we were to print out a native <code>data.frame</code> from base R, we would have been shown <em>everything</em> and it would clog up our <strong>Console</strong>. If you’re brave, then run <code>as.data.frame(starwars)</code> and it will convert this tibble into a dataframe and show just how messy it can be.</p>
+<p>The way that the data is organised above is the most common way of arranging our data. Each row is known as an <em>observation</em> and will usually be a single participant. Each column is a <em>variable</em> associated with that observation. Notice in the above, the third observation has a <code>name</code> variable of <code>"R2-D2"</code>and a <code>mass</code> variable of <code>32.0</code>. Because each <em>variable</em> should be consistent, they are stored as vectors. As we recall, vectors must all be the same type. For every participant in this dataset, <code>height</code> is an <em>integer</em> indicated by the <code>&lt;int&gt;</code> under the variable name, meaning a whole number and <code>eye_color</code> is a <em>character</em> indicated by <code>&lt;chr&gt;</code>.</p>
+<p>We can also see the names of the variables in our dataset by using the <code>names()</code> function, or get the dimensions by using <code>nrow()</code>, <code>ncol()</code> or <code>dim()</code>:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="enter-the-tidyverse-verbs.html#cb134-1"></a><span class="kw">names</span>(starwars)</span></code></pre></div>
+<pre><code>##  [1] &quot;name&quot;       &quot;height&quot;     &quot;mass&quot;       &quot;hair_color&quot; &quot;skin_color&quot;
+##  [6] &quot;eye_color&quot;  &quot;birth_year&quot; &quot;sex&quot;        &quot;gender&quot;     &quot;homeworld&quot; 
+## [11] &quot;species&quot;    &quot;films&quot;      &quot;vehicles&quot;   &quot;starships&quot;</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="enter-the-tidyverse-verbs.html#cb136-1"></a><span class="kw">nrow</span>(starwars)</span></code></pre></div>
+<pre><code>## [1] 87</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="enter-the-tidyverse-verbs.html#cb138-1"></a><span class="kw">ncol</span>(starwars)</span></code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="enter-the-tidyverse-verbs.html#cb140-1"></a><span class="kw">dim</span>(starwars)</span></code></pre></div>
+<pre><code>## [1] 87 14</code></pre>
+<p>There are a few other advantages of tibbles over data.frames that are a lot more technical, so feel free to read about them yourself by loading the help file using <code>?tbl_df</code></p>
+</div>
+<div id="one-table-verbs" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> One Table Verbs</h2>
+<p>In the <code>tidyverse</code> functions that do things to your data are known as <em>verbs</em>. Which makes sense since <em>verbs</em> are “doing words” and we are doing something to our data. Today, we’re going to have a look at some of the verbs which act on a single dataset. There are a few that can act on two tables (allowing them to be combined into one table), but for now, we’ll stick with one.</p>
+<div id="filter" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> filter()</h3>
+<p>The filter function allows us to pick out specific observations from our dataset depending on other values in our dataset.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="enter-the-tidyverse-verbs.html#cb142-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb142-2"><a href="enter-the-tidyverse-verbs.html#cb142-2"></a><span class="st">  </span><span class="kw">filter</span>(homeworld <span class="op">==</span><span class="st"> &quot;Naboo&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 R2-D2     96    32 &lt;NA&gt;       white, bl~ red               33 none  mascu~
+##  2 Palp~    170    75 grey       pale       yellow            82 male  mascu~
+##  3 Jar ~    196    66 none       orange     orange            52 male  mascu~
+##  4 Roos~    224    82 none       grey       orange            NA male  mascu~
+##  5 Rugo~    206    NA none       green      orange            NA male  mascu~
+##  6 Ric ~    183    NA brown      fair       blue              NA &lt;NA&gt;  &lt;NA&gt;  
+##  7 Quar~    183    NA black      dark       brown             62 &lt;NA&gt;  &lt;NA&gt;  
+##  8 Greg~    185    85 black      dark       brown             NA male  mascu~
+##  9 Cordé    157    NA brown      light      brown             NA fema~ femin~
+## 10 Dormé    165    NA brown      light      brown             NA fema~ femin~
+## 11 Padm~    165    45 brown      light      brown             46 fema~ femin~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>This has pulled out just the participants in the dataset that are from the planet <code>"Naboo"</code>. Can you see how this has worked? It has created a <em>logical</em> vector, <code>homeworld == "Naboo"</code> from the data within the tibble. We could do this without using <code>filter()</code> by just using the functions available without the <code>tidyverse</code> stuff, but it’s messier:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="enter-the-tidyverse-verbs.html#cb144-1"></a>starwars[starwars<span class="op">$</span>homeworld <span class="op">==</span><span class="st"> &quot;Naboo&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(starwars<span class="op">$</span>homeworld),]</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 R2-D2     96    32 &lt;NA&gt;       white, bl~ red               33 none  mascu~
+##  2 Palp~    170    75 grey       pale       yellow            82 male  mascu~
+##  3 Jar ~    196    66 none       orange     orange            52 male  mascu~
+##  4 Roos~    224    82 none       grey       orange            NA male  mascu~
+##  5 Rugo~    206    NA none       green      orange            NA male  mascu~
+##  6 Ric ~    183    NA brown      fair       blue              NA &lt;NA&gt;  &lt;NA&gt;  
+##  7 Quar~    183    NA black      dark       brown             62 &lt;NA&gt;  &lt;NA&gt;  
+##  8 Greg~    185    85 black      dark       brown             NA male  mascu~
+##  9 Cordé    157    NA brown      light      brown             NA fema~ femin~
+## 10 Dormé    165    NA brown      light      brown             NA fema~ femin~
+## 11 Padm~    165    45 brown      light      brown             46 fema~ femin~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>So firstly, we have to specify that <code>homeworld</code> is a variable in the <code>starwars</code> dataset, which we don’t have to when using <code>filter()</code>. And perhaps more confusingly, we have to use this <code>!is.na(starwars$homeworld)</code> bit. The function, <code>is.na()</code> will check if values are missing, which are usually shown as <code>NA</code> and are slightly greyed out, e.g. R2-D2’s hair colour is <code>NA</code> because they don’t have any! <code>filter()</code> deals with this check and will ignore <code>NA</code> values, but the default R method does not and so we have to specify this.</p>
+<p>We can combine multiple criteria to hone in on which parts of our data we want to look at:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="enter-the-tidyverse-verbs.html#cb146-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb146-2"><a href="enter-the-tidyverse-verbs.html#cb146-2"></a><span class="st">  </span><span class="kw">filter</span>(species <span class="op">==</span><span class="st"> &quot;Human&quot;</span>,</span>
+<span id="cb146-3"><a href="enter-the-tidyverse-verbs.html#cb146-3"></a>         gender <span class="op">==</span><span class="st"> &quot;feminine&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 9 x 14
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Leia~    150    49 brown      light      brown             19 fema~ femin~
+## 2 Beru~    165    75 brown      light      blue              47 fema~ femin~
+## 3 Mon ~    150    NA auburn     fair       blue              48 fema~ femin~
+## 4 Shmi~    163    NA black      fair       brown             72 fema~ femin~
+## 5 Cordé    157    NA brown      light      brown             NA fema~ femin~
+## 6 Dormé    165    NA brown      light      brown             NA fema~ femin~
+## 7 Joca~    167    NA white      fair       blue              NA fema~ femin~
+## 8 Rey       NA    NA brown      light      hazel             NA fema~ femin~
+## 9 Padm~    165    45 brown      light      brown             46 fema~ femin~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>This is the same as using the <code>&amp;</code> operator between each of these criteria, therefore, this returns all observations where <em>all</em> of the criteria are <code>TRUE</code> and we can use as many as we want. If we want to get observations where any of some criteria are true, we can use the <code>|</code> operatore:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="enter-the-tidyverse-verbs.html#cb148-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb148-2"><a href="enter-the-tidyverse-verbs.html#cb148-2"></a><span class="st">  </span><span class="kw">filter</span>(homeworld <span class="op">==</span><span class="st"> &quot;Naboo&quot;</span> <span class="op">|</span><span class="st"> </span>species <span class="op">==</span><span class="st"> &quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 41 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke~    172    77 blond      fair       blue            19   male  mascu~
+##  2 R2-D2     96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~
+##  3 Dart~    202   136 none       white      yellow          41.9 male  mascu~
+##  4 Leia~    150    49 brown      light      brown           19   fema~ femin~
+##  5 Owen~    178   120 brown, gr~ light      blue            52   male  mascu~
+##  6 Beru~    165    75 brown      light      blue            47   fema~ femin~
+##  7 Bigg~    183    84 black      light      brown           24   male  mascu~
+##  8 Obi-~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~
+##  9 Anak~    188    84 blond      fair       blue            41.9 male  mascu~
+## 10 Wilh~    180    NA auburn, g~ fair       blue            64   male  mascu~
+## # ... with 31 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>We can even use that <code>is.na()</code> function here to look for missing data, which can allow us to investigate holes in our data sets:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="enter-the-tidyverse-verbs.html#cb150-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb150-2"><a href="enter-the-tidyverse-verbs.html#cb150-2"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(birth_year))</span></code></pre></div>
+<pre><code>## # A tibble: 44 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 R5-D4     97    32 &lt;NA&gt;       white, red red               NA none  mascu~
+##  2 Jek ~    180   110 brown      fair       blue              NA male  mascu~
+##  3 Arve~     NA    NA brown      fair       brown             NA male  mascu~
+##  4 Nien~    160    68 none       grey       black             NA male  mascu~
+##  5 Nute~    191    90 none       mottled g~ red               NA male  mascu~
+##  6 Roos~    224    82 none       grey       orange            NA male  mascu~
+##  7 Rugo~    206    NA none       green      orange            NA male  mascu~
+##  8 Ric ~    183    NA brown      fair       blue              NA &lt;NA&gt;  &lt;NA&gt;  
+##  9 Watto    137    NA black      blue, grey yellow            NA male  mascu~
+## 10 Sebu~    112    40 none       grey, red  orange            NA male  mascu~
+## # ... with 34 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+<div id="slice" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> slice()</h3>
+<p>The slice function is a little bit cruder than the <code>filter()</code> function, in that it wants numbers to pull out certain observations. So we can’t make it depend on criteria from our data, but it can be useful to preview certain subsections of it.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="enter-the-tidyverse-verbs.html#cb152-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb152-2"><a href="enter-the-tidyverse-verbs.html#cb152-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">51</span><span class="op">:</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Eeth~    171    NA black      brown      brown             NA male  mascu~
+##  2 Adi ~    184    50 none       dark       blue              NA fema~ femin~
+##  3 Saes~    188    NA none       pale       orange            NA male  mascu~
+##  4 Yara~    264    NA none       white      yellow            NA male  mascu~
+##  5 Plo ~    188    80 none       orange     black             22 male  mascu~
+##  6 Mas ~    196    NA none       blue       blue              NA male  mascu~
+##  7 Greg~    185    85 black      dark       brown             NA male  mascu~
+##  8 Cordé    157    NA brown      light      brown             NA fema~ femin~
+##  9 Clie~    183    NA brown      fair       blue              82 male  mascu~
+## 10 Pogg~    183    80 none       green      yellow            NA male  mascu~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Similar to how we subsetted vectors and data.frames previously, we can also say which rows we don’t want, so if I don’t want the first 10 rows, I can use <code>-(1:10)</code></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="enter-the-tidyverse-verbs.html#cb154-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb154-2"><a href="enter-the-tidyverse-verbs.html#cb154-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 77 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Anak~    188    84 blond      fair       blue            41.9 male  mascu~
+##  2 Wilh~    180    NA auburn, g~ fair       blue            64   male  mascu~
+##  3 Chew~    228   112 brown      unknown    blue           200   male  mascu~
+##  4 Han ~    180    80 brown      fair       brown           29   male  mascu~
+##  5 Gree~    173    74 &lt;NA&gt;       green      black           44   male  mascu~
+##  6 Jabb~    175  1358 &lt;NA&gt;       green-tan~ orange         600   herm~ mascu~
+##  7 Wedg~    170    77 brown      fair       hazel           21   male  mascu~
+##  8 Jek ~    180   110 brown      fair       blue            NA   male  mascu~
+##  9 Yoda      66    17 white      green      brown          896   male  mascu~
+## 10 Palp~    170    75 grey       pale       yellow          82   male  mascu~
+## # ... with 67 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>It also has a few sibling functions which can come in handy for investigating our data. The first allows us to pull out a <em>random</em> set of observations:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="enter-the-tidyverse-verbs.html#cb156-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb156-2"><a href="enter-the-tidyverse-verbs.html#cb156-2"></a><span class="st">  </span><span class="kw">slice_sample</span>(<span class="dt">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Jar ~    196    66 none       orange     orange            52 male  mascu~
+##  2 Palp~    170    75 grey       pale       yellow            82 male  mascu~
+##  3 Grie~    216   159 none       brown, wh~ green, y~         NA male  mascu~
+##  4 Sebu~    112    40 none       grey, red  orange            NA male  mascu~
+##  5 Bail~    191    NA black      tan        brown             67 male  mascu~
+##  6 Gree~    173    74 &lt;NA&gt;       green      black             44 male  mascu~
+##  7 Wat ~    193    48 none       green, gr~ unknown           NA male  mascu~
+##  8 Raym~    188    79 brown      light      brown             NA male  mascu~
+##  9 Jabb~    175  1358 &lt;NA&gt;       green-tan~ orange           600 herm~ mascu~
+## 10 R5-D4     97    32 &lt;NA&gt;       white, red red               NA none  mascu~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>There are also <code>slice_min()</code> or <code>slice_max()</code> which are used to pull out the rows with the highest or lowest values of a variable</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="enter-the-tidyverse-verbs.html#cb158-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb158-2"><a href="enter-the-tidyverse-verbs.html#cb158-2"></a><span class="st">  </span><span class="kw">slice_max</span>(mass,<span class="dt">n=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 14
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Jabb~    175  1358 &lt;NA&gt;       green-tan~ orange           600 herm~ mascu~
+## 2 Grie~    216   159 none       brown, wh~ green, y~         NA male  mascu~
+## 3 IG-88    200   140 none       metal      red               15 none  mascu~
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+<div id="arrange" class="section level3" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> arrange()</h3>
+<p>Sometimes we may wish to re-arrange our data into a neater ordering. The <code>arrange()</code> function does just that. It’ll sort your data by whatever variable(s) are passed to it:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="enter-the-tidyverse-verbs.html#cb160-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb160-2"><a href="enter-the-tidyverse-verbs.html#cb160-2"></a><span class="st">  </span><span class="kw">arrange</span>(name)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Ackb~    180    83 none       brown mot~ orange          41   male  mascu~
+##  2 Adi ~    184    50 none       dark       blue            NA   fema~ femin~
+##  3 Anak~    188    84 blond      fair       blue            41.9 male  mascu~
+##  4 Arve~     NA    NA brown      fair       brown           NA   male  mascu~
+##  5 Ayla~    178    55 none       blue       hazel           48   fema~ femin~
+##  6 Bail~    191    NA black      tan        brown           67   male  mascu~
+##  7 Barr~    166    50 black      yellow     blue            40   fema~ femin~
+##  8 BB8       NA    NA none       none       black           NA   none  mascu~
+##  9 Ben ~    163    65 none       grey, gre~ orange          NA   male  mascu~
+## 10 Beru~    165    75 brown      light      blue            47   fema~ femin~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>And if we have ties, such as with <code>mass</code>, we can add a second sorting variable.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="enter-the-tidyverse-verbs.html#cb162-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb162-2"><a href="enter-the-tidyverse-verbs.html#cb162-2"></a><span class="st">  </span><span class="kw">arrange</span>(mass,height)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Ratt~     79    15 none       grey, blue unknown           NA male  mascu~
+##  2 Yoda      66    17 white      green      brown            896 male  mascu~
+##  3 Wick~     88    20 brown      brown      brown              8 male  mascu~
+##  4 R2-D2     96    32 &lt;NA&gt;       white, bl~ red               33 none  mascu~
+##  5 R5-D4     97    32 &lt;NA&gt;       white, red red               NA none  mascu~
+##  6 Sebu~    112    40 none       grey, red  orange            NA male  mascu~
+##  7 Dud ~     94    45 none       blue, grey yellow            NA male  mascu~
+##  8 Padm~    165    45 brown      light      brown             46 fema~ femin~
+##  9 Sly ~    178    48 none       pale       white             NA &lt;NA&gt;  &lt;NA&gt;  
+## 10 Wat ~    193    48 none       green, gr~ unknown           NA male  mascu~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Notice this is sorted by <code>mass</code> first and then <code>height</code>.</p>
+<p>When using <code>arrange()</code>, <code>NA</code> values will always be put to the bottom of our tibble, which we can see by using the <code>tail()</code> function, which gives the <em>bottom</em> 6 rows of a tibble. Here the mass &amp; height are all <code>NA</code>.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="enter-the-tidyverse-verbs.html#cb164-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb164-2"><a href="enter-the-tidyverse-verbs.html#cb164-2"></a><span class="st">  </span><span class="kw">arrange</span>(mass,height) <span class="op">%&gt;%</span></span>
+<span id="cb164-3"><a href="enter-the-tidyverse-verbs.html#cb164-3"></a><span class="st">  </span>tail</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 14
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Arve~     NA    NA brown      fair       brown             NA male  mascu~
+## 2 Finn      NA    NA black      dark       dark              NA male  mascu~
+## 3 Rey       NA    NA brown      light      hazel             NA fema~ femin~
+## 4 Poe ~     NA    NA brown      light      brown             NA male  mascu~
+## 5 BB8       NA    NA none       none       black             NA none  mascu~
+## 6 Capt~     NA    NA unknown    unknown    unknown           NA &lt;NA&gt;  &lt;NA&gt;  
+## # ... with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>By default, R will sort numeric data in ascending order and characters in alphabetical order. If we want to reverse this, we can use the <code>desc()</code> function:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="enter-the-tidyverse-verbs.html#cb166-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb166-2"><a href="enter-the-tidyverse-verbs.html#cb166-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(mass))</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Jabb~    175  1358 &lt;NA&gt;       green-tan~ orange         600   herm~ mascu~
+##  2 Grie~    216   159 none       brown, wh~ green, y~       NA   male  mascu~
+##  3 IG-88    200   140 none       metal      red             15   none  mascu~
+##  4 Dart~    202   136 none       white      yellow          41.9 male  mascu~
+##  5 Tarf~    234   136 brown      brown      blue            NA   male  mascu~
+##  6 Owen~    178   120 brown, gr~ light      blue            52   male  mascu~
+##  7 Bossk    190   113 none       green      red             53   male  mascu~
+##  8 Chew~    228   112 brown      unknown    blue           200   male  mascu~
+##  9 Jek ~    180   110 brown      fair       blue            NA   male  mascu~
+## 10 Dext~    198   102 none       brown      yellow          NA   male  mascu~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Once again, the <code>NA</code> values are at the bottom.</p>
+</div>
+<div id="select" class="section level3" number="2.5.4">
+<h3><span class="header-section-number">2.5.4</span> select()</h3>
+<p>The previous verbs all did something related to the <em>rows</em> in our data, whether that was extracting some subset of rows, or to organise the rows of our data better. <code>select()</code> acts similar to <code>filter()</code> but to extract <em>columns</em> or <em>variables</em>, rather than rows (observations)</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="enter-the-tidyverse-verbs.html#cb168-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb168-2"><a href="enter-the-tidyverse-verbs.html#cb168-2"></a><span class="st">  </span><span class="kw">select</span>(name,height,mass)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 3
+##    name               height  mass
+##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt;
+##  1 Luke Skywalker        172    77
+##  2 C-3PO                 167    75
+##  3 R2-D2                  96    32
+##  4 Darth Vader           202   136
+##  5 Leia Organa           150    49
+##  6 Owen Lars             178   120
+##  7 Beru Whitesun lars    165    75
+##  8 R5-D4                  97    32
+##  9 Biggs Darklighter     183    84
+## 10 Obi-Wan Kenobi        182    77
+## # ... with 77 more rows</code></pre>
+<p>For this, we have selected only three variables. There are a few different ways we can use <code>select()</code>, depending on what we want to do.</p>
+<p>Again, we can say what we don’t want:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="enter-the-tidyverse-verbs.html#cb170-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb170-2"><a href="enter-the-tidyverse-verbs.html#cb170-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>eye_color,<span class="op">-</span>skin_color)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 12
+##    name  height  mass hair_color birth_year sex   gender homeworld species films
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt;
+##  1 Luke~    172    77 blond            19   male  mascu~ Tatooine  Human   &lt;chr~
+##  2 C-3PO    167    75 &lt;NA&gt;            112   none  mascu~ Tatooine  Droid   &lt;chr~
+##  3 R2-D2     96    32 &lt;NA&gt;             33   none  mascu~ Naboo     Droid   &lt;chr~
+##  4 Dart~    202   136 none             41.9 male  mascu~ Tatooine  Human   &lt;chr~
+##  5 Leia~    150    49 brown            19   fema~ femin~ Alderaan  Human   &lt;chr~
+##  6 Owen~    178   120 brown, gr~       52   male  mascu~ Tatooine  Human   &lt;chr~
+##  7 Beru~    165    75 brown            47   fema~ femin~ Tatooine  Human   &lt;chr~
+##  8 R5-D4     97    32 &lt;NA&gt;             NA   none  mascu~ Tatooine  Droid   &lt;chr~
+##  9 Bigg~    183    84 black            24   male  mascu~ Tatooine  Human   &lt;chr~
+## 10 Obi-~    182    77 auburn, w~       57   male  mascu~ Stewjon   Human   &lt;chr~
+## # ... with 77 more rows, and 2 more variables: vehicles &lt;list&gt;,
+## #   starships &lt;list&gt;</code></pre>
+<p>We can use numbers, similar to <code>slice()</code> to get the nth columns</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="enter-the-tidyverse-verbs.html#cb172-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb172-2"><a href="enter-the-tidyverse-verbs.html#cb172-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span><span class="op">:</span><span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 6
+##    name               hair_color    skin_color  birth_year sex    gender   
+##    &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+##  1 Luke Skywalker     blond         fair              19   male   masculine
+##  2 C-3PO              &lt;NA&gt;          gold             112   none   masculine
+##  3 R2-D2              &lt;NA&gt;          white, blue       33   none   masculine
+##  4 Darth Vader        none          white             41.9 male   masculine
+##  5 Leia Organa        brown         light             19   female feminine 
+##  6 Owen Lars          brown, grey   light             52   male   masculine
+##  7 Beru Whitesun lars brown         light             47   female feminine 
+##  8 R5-D4              &lt;NA&gt;          white, red        NA   none   masculine
+##  9 Biggs Darklighter  black         light             24   male   masculine
+## 10 Obi-Wan Kenobi     auburn, white fair              57   male   masculine
+## # ... with 77 more rows</code></pre>
+<p>Personally, I don’t tend to use the numeric version, as I prefer to use the names of the variables I’m getting. Above, I used <code>7:9</code> to create a vector <code>7 8 9</code> and pull them. We can actully do this using the variable names (but this doesn’t work outside of <code>tidyverse</code>)</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="enter-the-tidyverse-verbs.html#cb174-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb174-2"><a href="enter-the-tidyverse-verbs.html#cb174-2"></a><span class="st">  </span><span class="kw">select</span>(name<span class="op">:</span>eye_color)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 6
+##    name               height  mass hair_color    skin_color  eye_color
+##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    
+##  1 Luke Skywalker        172    77 blond         fair        blue     
+##  2 C-3PO                 167    75 &lt;NA&gt;          gold        yellow   
+##  3 R2-D2                  96    32 &lt;NA&gt;          white, blue red      
+##  4 Darth Vader           202   136 none          white       yellow   
+##  5 Leia Organa           150    49 brown         light       brown    
+##  6 Owen Lars             178   120 brown, grey   light       blue     
+##  7 Beru Whitesun lars    165    75 brown         light       blue     
+##  8 R5-D4                  97    32 &lt;NA&gt;          white, red  red      
+##  9 Biggs Darklighter     183    84 black         light       brown    
+## 10 Obi-Wan Kenobi        182    77 auburn, white fair        blue-gray
+## # ... with 77 more rows</code></pre>
+<p>One final thing we can use <code>select()</code> for is to rearrange our variables. The variables in <code>select()</code> will be in the order supplied:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="enter-the-tidyverse-verbs.html#cb176-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb176-2"><a href="enter-the-tidyverse-verbs.html#cb176-2"></a><span class="st">  </span><span class="kw">select</span>(height,mass,name)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 3
+##    height  mass name              
+##     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;             
+##  1    172    77 Luke Skywalker    
+##  2    167    75 C-3PO             
+##  3     96    32 R2-D2             
+##  4    202   136 Darth Vader       
+##  5    150    49 Leia Organa       
+##  6    178   120 Owen Lars         
+##  7    165    75 Beru Whitesun lars
+##  8     97    32 R5-D4             
+##  9    183    84 Biggs Darklighter 
+## 10    182    77 Obi-Wan Kenobi    
+## # ... with 77 more rows</code></pre>
+<p>But, what if we want to bring just one or two variables to the left (so we can see them easier) and not drop the rest? Well that’s where a little <code>tidy helper</code> called <code>everything()</code> comes in:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="enter-the-tidyverse-verbs.html#cb178-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb178-2"><a href="enter-the-tidyverse-verbs.html#cb178-2"></a><span class="st">  </span><span class="kw">select</span>(homeworld,species,<span class="kw">everything</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    homeworld species name  height  mass hair_color skin_color eye_color
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+##  1 Tatooine  Human   Luke~    172    77 blond      fair       blue     
+##  2 Tatooine  Droid   C-3PO    167    75 &lt;NA&gt;       gold       yellow   
+##  3 Naboo     Droid   R2-D2     96    32 &lt;NA&gt;       white, bl~ red      
+##  4 Tatooine  Human   Dart~    202   136 none       white      yellow   
+##  5 Alderaan  Human   Leia~    150    49 brown      light      brown    
+##  6 Tatooine  Human   Owen~    178   120 brown, gr~ light      blue     
+##  7 Tatooine  Human   Beru~    165    75 brown      light      blue     
+##  8 Tatooine  Droid   R5-D4     97    32 &lt;NA&gt;       white, red red      
+##  9 Tatooine  Human   Bigg~    183    84 black      light      brown    
+## 10 Stewjon   Human   Obi-~    182    77 auburn, w~ fair       blue-gray
+## # ... with 77 more rows, and 6 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>It basically acts as a filler for all the “other” variables that haven’t been mentioned in <code>select()</code> yet, and will retain the order of them as they appear in the dataset.</p>
+<p>Now that we know how to do something to our columns and our rows seperately, it makes sense to want to combine them. As discussed earlier, this is made very easy using the <code>%&gt;%</code> pipe.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="enter-the-tidyverse-verbs.html#cb180-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb180-2"><a href="enter-the-tidyverse-verbs.html#cb180-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;feminine&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb180-3"><a href="enter-the-tidyverse-verbs.html#cb180-3"></a><span class="st">  </span><span class="kw">select</span>(name,height,mass,homeworld,species)</span></code></pre></div>
+<pre><code>## # A tibble: 17 x 5
+##    name               height  mass homeworld species   
+##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     
+##  1 Leia Organa           150  49   Alderaan  Human     
+##  2 Beru Whitesun lars    165  75   Tatooine  Human     
+##  3 Mon Mothma            150  NA   Chandrila Human     
+##  4 Shmi Skywalker        163  NA   Tatooine  Human     
+##  5 Ayla Secura           178  55   Ryloth    Twi&#39;lek   
+##  6 Adi Gallia            184  50   Coruscant Tholothian
+##  7 Cordé                 157  NA   Naboo     Human     
+##  8 Luminara Unduli       170  56.2 Mirial    Mirialan  
+##  9 Barriss Offee         166  50   Mirial    Mirialan  
+## 10 Dormé                 165  NA   Naboo     Human     
+## 11 Zam Wesell            168  55   Zolan     Clawdite  
+## 12 Taun We               213  NA   Kamino    Kaminoan  
+## 13 Jocasta Nu            167  NA   Coruscant Human     
+## 14 R4-P17                 96  NA   &lt;NA&gt;      Droid     
+## 15 Shaak Ti              178  57   Shili     Togruta   
+## 16 Rey                    NA  NA   &lt;NA&gt;      Human     
+## 17 Padmé Amidala         165  45   Naboo     Human</code></pre>
+<p><code>filter()</code> outputs a tibble, which can then be passed to <code>select()</code> with ease.</p>
+</div>
+<div id="mutate" class="section level3" number="2.5.5">
+<h3><span class="header-section-number">2.5.5</span> mutate()</h3>
+<p>The mutate function is really the powerhouse of the <code>tidyverse</code> and behind the <code>%&gt;%</code> pipe, you will probably use it a lot. It allows us to <em>mutate</em> or <em>change</em> our data as we need. This can be to change existing variables or to create new ones. First, we will convert <code>height</code> from cm to m by dividing by 100</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="enter-the-tidyverse-verbs.html#cb182-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb182-2"><a href="enter-the-tidyverse-verbs.html#cb182-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">height =</span> height<span class="op">/</span><span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke~   1.72    77 blond      fair       blue            19   male  mascu~
+##  2 C-3PO   1.67    75 &lt;NA&gt;       gold       yellow         112   none  mascu~
+##  3 R2-D2   0.96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~
+##  4 Dart~   2.02   136 none       white      yellow          41.9 male  mascu~
+##  5 Leia~   1.5     49 brown      light      brown           19   fema~ femin~
+##  6 Owen~   1.78   120 brown, gr~ light      blue            52   male  mascu~
+##  7 Beru~   1.65    75 brown      light      blue            47   fema~ femin~
+##  8 R5-D4   0.97    32 &lt;NA&gt;       white, red red             NA   none  mascu~
+##  9 Bigg~   1.83    84 black      light      brown           24   male  mascu~
+## 10 Obi-~   1.82    77 auburn, w~ fair       blue-gray       57   male  mascu~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>We can combine multiple <em>mutations</em> in a single <code>mutate()</code> function and R will perform them in order. This also means if we change a variable in one command, the updated version will be used from then on. It’s also worth pointing out that new variables will by default be put at the end of our data, but we can use the <code>.before</code> or <code>.after</code> arguments to squeeze them in earlier (notice that there is a dot at the start of these agrgument names, it’s <code>.before</code> not <code>before</code>)</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="enter-the-tidyverse-verbs.html#cb184-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb184-2"><a href="enter-the-tidyverse-verbs.html#cb184-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">height =</span> height<span class="op">/</span><span class="dv">100</span>,</span>
+<span id="cb184-3"><a href="enter-the-tidyverse-verbs.html#cb184-3"></a>         <span class="dt">BMI =</span> mass<span class="op">/</span>height<span class="op">^</span><span class="dv">2</span>,</span>
+<span id="cb184-4"><a href="enter-the-tidyverse-verbs.html#cb184-4"></a>         <span class="dt">.after =</span> mass)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 15
+##    name  height  mass   BMI hair_color skin_color eye_color birth_year sex  
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;
+##  1 Luke~   1.72    77  26.0 blond      fair       blue            19   male 
+##  2 C-3PO   1.67    75  26.9 &lt;NA&gt;       gold       yellow         112   none 
+##  3 R2-D2   0.96    32  34.7 &lt;NA&gt;       white, bl~ red             33   none 
+##  4 Dart~   2.02   136  33.3 none       white      yellow          41.9 male 
+##  5 Leia~   1.5     49  21.8 brown      light      brown           19   fema~
+##  6 Owen~   1.78   120  37.9 brown, gr~ light      blue            52   male 
+##  7 Beru~   1.65    75  27.5 brown      light      blue            47   fema~
+##  8 R5-D4   0.97    32  34.0 &lt;NA&gt;       white, red red             NA   none 
+##  9 Bigg~   1.83    84  25.1 black      light      brown           24   male 
+## 10 Obi-~   1.82    77  23.2 auburn, w~ fair       blue-gray       57   male 
+## # ... with 77 more rows, and 6 more variables: gender &lt;chr&gt;, homeworld &lt;chr&gt;,
+## #   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Any fundamental changes that need to be made to your data, can be done using this <code>mutate()</code> function, and we will explore this much more in the future.</p>
+</div>
+<div id="summarise" class="section level3" number="2.5.6">
+<h3><span class="header-section-number">2.5.6</span> summarise()</h3>
+<p>So now we can manipulate our data as a whole, but that’s no good if we can’t provide a summary of our data. As the name suggests, the <code>summarise()</code> function does exactly that. It performs functions on the variables as a whole and returns some sort of summary statistic (depending on what we ask for), and it returns that as another tibble</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="enter-the-tidyverse-verbs.html#cb186-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb186-2"><a href="enter-the-tidyverse-verbs.html#cb186-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mass_avg =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm=</span>T),</span>
+<span id="cb186-3"><a href="enter-the-tidyverse-verbs.html#cb186-3"></a>            <span class="dt">mass_sd =</span> <span class="kw">sd</span>(mass, <span class="dt">na.rm=</span>T))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   mass_avg mass_sd
+##      &lt;dbl&gt;   &lt;dbl&gt;
+## 1     97.3    169.</code></pre>
+<p>Notice that for these two functions, <code>mean()</code> and <code>sd()</code>, I need to pass an extra argument, the <code>na.rm=T</code> just tells R to ignore the <code>NA</code> values. Otherwise, the default means that both of these functions would return <code>NA</code> (seems a bit silly, but it can be useful for spotting errors).</p>
+</div>
+<div id="group_by" class="section level3" number="2.5.7">
+<h3><span class="header-section-number">2.5.7</span> group_by()</h3>
+<p>The final thing on today’s agenda is the <code>group_by()</code> function which allows us to group our data in meaningful ways. This is exceptionally useful with the <code>summarise()</code> function above, as it can give us summary statistics based on other variables. Firstly, what does it look like to <em>group</em> our data?</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="enter-the-tidyverse-verbs.html#cb188-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb188-2"><a href="enter-the-tidyverse-verbs.html#cb188-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender)</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+## # Groups:   gender [3]
+##    name  height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke~    172    77 blond      fair       blue            19   male  mascu~
+##  2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   none  mascu~
+##  3 R2-D2     96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~
+##  4 Dart~    202   136 none       white      yellow          41.9 male  mascu~
+##  5 Leia~    150    49 brown      light      brown           19   fema~ femin~
+##  6 Owen~    178   120 brown, gr~ light      blue            52   male  mascu~
+##  7 Beru~    165    75 brown      light      blue            47   fema~ femin~
+##  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   none  mascu~
+##  9 Bigg~    183    84 black      light      brown           24   male  mascu~
+## 10 Obi-~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~
+## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>The data looks mostly the same, except we now have a bit of information telling us that the data has been grouped and how many groups there are.</p>
+<p>But it gets more interesting when we perform a <code>summarise()</code>:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="enter-the-tidyverse-verbs.html#cb190-1"></a>starwars <span class="op">%&gt;%</span></span>
+<span id="cb190-2"><a href="enter-the-tidyverse-verbs.html#cb190-2"></a><span class="st">  </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
+<span id="cb190-3"><a href="enter-the-tidyverse-verbs.html#cb190-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">number =</span> <span class="kw">n</span>(),</span>
+<span id="cb190-4"><a href="enter-the-tidyverse-verbs.html#cb190-4"></a>            <span class="dt">mass_avg =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm=</span>T),</span>
+<span id="cb190-5"><a href="enter-the-tidyverse-verbs.html#cb190-5"></a>            <span class="dt">mass_sd =</span> <span class="kw">sd</span>(mass, <span class="dt">na.rm=</span>T),</span>
+<span id="cb190-6"><a href="enter-the-tidyverse-verbs.html#cb190-6"></a>            <span class="dt">height_avg =</span> <span class="kw">mean</span>(height, <span class="dt">na.rm=</span>T),</span>
+<span id="cb190-7"><a href="enter-the-tidyverse-verbs.html#cb190-7"></a>            <span class="dt">height_sd =</span> <span class="kw">sd</span>(height, <span class="dt">na.rm=</span>T),</span>
+<span id="cb190-8"><a href="enter-the-tidyverse-verbs.html#cb190-8"></a>            <span class="dt">.groups=</span><span class="st">&quot;drop&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   gender    number mass_avg mass_sd height_avg height_sd
+##   &lt;chr&gt;      &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1 feminine      17     54.7    8.59       165.     23.6 
+## 2 masculine     66    106.   185.         177.     37.6 
+## 3 &lt;NA&gt;           4     48     NA          181.      2.89</code></pre>
+<p>This time we get a row of data for each of our groups. If we were to have more groups, we’d have more rows. I used a few other new things here. The <code>n()</code> function will return the size of each group, and so can be useful here when summarising our data. I also passed an argument called <code>.groups</code>, which just stops R from telling me that it has ungrouped my data (this is a bit of a bug and hopefully will be removed in future versions).</p>
 
+</div>
+</div>
 </div>
             </section>
 

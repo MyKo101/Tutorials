@@ -93,9 +93,9 @@ The most common kind of data we can use is numeric, and this is what we've just 
 ```{r NumericOperators, echo=F}
 tribble(
   ~Symbol,~Description,
-  "+","Adds two values together",
-  "*","Multiplies two values together",
-  "-","Subtracts one value from the other",
+  "\\+","Adds two values together",
+  "\\*","Multiplies two values together",
+  "\\-","Subtracts one value from the other",
   "/","Divides one value by the other",
   "^","Takes one value to the power of the other"
 ) %>%
@@ -229,7 +229,25 @@ I can also create a vector out of characters, or logical data:
 c("hello","world")
 c(TRUE,FALSE)
 ```
-Notice that this time, the "hello" and "world" are shown to be seperate, rather than earlier when they were a single string.
+Notice that this time, the "hello" and "world" are shown to be seperate, rather than earlier when they were a single string. This is because we've turned these into vectors of length 2.
+
+The `c()` function will probably be one of your most used functions, which is why it's name is so short. It keeps it easy to use. Vectors in R have to be the same data type. You can't create a vector that is part numeric and part character. If you try, R will try to convert things to the same type.
+
+```{r cnumericandcharacter}
+c("hello",2)
+```
+
+See how this has converted the `2` into `"2"`, which as we've discussed is viewed very differently by R. This is called _coercion_ and can cause errors if you're not careful.
+
+You can also use `c()` to combine vectors into bigger ones, or to add values to the beginning or end of another vector
+
+```{r combinevectors}
+x <- c(2,4,6)
+y <- c(8,10)
+x <- c(x,y)
+
+```
+
 
 Functions don't always need arguments though, as the below function can run fine and gives us the current time.
 
@@ -246,10 +264,17 @@ sys.time()
 ```
 
 We've now created a vector of numbers but we've not done anything with these numbers. What is happening here:
-```{r}
+```{r addsingle}
 c(1,2,3) + 10
 ```
 Here, we created a vector of numerics, and then performed an operator on that vector. R did this for each individual element of our vector.
+
+This can also work with vectors that are the same length:
+
+```{r addvector}
+c(1,2,3) + c(1,2,3)
+```
+
 
 One last operator that we've not mentioned yet is the _sequence_ operator, `:`. This operator works with numbers to create a vector that runs from the first number to the second and is very useful for quickly creating big vectors.
 
@@ -273,7 +298,7 @@ R doesn't even try it. R knows its limits But it can make it up to 10<sup>15</su
 
 ### Subsetting
 
-As previously shown, data can be assigned to a, this includes vectors.
+As previously shown, data can be assigned to a variable, this includes vectors.
 
 ```{r assignvectorx}
 x <- c(2,4,6,8,10)
