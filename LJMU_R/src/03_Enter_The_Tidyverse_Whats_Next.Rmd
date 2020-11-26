@@ -1,3 +1,317 @@
 # Enter The Tidyverse: What's Next?
 
-Coming Soon...
+```{r setup03, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pkgs <- c("tidyverse")
+purrr::walk(pkgs,library,character.only=T)
+```
+
+## Refresher
+
+Previously, we learned what a `tibble` is and how it stores data in observations/rows and variables/columns. We also learned about 7 fundamental data manipulation functions to allow us to edit these tibbles.
+
+* filter() - selects observations based on a criteria/predicate
+* slice() - selects obersevations based on number
+* arrange() - re-arranges rows based on a variable
+* select() - picks certain variables
+* mutate() - changes variables or creates new ones
+* summarise() -  aggregates variables based on some functions
+* group_by() - groups data sets by variables
+
+## Pivoting
+
+In general, datasets come in two forms, **long** or **wide**. Long data has many rows and fewer columns, and so it looks longer (vertically) if shown in a spreadsheet. Wide data has more columns and fewer rows (hence, it is wider). Data can be represented in both ways and each has advantages.
+
+This terminology might seem confusing for now, but we're going to jump into an example dataset which includes how songs moved through the charts in the year 2000. We're given the date when the song entered the chart (which is always a Saturday) and then the ranking within the charts for the next 76 weeks. This data is in wide format.
+
+```{r billboardintro}
+billboard
+```
+
+Each row represents one song, and therefore our _observations_ are single songs and looking at when each song was in the charts. The position in the charts for each week from it's date of release is represented by a separate variable.
+
+### pivot_longer()
+
+But, we might want an observation to represent each week for a track and so we can turn this data from _wide_ to _long_ format using the `pivot_longer()` function. The data currently has 317 rows and 76 weeks, so the resulting dataset should have `r 317*76` rows, since each track will now appear across 76 rows.
+
+```{r billboardlong}
+billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week_num",
+    values_to = "position"
+  )
+```
+
+So we used the `pivot_longer()` function with 4 arguments. Remember that the first argument is our dataset being piped in. Then we've given a name to the new variable that takes the previous variable names (`names_to`), similarly for the values we are extracting (`values_to`). The other argument is using a `tidy helper` called `starts_with()`. Remember the `everything()` helper from last time when we were using the `select()` function? This works similarly. It's saying that the columns we want to pivot are the ones that start with `"wk"`.
+
+This dataset looks much bigger because it has more observations, but it's still representing the same data. `pivot_longer()` has a few other tricks that we can do. For example, there are now lot of `NA` values in the `position` variable, these represent weeks when the track fell out of the top 100. We could use `filter()` to get rid of these, or we can tell `pivot_longer()` to do it for us.
+
+```{r billboardNA}
+billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week_num",
+    values_to = "position",
+    values_drop_na = TRUE
+  )
+```
+
+We've not got much less rows since we've gotten rid of the `NA` values from the `position` variable. The `values_drop_na` argument does exactly what the name suggests. Should we drop the `NA`s or keep them? If we want to work with this dataset though, we'd prefer that `week_num` column to be a number, at the minute it's _character_, which means we can't do any maths on it. `pivot_longer()` can get rid of the `"wk"` part of this and convert it to a number using two more arguments:
+
+```{r billboardweeknum}
+billboard_long <- billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week_num",
+    values_to = "position",
+    values_drop_na = TRUE,
+    names_prefix = "wk",
+    names_transform = list(week_num = as.integer)
+  )
+billboard_long
+```
+
+The `names_prefix` argument told `pivot_longer()` to strip out the `"wk"` part of the `week_num` variable and then the `names_transform` applied the `as.integer()` function to these values. This one function just did quite a lot of work for us!
+
+Bear in mind that the arguments above can be given to the function in _any_ order, as long as they are _named_.
+
+
+### pivot_wider()
+
+But what if we want to turn the data back? Or, in general, we want to convert a long dataset into a wide one? Well `pivot_longer()` has a twin called `pivot_wider()`. The arguments look very similar and so is their usage:
+
+```{r billboardwide}
+billboard_long %>%
+  pivot_wider(
+    names_from = "week_num",
+    names_prefix = "wk",
+    values_from = "position"
+  )
+```
+
+Pretty simple to do this and it gets the data back to how it was previously. Oftentimes it can be quite useful to pivot data around and then return back to it's original form.
+
+A reason we might want to do this is to edit all of the week data all at once. In the `billboard` dataset, the position in the charts is based on number of weeks since the track was released. So 2 Pac's Baby Don't Cry in the first row, was released a few months before 3 Doors Down's Kryptonite, but a week after each of their releases they were in chart position 87 and 91 respectively. What if we wanted to know where they were for the actual weeks of the year?
+
+First we're going to load up another package called `lubridate` which makes working with dates a lot smoother.
+```{r lubridateload, echo=F}
+library(lubridate)
+```
+
+And then we can figure out how far into the year each song was released (note that the `date.entered` is a Saturday and the year 2000 started on a Saturday). To do this, we'll subtract the 1st January from the `date.entered` to get the number of days between them and then divide it by 7 to get the number of weeks. By adding the `week_num - 1`, we can see which week each position is from, and we can overwrite the `week_num` value with this new value.
+
+```{r billboardabsweek}
+billboard_long %>%
+  mutate(week_num = as.integer((date.entered - dmy("01/01/2000"))/7) + week_num - 1)
+```
+
+Next we can `filter()` out the weeks from outside of the year 2000 by getting rid of `week_num` that are less than 0 or greater than 52, and then by sorting the data by this `week_num`, we'll get the columns in the right order when we come to `pivot_wider()` back around.
+```{r billboardrewide}
+billboard_long %>%
+  mutate(week_num = as.integer((date.entered - dmy("01/01/2000"))/7) + week_num - 1) %>%
+  filter(between(week_num,0,52)) %>%
+  arrange(week_num) %>%
+  pivot_wider(
+    names_from = week_num,
+    names_prefix = "wk",
+    values_from = position
+  )
+```
+
+
+## Two Table Verbs
+
+In the previous lesson we looked at the _verbs_ associated with a single table. However, a lot of the time, our data doesn't come in a nice and neat single spreadsheet so we might have to combine multiple datasets into a single tibble. There are various ways to do this kind of combining depending on what the data looks like and our intentions with it.
+
+### bind_rows()
+
+If we have two tables that are (more or less) the same, we can just stick them together with one on top of the other.
+
+```{r makebindrowsdata}
+data1 <- tibble(x=1:3,y=c("red","green","blue"))
+data2 <- tibble(x=4:6,y=c("orange","purple","yellow"))
+
+data1
+data2
+```
+
+To do this, we just pass both tables to the `bind_rows()` function which will essentially stack them on top of eachother
+```{r bindrows}
+bind_rows(data1,data2)
+```
+
+This function can take in as many tables as we want (for now, we'll just put in two). If we want to bind more together, just pass them as extra arguments
+```{r bindrowsmany}
+bind_rows(
+  data1,
+  data2,
+  tibble(x=7,y="black"),
+  tibble(x=8,y="white"),
+)
+```
+
+This is a very simple procedure, however we can add a bit of complexity if we want to keep track of where our data is coming from. For example, you might record a lot of data and so have a spreadsheet for each participant. We can add a new column that will identify each tibble we are binding
+
+```{r bindrowsid}
+bind_rows(
+  set1 = data1,
+  set2 = data2,
+  .id = "set"
+)
+```
+
+`bind_rows()` even works if your data isn't the exact same, it'll just put `NA` where there was missing data:
+
+```{r bindrowsmissing}
+bind_rows(
+  data1,
+  tibble(x=8)
+)
+```
+
+### bind_cols()
+
+Just like with `select()` and `filter()` which work on columns & rows respectively, `bind_rows()` has a twin called `bind_cols()` and this will stick the tables together next to one another.
+
+```{r makebindcoldata}
+data3 <- tibble(z=c("cat","dog","mouse"),w=100:102)
+bind_cols(data1,data3)
+```
+
+### joins
+
+The above two methods of combining data don't do an awful lot. They just stick the data together without changing much. However, we might want to match our data together based on a common identifier. For this, we're going to use some data on flights leaving New York City, which is stored in a package called `nycflights`
+```{r loadflights}
+library(nycflights13)
+flights2 <- select(flights,year,month,day,hour,origin,dest,tailnum,carrier)
+flights2
+```
+
+As well as the actual flight information, this package also contains data about the airlines, which we can see here
+
+```{r airlines}
+airlines
+```
+
+How would we go about sticking these together. We can't just `bind_cols()` since we want to match them based on the value in `carrier`. To do this, we can use `left_join()`:
+
+```{r joinflightsairlines}
+flights2 %>%
+  left_join(airlines,
+            by="carrier")
+```
+
+As well as supplying the two datasets, we've also told R which variable we want to match on. By default, R will just look at which variables appear in both datasets and match on those. And yes, you can match on multiple variables, like so.
+
+```{r joinflightsweather}
+flights2 %>%
+  left_join(
+    select(weather,origin,year,month,day,hour,temp)
+  )
+```
+Above we used the `left_join()` function, but there are actually four main types of `*_join()` functions in R. They each match the data in slightly different ways. 
+
+#### full_join()
+
+`full_join()` will match every instance in your two datasets.
+
+```{r makejoindata}
+data1 <- tibble(id = 1:4,x=runif(4))
+data2 <- tibble(id = 2:7,y=runif(6))
+full_join(data1,data2,by="id")
+```
+
+The value of `id = 5` isn't present in `data1` and so there isn't a row associated with that in the data and so R just puts an `NA` in those. Similarly for the other `NA` values, they're not present in both datasets. `full_join()` will return every row from both data sets being joined together.
+
+#### inner_join()
+```{r innerjoin}
+inner_join(data1,data2,by="id")
+```
+
+The `inner_join()` function returns only the rows that are in _both_ datasets. It doesn't give us any `NA`, and returns a relatively small dataset.
+
+#### left_join() & right_join()
+
+The `left_join()` and `right_join()` functions will keep everything from either the first or the second dataset being supplied.
+
+```{r leftjoin}
+left_join(data1,data2,by="id")
+```
+Here, we don't keep the rows from `y` that are not in `x` (i.e. `id = 5,6,7`).
+
+```{r rightjoin}
+right_join(data1,data2,by="id")
+```
+
+This time we have everything from `y`, but not all of the results for `x` because there isn't a row for `id=1` in the `data2` dataset.
+
+## Decisions
+
+Not all tasks in R require us to do maths or logical. Sometimes, we might have to make a choice of what to return based on an input. Here well have a look at some of the options available if we need to make decisions like this
+
+### if_else()
+
+The `if_else()` function takes in three arguments, which should all be either vectors of the same length, or length 1. The first argument is then analysed and it should return a logical vector (`TRUE`s and `FALSE`s). Wherever this logical vector is `TRUE`, it will return the appropriate value from the second argument, and wherever it is `FALSE`, it will return the appropriate value from the third argument.
+
+Let's see it in action:
+
+```{r ifelse}
+logical_vector <- c(T,T,F,F,T)
+true_response <- letters[1:5]
+false_response <- letters[22:26]
+if_else(
+  logical_vector,
+  true_response,
+  false_response
+)
+```
+
+So, since our logical vector has `TRUE` for the first two values, the first two values from the `true_response` are given here, followed by two from the `false_response` and then finally the `true_response`.
+
+This is a very quick way to make a vectorised choice in R. And don't forget, this function can be used in a `mutate()` function to edit our datasets
+
+```{r ifelsemutate}
+flights2 %>%
+  mutate(am_pm = if_else(hour < 12, "am","pm")) %>%
+  slice_sample(n=10)
+```
+
+### recode()
+
+The `if_else()` function is useful for making a decision between two options, but that situation doesn't arise very often. Sometimes, we might need to replace a certain value and so the `recode()` function is useful for that
+
+```{r recode}
+flights2 %>%
+  mutate(month_string = recode(month,
+                               `1`="January",
+                               `2`="February",
+                               `3`="March",
+                               `4`="April",
+                               `5`="May",
+                               `6`="June",
+                               `7`="July",
+                               `8`="August",
+                               `9`="September",
+                               `10`="October",
+                               `11`="November",
+                               `12`="December",
+                               )) %>%
+  slice_sample(n=10)
+
+```
+
+### case_when()
+
+However, the `recode()` function isn't too flexible, it'll only look at a single variable and then decide what to do based on that value. We might want to check something more complicated, and so for things like that we can use the `case_when()` function, which has a unique syntax.
+
+```{r casewhen}
+flights2 %>%
+  mutate(season = case_when(
+    month < 2 | month == 12 ~ "Winter",
+    month < 5 ~ "Spring",
+    month < 8 ~ "Summer",
+    T ~ "Autumn"
+  ))
+```
+
