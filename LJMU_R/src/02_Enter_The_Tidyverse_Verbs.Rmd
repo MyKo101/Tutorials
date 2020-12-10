@@ -1,12 +1,13 @@
-# Enter The Tidyverse: Verbs
-
-## Introduction
+# Enter The Tidyverse: 
 
 ```{r setup02, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 pkgs <- c("tidyverse")
 purrr::walk(pkgs,library,character.only=T)
 ```
+
+## Introduction
+
 
 
 In this week's session, we will discuss R's add-on mechanic, where we can include `packages` within our projects and focus on a specific family of packages called the `tidyverse`

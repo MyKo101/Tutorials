@@ -1,3 +1,199 @@
 # Final Coding
 
-Coming Soon...
+## The Dataset
+The example dataset today is of 10 test results of 1000 participants over time. 
+
+One problem is that when administering this test, the way that the test was performed was changed for the final two examinations. For these two tests, points were awarded negatively and those with the lowest scores actually did better.
+
+```{r loaddata}
+data_url <- "https://www.michaelbarrowman.co.uk/Tutorials/LJMU_R/src/data/LessonFiveData.csv"
+df <- read_csv(data_url)
+```
+
+### Visualise
+
+We want to inspect our data to see 
+
+
+The data is currently in a wide format, but it would be useful to convert it into a long format to plot the data together.
+
+```{r plotdata}
+df %>%
+  pivot_longer(starts_with("test_"),
+               names_to = "test_num",
+               names_prefix = "test_",
+               names_transform = list(test_num = as.numeric),
+               values_to = "res"
+               ) %>%
+  ggplot(aes(res)) +
+  geom_histogram(aes(y=..density..),fill=rgb(1,0.4,0.4)) +
+  geom_density() +
+  facet_wrap(vars(test_num),nrow=3) +
+  theme_bw()
+```
+
+It turns out that tests 8 and 9 were marked differently, in such a way that lower negative scores mean smarter results, so the tests have been graded backwards.
+
+We want to standardise the results, however, we need to remember that tests 8 and 9 are backwards, so we'd need to reverse them. to standardise our results, we're going to subtract the mean and divide by the standard deviation. This means that all test results should then follow a Standard Normal distribution, that is one with a mean of 0 (because we subtracted the original mean) and a standard deviation of 1 (because we divided by the standard deviation)
+
+```{r plotstandardnormal}
+3 %>%
+  seq(-.,.,length.out=1000) %>%
+  tibble(x=.,y=dnorm(.)) %>%
+  ggplot(aes(x,y)) +
+  geom_line() +
+  theme_bw()
+```
+
+## Loops
+
+For now, we're going to ignore results 8 and 9, we'll come back to them later.
+
+A lot of the time within programming we have to repeat the same processes over and over again. In this example, we need to do *something* to each column of our data. To do this "the old fashioned way" would require the following bit of repetitive code. We're going to start by making a copy of our dataset so we don't ruin that original.
+
+```{r repetitivecode}
+df2 <- df
+df2$test_1 <- (df2$test_1 - mean(df2$test_1))/sd(df2$test_1)
+df2$test_2 <- (df2$test_2 - mean(df2$test_2))/sd(df2$test_2)
+df2$test_3 <- (df2$test_3 - mean(df2$test_3))/sd(df2$test_3)
+df2$test_4 <- (df2$test_4 - mean(df2$test_4))/sd(df2$test_4)
+df2$test_5 <- (df2$test_5 - mean(df2$test_5))/sd(df2$test_5)
+df2$test_6 <- (df2$test_6 - mean(df2$test_6))/sd(df2$test_6)
+df2$test_7 <- (df2$test_7 - mean(df2$test_7))/sd(df2$test_7)
+df2
+```
+
+This is prone to human error, and so there are much smoother ways to do this. 
+
+This repetition of code is called *Looping* and it means we're going to loop through a piece of code in our script.
+
+One way we can do this is through a `while()` loop, this will repeat a process until a certain condition is met. So we pass the `while()` function something that comes back as `TRUE` or `FALSE`. First the condition is checked, then the code is run, the condition is checked again, and the code is run again. This repeats until the condition is `FALSE`.
+
+The code that's getting run must be surrounded with curly brackets `{` and `}`
+
+To do this over the first 7 columns, we can do the following loop:
+
+```{r whileloop}
+df3 <- df
+i <- 1
+while(i <= 7){
+  var_name <- paste0("test_",i) 
+  current_test <- df3[[var_name]]
+  
+  current_mean <- mean(current_test)
+  current_sd <- sd(current_test)
+  
+  standardise_test <- (current_test - current_mean) / current_sd
+  
+  df3[[var_name]] <- standardise_test
+  
+  i <- i+1
+}
+df3
+
+```
+
+A word of warning, `while()` loops can get stuck. If the condition never changes, then the loop will go on forever. To break out of a stuck loop, you can usually hit the `STOP` button near the *Console*, but sometimes this doesn't work and you have to exit R. This loop will never stop, can you figure out why?
+
+```{r whileerror, eval=F}
+i <- 1
+while(i <= 7){
+  var_name <- paste0("test_",i) 
+  current_test <- df3[[var_name]]
+  
+  current_mean <- mean(current_test)
+  current_sd <- sd(current_test)
+  
+  standardise_test <- (current_test - current_mean) / current_sd
+  
+  df3[[var_name]] <- standardise_test
+  
+}
+```
+
+The alternative is a `for()` loop, which is much more structured than a `while()` loop and can only perform the action a set number of times. For this reason, you don't need to worry about an infinite loop. However, this does make it less flexible, but for most cases (particularly your usecases), this shouldn't be a problem.
+
+```{r forloop}
+df4 <- df
+
+for(i in 1:7){
+  var_name <- paste0("test_",i) 
+  current_test <- df4[[var_name]]
+  
+  current_mean <- mean(current_test)
+  current_sd <- sd(current_test)
+  
+  standardise_test <- (current_test - current_mean) / current_sd
+  
+  df4[[var_name]] <- standardise_test
+  
+}
+df4
+
+```
+
+## Branches
+
+Previously we used the `if_else()` and `case_when()` functions to make decisions for us based on the data. Those decisions looked at individual elements in a vector
+
+
+```{r ifeg}
+
+x <- rnorm(1)
+if(x < 0){
+  cat("x is less than zero: ", x)
+} else {
+  cat("x is greater than zero: ",x)
+}
+
+
+```
+
+We can also chain these together using an `else if()` statement
+
+```{r ifelseif}
+
+x <- round(rnorm(1,sd=3))
+if(x == 0){
+  cat("x is zero!")
+} else if(x < 0){
+  cat("x is less than zero: ", x)
+} else {
+  cat("x is greater than zero: ",x)
+}
+
+```
+
+
+```{r forif}
+df5 <- df
+
+for(i in 1:9){
+  var_name <- paste0("test_",i) 
+  current_test <- df5[[var_name]]
+  
+  if(i == 8 | i == 9){
+    current_test <- -current_test
+  }
+  
+  current_mean <- mean(current_test)
+  current_sd <- sd(current_test)
+  
+  standardise_test <- (current_test - current_mean) / current_sd
+  
+  df5[[var_name]] <- standardise_test
+  
+}
+```
+
+## Functions
+
+```{r definefunction}
+function(x) {
+  
+}
+```
+
+## mapping
+
+## across

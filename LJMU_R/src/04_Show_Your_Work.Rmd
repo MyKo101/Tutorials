@@ -1,3 +1,177 @@
 # Show Your Work
 
-Coming Soon...
+
+```{r setup04, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pkgs <- c("tidyverse")
+purrr::walk(pkgs,library,character.only=T)
+```
+
+## Loading Data
+
+Depending on the format of the data you are loading in, you may have to use different functions or packages to load data in. Loading the `tidyverse` will automatically load up a package called `readr` which can load simple data sets. However a two other packages that might be handy are
+
+* [`readxl`](https://readxl.tidyverse.org/) for Excel files
+* [`haven`](https://haven.tidyverse.org/) for SPSS, SAS or Stata files
+
+Today we're going to load a dataset from a csv file, which is a simple structure that doesn't use any overhead/meta-data and so is very efficient to transfer data. Other formats such as Excel or SPSS have a lot of meta-data (such as variable types in SPSS) or formatting data (in Excel) which increase the size of the dataset.
+
+The data is stored at the below URL, which I'm going to store as a variable to load from:
+```{r dataURL}
+data_url <- "https://www.michaelbarrowman.co.uk/Tutorials/LJMU_R/src/data/LessonFourData.csv"
+```
+
+Since the data is stored within this tutorial, you can do one of two things. You can either download the data to your computer from [here](`r data_url`) or by using the url directly. Remember that if you're downloading the data, to make sure you save it in the folder you're currently working in, or remember the directory to find it again.
+
+```{r loaddata}
+df <- read_csv(data_url)
+```
+
+The data is now loaded into a variable called `df`. The `read_csv()` function loads the data into a tibble, which as dicussed previously, is a more convenient way to store `data.frame` data.
+
+The output from this command gives us some details as to how the data has been loaded, some data have been loaded as `double`s (i.e. numbers), which is indicated by the line `id = col_double()`, whereas others are `character`s (i.e. text) by the line `Gender = col_character()`.
+
+We can view the top few rows of the dataset by running it's variable name in the console, or highlighting it in our script and hitting Ctrl+Enter. Or we can use the `view()` function to take a look at the data in a spreadsheet.
+
+```{r previewdata}
+df
+```
+
+
+## Testing and Plotting
+
+### Two Groups Parametric
+
+### Two Groups Non-Parametric
+
+### Three Groups Parametric
+
+### Three Groups Non-Parametric
+
+### Linear Models
+
+
+```{r}
+
+
+
+cap_between <- function(x,min,max) pmin(pmax(x,min),max)
+
+df2 <- df %>% mutate(Savings = cap_between(Age*Income*rnorm(n(),1,0.1),0,Inf))
+
+
+library(tidyverse)
+
+data_url <- "https://raw.githubusercontent.com/MyKo101/Tutorials/master/LJMU_R/src/LessonFourData.csv"
+
+df <- read_csv(data_url)
+
+view(df)
+
+ggplot(df) +
+  aes(Height) +
+  geom_density()
+
+ggplot(df) +
+  aes(Height,group=Gender,fill=Gender) +
+  geom_density(alpha = 0.3) 
+
+
+
+shapiro.test(df$Height)$p.value
+
+df %>%
+  group_by(Gender) %>%
+  summarise(Shapiro_Height = shapiro.test(Height)$p.value)
+
+
+bartlett.test(df$Height,df$Gender)
+bartlett.test(Height ~ Gender,data=df)
+
+Gender_Height_t <- t.test(Height ~ Gender,data=df,var.equal=F)
+
+
+
+
+ggplot(df) +
+  aes(Income,group=Gender) +
+  geom_density()
+
+shapiro.test(df$Income)
+
+
+
+df %>%
+  group_by(Gender) %>%
+  summarise(Shapiro_Income = shapiro.test(Income)$p.value)
+
+wilcox.test(Income ~ Gender,data=df)
+
+
+
+p <- ggplot(df) +
+  aes(Income,group=Gender,fill=Gender) +
+  geom_density(alpha=0.3) +
+  scale_x_log10(labels=scales::comma) +
+  theme_minimal() +
+  ggtitle("Income across Genders")
+
+ggsave(plot=p,"My Plot.jpg")
+
+
+
+
+ggplot(df) +
+  aes(Height,group=Country,fill=Country) +
+  geom_density(alpha = 0.3) 
+
+
+df %>%
+  group_by(Country) %>%
+  summarise(Shapiro_Height = shapiro.test(Height)$p.value)
+
+
+
+ANOVA_test <- aov(Height ~ Country,data=df)
+summary(ANOVA_test)
+
+
+
+
+ggplot(df) +
+  aes(Income,group=Country,fill=Country) +
+  geom_density(alpha=0.3) +
+  scale_x_log10(labels=scales::comma) +
+  theme_minimal() +
+  ggtitle("Income across Countries")
+
+
+kruskal.test(Income ~ Country,data=df)
+
+
+ggplot(df2) +
+  aes(Age,Savings) + 
+  geom_point() +
+  geom_smooth(method="lm")
+
+
+df2 <- tibble(
+  x = rnorm(100),
+  y = x + rnorm(100,0,1)
+)
+
+ggplot(df2) +
+  aes(x,y,group=Gender,colour=Gender) +
+  geom_point() +
+  geom_smooth(method="lm") 
+
+
+
+
+mod <- lm(Savings ~ Age + Gender + Country,data=df2)
+
+summary(mod)
+
+
+
+```
